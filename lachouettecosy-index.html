@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Chouette Cosy — Le Coin Mystique, Le Coin Cosy &amp; la boutique</title>
+<meta name="description" content="L'univers de la Chouette Cosy : l'application Le Coin Mystique, le podcast Le Coin Cosy, et bientôt la boutique.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nuit: #1a1625;
+    --nuit-2: #15111e;
+    --amethyste: #3d3450;
+    --or: #c9a876;
+    --or-clair: #dec79a;
+    --sauge: #7a8b6f;
+    --terracotta: #b86b4b;
+    --text-primary: #f3efe8;
+    --text-secondary: #c2b8d1;
+    --text-muted: #897f99;
+    --border: rgba(247, 243, 237, 0.08);
+    --border-strong: rgba(247, 243, 237, 0.16);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--nuit);
+    color: var(--text-primary);
+    font-family: "Outfit", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    min-height: 100vh;
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, rgba(247,243,237,.35), transparent),
+      radial-gradient(1px 1px at 28% 62%, rgba(247,243,237,.25), transparent),
+      radial-gradient(1.5px 1.5px at 46% 12%, rgba(247,243,237,.4), transparent),
+      radial-gradient(1px 1px at 63% 78%, rgba(247,243,237,.2), transparent),
+      radial-gradient(1.5px 1.5px at 81% 32%, rgba(247,243,237,.3), transparent),
+      radial-gradient(1px 1px at 92% 68%, rgba(247,243,237,.25), transparent),
+      radial-gradient(1px 1px at 8% 85%, rgba(247,243,237,.2), transparent),
+      radial-gradient(1.5px 1.5px at 55% 92%, rgba(247,243,237,.3), transparent);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 72px 32px 56px;
+  }
+
+  /* Hero */
+  .hero { text-align: center; margin-bottom: 64px; }
+  .hero-badge {
+    width: 84px; height: 84px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--amethyste), var(--nuit-2));
+    border: 1px solid var(--border-strong);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.4);
+  }
+  .hero-eyebrow {
+    font-family: "Caveat", cursive;
+    font-size: 26px;
+    color: var(--or-clair);
+    margin: 0 0 6px;
+  }
+  .hero h1 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 48px);
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  .hero p {
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* Cards grid */
+  .grille {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .grille { grid-template-columns: 1fr; }
+  }
+
+  .carte {
+    background: var(--nuit-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 26px;
+    text-align: center;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .carte:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 34px rgba(0,0,0,.35);
+  }
+  .carte-icone {
+    font-size: 34px;
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .carte h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 21px;
+    margin: 0 0 8px;
+  }
+  .carte p.desc {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin: 0 0 20px;
+    min-height: 44px;
+  }
+
+  .bouton {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14.5px;
+    padding: 11px 24px;
+    border-radius: 999px;
+    background: var(--or-clair);
+    color: #2c2310;
+    transition: filter .15s;
+  }
+  .bouton:hover { filter: brightness(1.08); }
+  .bouton.discret {
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+  }
+
+  /* Carte podcast : joue le rôle de signature visuelle */
+  .carte-podcast .carte-icone { background: radial-gradient(circle at 35% 30%, var(--sauge), #384231); }
+  .carte-mystique .carte-icone { background: radial-gradient(circle at 35% 30%, var(--amethyste), var(--nuit-2)); border: 1px solid var(--border-strong); }
+  .carte-boutique .carte-icone { background: radial-gradient(circle at 35% 30%, var(--terracotta), #6b3a28); }
+
+  .spotify-embed {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+  }
+  .spotify-embed iframe { display: block; width: 100%; }
+
+  .plateformes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .plateformes a {
+    font-size: 12.5px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    background: rgba(247,243,237,.06);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    transition: color .15s, border-color .15s;
+  }
+  .plateformes a:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+  }
+
+  .badge-bientot {
+    font-size: 12px;
+    color: var(--terracotta-clair, #dea68c);
+    background: rgba(184,107,75,.14);
+    border: 1px solid rgba(184,107,75,.3);
+    border-radius: 999px;
+    padding: 5px 14px;
+    margin-bottom: 4px;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 64px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  footer a { color: var(--or-clair); text-decoration: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carte { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-badge">🦉</div>
+      <p class="hero-eyebrow">par la Chouette Cosy</p>
+      <h1>Bienvenue dans mon univers</h1>
+      <p>Un coin cosy pour explorer, écouter et bientôt te chouchouter — choisis où tu veux aller.</p>
+    </div>
+
+    <div class="grille">
+
+      <!-- Le Coin Mystique -->
+      <a href="https://coin-mystique-app.vercel.app" style="text-decoration:none; color:inherit;">
+        <div class="carte carte-mystique">
+          <div class="carte-icone">🔮</div>
+          <h2>Le Coin Mystique</h2>
+          <p class="desc">Ton grimoire numérique : tarot, pierres, rituels, astrologie et bien plus.</p>
+          <span class="bouton">Entrer dans le grimoire →</span>
+        </div>
+      </a>
+
+      <!-- Le Coin Cosy (podcast) -->
+      <div class="carte carte-podcast">
+        <div class="carte-icone">🎙️</div>
+        <h2>Le Coin Cosy</h2>
+        <p class="desc">Le podcast : bien-être, sorcellerie légère et entrepreneuriat féminin.</p>
+
+        <div class="spotify-embed">
+          <iframe
+            src="https://open.spotify.com/embed/show/4HGgYjF5aKj6ZxD9TDKqMJ?utm_source=generator&theme=0"
+            width="100%" height="232" frameborder="0" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy" title="Lecteur Spotify — Le Coin Cosy" style="width:100%; display:block;">
+          </iframe>
+        </div>
+
+        <div class="plateformes">
+          <a href="https://podcasts.apple.com/us/podcast/le-coin-cosy/id1807794277" target="_blank" rel="noopener">🎧 Apple Podcasts</a>
+          <a href="https://music.amazon.com/podcasts/754b9658-37b7-4cd3-bb7b-280770a901f1/le-coin-cosy" target="_blank" rel="noopener">Amazon Music</a>
+          <a href="https://link.deezer.com/s/33RtCxgqINnmqQ5bZ8alv" target="_blank" rel="noopener">Deezer</a>
+          <a href="https://castbox.fm/channel/Le-coin-cosy-id7101615?country=fr" target="_blank" rel="noopener">Castbox</a>
+          <a href="https://goodpods.com/podcasts/le-coin-cosy-739529" target="_blank" rel="noopener">Goodpods</a>
+          <a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">📷 Instagram</a>
+        </div>
+      </div>
+
+      <!-- Boutique -->
+      <div class="carte carte-boutique">
+        <div class="carte-icone">🛍️</div>
+        <h2>La Boutique</h2>
+        <p class="desc">Mugs, tee-shirts, casquettes et tote bags à l'effigie de la chouette.</p>
+        <span class="badge-bientot">Bientôt disponible</span>
+      </div>
+
+    </div>
+
+    <footer>
+      🦉 La Chouette Cosy — <a href="https://coin-mystique-app.vercel.app">Le Coin Mystique</a> · Le Coin Cosy · La Boutique
+    </footer>
+  </div>
+</body>
+</html>
