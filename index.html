@@ -342,6 +342,54 @@
     margin-bottom: 4px;
   }
 
+  .newsletter-box {
+    max-width: 560px;
+    margin: 64px auto 0;
+    background: var(--nuit-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 34px 30px;
+    text-align: center;
+  }
+  .newsletter-box p:not(.intro-eyebrow) {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 14.5px;
+    max-width: 420px;
+    margin: 0 auto 22px;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .newsletter-form input {
+    flex: 1;
+    min-width: 220px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: var(--nuit);
+    border: 1px solid var(--border-strong);
+    color: var(--text-primary);
+    font-family: "Outfit", sans-serif;
+    font-size: 14.5px;
+  }
+  .newsletter-form input::placeholder { color: var(--text-muted); }
+  .newsletter-form button {
+    border: none;
+    cursor: pointer;
+    font-family: "Outfit", sans-serif;
+  }
+  .newsletter-msg {
+    margin-top: 14px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    min-height: 18px;
+  }
+
   footer {
     text-align: center;
     margin-top: 64px;
@@ -439,9 +487,57 @@
       </details>
     </section>
 
+    <section class="newsletter-box">
+      <p class="intro-eyebrow">Rejoins le cercle</p>
+      <h2 style="font-family:'Fraunces',serif; font-weight:500; font-size:22px; margin:0 0 12px;">La newsletter du Coin Cosy</h2>
+      <p>Chaque jeudi : le nouvel épisode, une citation qui fait du bien, et une petite fiche pour explorer un coin du grimoire — directement dans ta boîte mail.</p>
+      <form class="newsletter-form" id="form-newsletter">
+        <input type="email" id="email-newsletter" required placeholder="ton-email@exemple.com">
+        <button type="submit" class="bouton">Je m'abonne</button>
+      </form>
+      <p class="newsletter-msg" id="msg-newsletter"></p>
+    </section>
+
     <footer>
       🦉 La Chouette Cosy — <a href="https://app.lachouettecosy.com">Le Coin Mystique</a> · Le Coin Cosy · La Boutique
     </footer>
   </div>
+
+  <script>
+    document.getElementById('form-newsletter').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var form = e.target;
+      var bouton = form.querySelector('button');
+      var msg = document.getElementById('msg-newsletter');
+      var email = document.getElementById('email-newsletter').value;
+      bouton.disabled = true;
+      bouton.textContent = 'Un instant…';
+      msg.style.color = 'var(--text-muted)';
+      msg.textContent = '';
+      fetch('https://app.lachouettecosy.com/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email }),
+      })
+        .then(function (res) {
+          if (res.ok) {
+            form.style.display = 'none';
+            msg.style.color = 'var(--or-clair)';
+            msg.textContent = "C'est fait 🦉 Bienvenue dans le cercle — ton prochain rendez-vous cosy arrive jeudi.";
+          } else {
+            bouton.disabled = false;
+            bouton.textContent = "Je m'abonne";
+            msg.style.color = 'var(--terracotta)';
+            msg.textContent = 'Un souci est survenu, réessaie dans un instant.';
+          }
+        })
+        .catch(function () {
+          bouton.disabled = false;
+          bouton.textContent = "Je m'abonne";
+          msg.style.color = 'var(--terracotta)';
+          msg.textContent = 'Un souci est survenu, réessaie dans un instant.';
+        });
+    });
+  </script>
 </body>
 </html>
