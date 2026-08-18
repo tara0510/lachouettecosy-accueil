@@ -141,13 +141,17 @@
   /* Hero */
   .hero { text-align: center; margin-bottom: 64px; }
   .hero-badge {
-    width: 84px; height: 84px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, var(--amethyste), var(--nuit-2));
-    border: 1px solid var(--border-strong);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 40px;
+    width: 190px; height: 190px; border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--border-strong);
     margin: 0 auto 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,.4);
+    box-shadow: 0 12px 40px rgba(0,0,0,.45);
+  }
+  .hero-badge img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+    display: block;
   }
   .hero-eyebrow {
     font-family: "Caveat", cursive;
@@ -168,6 +172,28 @@
     margin: 0 auto;
     line-height: 1.6;
     font-size: 16px;
+  }
+
+  /* Pensée du jour : change chaque jour (calculée en JS), pour donner une
+     raison de repasser sur la page plutôt qu'un site figé. */
+  .pensee-du-jour {
+    max-width: 620px;
+    margin: 0 auto 56px;
+    background: var(--nuit-2);
+    border-left: 3px solid var(--or);
+    border-radius: 0 14px 14px 0;
+    padding: 20px 26px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .pensee-icone { font-size: 22px; line-height: 1.4; }
+  .pensee-du-jour p {
+    margin: 0;
+    font-family: "Caveat", cursive;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--text-primary);
   }
 
   /* Intro : quelques mots sur la sorcellerie douce */
@@ -255,24 +281,26 @@
     background: var(--nuit-2);
     border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 28px 26px;
+    padding: 0 26px 28px;
     text-align: center;
     transition: border-color .2s, transform .2s, box-shadow .2s;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
   }
   .carte:hover {
     border-color: var(--border-strong);
     transform: translateY(-4px);
     box-shadow: 0 12px 34px rgba(0,0,0,.35);
   }
-  .carte-icone {
-    font-size: 34px;
-    width: 68px; height: 68px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 16px;
+  .carte-visuel {
+    width: calc(100% + 52px);
+    margin: 0 -26px 18px;
+    height: 210px;
+    object-fit: cover;
+    object-position: center 48%;
+    display: block;
   }
   .carte h2 {
     font-family: "Fraunces", serif;
@@ -307,10 +335,6 @@
   }
 
   /* Carte podcast : joue le rôle de signature visuelle */
-  .carte-podcast .carte-icone { background: radial-gradient(circle at 35% 30%, var(--sauge), #384231); }
-  .carte-mystique .carte-icone { background: radial-gradient(circle at 35% 30%, var(--amethyste), var(--nuit-2)); border: 1px solid var(--border-strong); }
-  .carte-boutique .carte-icone { background: radial-gradient(circle at 35% 30%, var(--terracotta), #6b3a28); }
-  .carte-ebooks .carte-icone { background: radial-gradient(circle at 35% 30%, var(--or), #4a3d1f); }
 
   .spotify-embed {
     width: 100%;
@@ -414,10 +438,15 @@
 <body>
   <div class="wrap">
     <div class="hero">
-      <div class="hero-badge">🦉</div>
+      <div class="hero-badge"><img src="images/hero-chouette.jpg" alt="La Chouette Cosy, blottie avec son cacao et ses bougies" loading="eager"></div>
       <p class="hero-eyebrow">par la Chouette Cosy</p>
       <h1>Bienvenue dans mon univers</h1>
       <p>Un coin cosy pour explorer la sorcellerie douce et la magie du quotidien, écouter et te chouchouter — choisis où tu veux aller.</p>
+    </div>
+
+    <div class="pensee-du-jour">
+      <span class="pensee-icone">🔮</span>
+      <p id="pensee-texte">Chargement d'une pensée cosy…</p>
     </div>
 
     <section class="intro">
@@ -430,7 +459,7 @@
 
       <!-- Le Coin Mystique -->
       <div class="carte carte-mystique">
-        <div class="carte-icone">🔮</div>
+        <img class="carte-visuel" src="images/carte-mystique.jpg" alt="La Chouette Cosy tire les cartes de tarot à la lueur des bougies" loading="lazy">
         <h2>Le Coin Mystique</h2>
         <p class="desc">Ton grimoire numérique : tarot, pierres, rituels, astrologie et bien plus.</p>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
@@ -441,7 +470,7 @@
 
       <!-- Boutique -->
       <div class="carte carte-boutique">
-        <div class="carte-icone">🛍️</div>
+        <img class="carte-visuel" src="images/carte-boutique.jpg" alt="La Chouette Cosy avec son balai dans un jardin fleuri" loading="lazy">
         <h2>La Boutique</h2>
         <p class="desc">Mugs, tee-shirts, casquettes et tote bags à l'effigie de la chouette.</p>
         <a class="bouton" href="https://la-chouette-cosy.tpopsite.com/" style="text-decoration:none;">Découvrir la boutique →</a>
@@ -449,7 +478,7 @@
 
       <!-- Ebooks -->
       <div class="carte carte-ebooks">
-        <div class="carte-icone">📚</div>
+        <img class="carte-visuel" src="images/carte-ebooks.jpg" alt="La Chouette Cosy écrit dans son grimoire à la plume" loading="lazy">
         <h2>Mes ebooks</h2>
         <p class="desc">Le Grimoire de la Chouette Cosy, et Le Coin Spooky : vingt-quatre légendes, mystères &amp; affaires.</p>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
@@ -461,7 +490,7 @@
       <!-- Le Coin Cosy (podcast) — seule sur sa ligne, pleine largeur, pour que
            le lecteur Spotify s'affiche en entier sans défilement interne. -->
       <div class="carte carte-podcast">
-        <div class="carte-icone">🎙️</div>
+        <img class="carte-visuel" src="images/carte-podcast.jpg" alt="La Chouette Cosy enregistre le podcast avec son micro et son cacao" loading="lazy">
         <h2>Le Coin Cosy</h2>
         <p class="desc">Le podcast : bien-être, sorcellerie légère et entrepreneuriat féminin.</p>
 
@@ -525,6 +554,33 @@
   </div>
 
   <script>
+    var pensees = [
+      "Une bougie allumée avec une vraie intention vaut tous les rituels compliqués.",
+      "Aujourd'hui, le seul sortilège dont tu as besoin, c'est peut-être une tisane et cinq minutes de silence.",
+      "La lune ne juge jamais ton ménage en retard.",
+      "Un grimoire qui prend la poussière apprend quand même quelque chose : la patience.",
+      "Ta sorcière intérieure porte peut-être un legging de yoga et boit un café tiède, et c'est très bien comme ça.",
+      "Ranger son bureau, c'est déjà un petit rituel de purification.",
+      "On peut être puissante et avoir oublié où on a mis ses clés.",
+      "Le meilleur oracle du moment, c'est souvent ton propre corps qui te dit de ralentir.",
+      "Une pierre roulée dans la poche fait autant de bien qu'un long discours de développement personnel.",
+      "La magie du quotidien n'a pas besoin de témoins pour être vraie.",
+      "Trois respirations profondes avant de répondre à ce mail énervant : ça compte comme un sort de protection.",
+      "Il n'y a pas de mauvaise sorcière, juste des journées où le chaudron déborde un peu.",
+      "Se coucher tôt un soir de pleine lune, c'est aussi une forme de rébellion douce.",
+      "Un thé bien infusé et un carnet ouvert valent toutes les formations sur la manifestation.",
+      "Tu n'as pas besoin d'un autel parfait pour que la magie opère — une étagère un peu bancale fait très bien l'affaire.",
+      "Dire non poliment, c'est un sortilège de protection qui ne nécessite aucun accessoire.",
+      "La sorcellerie douce, c'est surtout se souvenir qu'on a le droit d'aller à son propre rythme.",
+      "Même les chouettes ont des jours où elles préfèrent rester dans leur nid."
+    ];
+    (function () {
+      var debutAnnee = new Date(new Date().getFullYear(), 0, 0);
+      var jourDeLannee = Math.floor((Date.now() - debutAnnee) / 86400000);
+      var el = document.getElementById('pensee-texte');
+      if (el) el.textContent = pensees[jourDeLannee % pensees.length];
+    })();
+
     document.getElementById('form-newsletter').addEventListener('submit', function (e) {
       e.preventDefault();
       var form = e.target;
