@@ -233,7 +233,7 @@
   /* Cards grid */
   .grille {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 22px;
     align-items: start;
   }
@@ -300,6 +300,7 @@
   .carte-podcast .carte-icone { background: radial-gradient(circle at 35% 30%, var(--sauge), #384231); }
   .carte-mystique .carte-icone { background: radial-gradient(circle at 35% 30%, var(--amethyste), var(--nuit-2)); border: 1px solid var(--border-strong); }
   .carte-boutique .carte-icone { background: radial-gradient(circle at 35% 30%, var(--terracotta), #6b3a28); }
+  .carte-ebooks .carte-icone { background: radial-gradient(circle at 35% 30%, var(--or), #4a3d1f); }
 
   .spotify-embed {
     width: 100%;
@@ -462,6 +463,17 @@
         <h2>La Boutique</h2>
         <p class="desc">Mugs, tee-shirts, casquettes et tote bags à l'effigie de la chouette.</p>
         <a class="bouton" href="https://la-chouette-cosy.tpopsite.com/" style="text-decoration:none;">Découvrir la boutique →</a>
+      </div>
+
+      <!-- Ebooks -->
+      <div class="carte carte-ebooks">
+        <div class="carte-icone">📚</div>
+        <h2>Mes ebooks</h2>
+        <p class="desc">Le Grimoire de la Chouette Cosy, et Le Coin Spooky : vingt-quatre légendes, mystères &amp; affaires.</p>
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+          <a class="bouton" href="https://www.amazon.fr/dp/B0HF7W517J?tag=lachouettecos-21" target="_blank" rel="noopener" style="text-decoration:none;">📖&nbsp;Le Grimoire</a>
+          <a class="bouton discret" href="https://www.amazon.fr/dp/B0HF8JN3HY?tag=lachouettecos-21" target="_blank" rel="noopener" style="text-decoration:none;">🎃&nbsp;Le Coin Spooky</a>
+        </div>
       </div>
 
     </div>
