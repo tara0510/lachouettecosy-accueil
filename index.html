@@ -267,6 +267,7 @@
   }
   .carte-podcast {
     grid-column: span 2;
+    padding-top: 28px;
   }
   .newsletter-box {
     grid-column: span 1;
@@ -381,9 +382,11 @@
     background: var(--nuit-2);
     border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 28px 26px;
+    padding: 0 26px 28px;
     text-align: center;
+    overflow: hidden;
   }
+  .newsletter-box .intro-eyebrow { margin-top: 18px; }
   .newsletter-box p:not(.intro-eyebrow) {
     color: var(--text-secondary);
     line-height: 1.6;
@@ -459,7 +462,7 @@
 
       <!-- Le Coin Mystique -->
       <div class="carte carte-mystique">
-        <img class="carte-visuel" src="images/carte-mystique.jpg" alt="La Chouette Cosy tire les cartes de tarot à la lueur des bougies" loading="lazy">
+        <img class="carte-visuel" src="images/carte-mystique.jpg" alt="La Chouette Cosy ravie, sa tisane à la main devant son carnet de notes magiques" loading="lazy">
         <h2>Le Coin Mystique</h2>
         <p class="desc">Ton grimoire numérique : tarot, pierres, rituels, astrologie et bien plus.</p>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
@@ -470,7 +473,7 @@
 
       <!-- Boutique -->
       <div class="carte carte-boutique">
-        <img class="carte-visuel" src="images/carte-boutique.jpg" alt="La Chouette Cosy avec son balai dans un jardin fleuri" loading="lazy">
+        <img class="carte-visuel" src="images/carte-boutique.jpg" alt="La Chouette Cosy, malicieuse, présente sa recette magique" loading="lazy">
         <h2>La Boutique</h2>
         <p class="desc">Mugs, tee-shirts, casquettes et tote bags à l'effigie de la chouette.</p>
         <a class="bouton" href="https://la-chouette-cosy.tpopsite.com/" style="text-decoration:none;">Découvrir la boutique →</a>
@@ -490,7 +493,6 @@
       <!-- Le Coin Cosy (podcast) — seule sur sa ligne, pleine largeur, pour que
            le lecteur Spotify s'affiche en entier sans défilement interne. -->
       <div class="carte carte-podcast">
-        <img class="carte-visuel" src="images/carte-podcast.jpg" alt="La Chouette Cosy enregistre le podcast avec son micro et son cacao" loading="lazy">
         <h2>Le Coin Cosy</h2>
         <p class="desc">Le podcast : bien-être, sorcellerie légère et entrepreneuriat féminin.</p>
 
@@ -515,6 +517,7 @@
 
       <!-- Newsletter, juste à côté du podcast -->
       <div class="carte newsletter-box">
+        <img class="carte-visuel" src="images/carte-newsletter.jpg" alt="La Chouette Cosy blottie sous un plaid avec un chocolat chaud" loading="lazy">
         <p class="intro-eyebrow">Rejoins le cercle</p>
         <h2 style="font-family:'Fraunces',serif; font-weight:500; font-size:21px; margin:0 0 8px;">La newsletter du Coin Cosy</h2>
         <p>Chaque jeudi : le nouvel épisode, une citation qui fait du bien, et une petite fiche pour explorer un coin du grimoire.</p>
