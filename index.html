@@ -199,7 +199,7 @@
   /* Intro : quelques mots sur la sorcellerie douce */
   .intro {
     max-width: 640px;
-    margin: 0 auto 80px;
+    margin: 0 auto 40px;
     text-align: center;
   }
   .intro-eyebrow {
@@ -220,6 +220,15 @@
     font-size: 15.5px;
   }
   .intro strong { color: var(--text-primary); font-weight: 600; }
+
+  /* Séparateur décoratif doré, façon arabesque, entre les grandes sections */
+  .separateur {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 56px;
+    max-width: 500px;
+  }
+  .separateur svg { width: 100%; height: auto; }
 
   /* FAQ */
   .faq {
@@ -464,6 +473,18 @@
       <h2>La sorcellerie douce, version cosy</h2>
       <p>Ici, la magie ne fait pas peur : c'est une <strong>magie du quotidien</strong>, tissée de petits rituels, de phases lunaires et de tasses de thé fumantes. Que tu débutes en <strong>sorcellerie douce</strong> ou que tu pratiques depuis longtemps, tu trouveras de quoi nourrir ta curiosité — tarot et oracles, pierres et cristaux, sortilèges, calendrier des sabbats, astrologie... Une invitation à ralentir et à réenchanter les gestes simples, sans jamais se prendre trop au sérieux.</p>
     </section>
+
+    <div class="separateur" aria-hidden="true">
+      <svg viewBox="0 0 500 30" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="var(--or)" stroke-width="1" stroke-linecap="round">
+          <path d="M0 15 H175"/>
+          <path d="M325 15 H500"/>
+          <path d="M175 15 C 195 15 195 6 215 6 C 232 6 232 15 250 15"/>
+          <path d="M250 15 C 268 15 268 6 285 6 C 305 6 305 15 325 15"/>
+        </g>
+        <circle cx="250" cy="15" r="3" fill="var(--or)"/>
+      </svg>
+    </div>
 
     <div class="grille">
 
