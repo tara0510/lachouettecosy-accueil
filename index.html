@@ -277,6 +277,9 @@
   }
   .carte-podcast {
     grid-column: span 2;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .newsletter-box {
     grid-column: span 1;
@@ -324,9 +327,6 @@
       radial-gradient(ellipse at 30% 20%, rgba(255,140,60,.05), transparent 50%),
       linear-gradient(160deg, #221a2e, #171120 55%, #0e0a15);
   }
-  .carte-podcast h2 { color: var(--text-primary); }
-  .carte-podcast p.desc { color: var(--text-secondary); }
-
   .carte-visuel {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -357,6 +357,8 @@
     margin: 0 0 20px;
     min-height: 44px;
   }
+  .carte-podcast h2 { color: var(--text-primary); }
+  .carte-podcast p.desc { color: var(--text-secondary); }
 
   .bouton {
     display: inline-block;
@@ -494,6 +496,15 @@
   .plateformes a:hover {
     color: var(--ink);
     border-color: rgba(61,43,26,.45);
+  }
+  .carte-podcast .plateformes a {
+    color: var(--text-secondary);
+    background: rgba(247,243,237,.06);
+    border-color: var(--border);
+  }
+  .carte-podcast .plateformes a:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
   }
 
   .badge-bientot {
