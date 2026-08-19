@@ -390,9 +390,52 @@
     gap: 8px;
     justify-content: center;
     margin-bottom: 18px;
-    margin-top: auto;
-    padding-top: 18px;
   }
+
+  /* Petit encart mystérieux vers Le Coin Spooky, dans la carte podcast */
+  .spooky-teaser {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-align: left;
+    background: rgba(20, 14, 8, .88);
+    border: 1px solid rgba(255, 140, 60, .25);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: auto;
+    box-shadow: inset 0 0 30px rgba(0,0,0,.5), 0 4px 14px rgba(0,0,0,.3);
+  }
+  .spooky-teaser img {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px rgba(255,120,40,.4), 0 0 18px rgba(255,90,20,.25);
+  }
+  .spooky-teaser .spooky-titre {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ff9b5c;
+    margin: 0 0 4px;
+  }
+  .spooky-teaser p {
+    color: #d9c9b8;
+    font-size: 12.5px;
+    line-height: 1.5;
+    margin: 0 0 8px;
+  }
+  .spooky-teaser a {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    color: #ff9b5c;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,155,92,.4);
+  }
+  .spooky-teaser a:hover { color: #ffb27e; }
   .plateformes a {
     font-size: 12.5px;
     text-decoration: none;
@@ -558,6 +601,15 @@
           <a href="https://castbox.fm/channel/Le-coin-cosy-id7101615?country=fr" target="_blank" rel="noopener">Castbox</a>
           <a href="https://goodpods.com/podcasts/le-coin-cosy-739529" target="_blank" rel="noopener">Goodpods</a>
           <a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">📷 Instagram</a>
+        </div>
+
+        <div class="spooky-teaser">
+          <img src="images/coin-spooky-logo.jpg" alt="Le Coin Spooky">
+          <div>
+            <p class="spooky-titre">🕯️ Et quand la nuit tombe...</p>
+            <p>Une autre voix se réveille dans l'application : <strong>Le Coin Spooky</strong>, légendes, affaires non résolues et lieux hantés, racontés comme au coin du feu. Le premier récit s'écoute librement — les suivants n'attendent que les âmes abonnées.</p>
+            <a href="https://app.lachouettecosy.com/coin-spooky" target="_blank" rel="noopener">Écouter si tu l'oses →</a>
+          </div>
         </div>
       </div>
 
