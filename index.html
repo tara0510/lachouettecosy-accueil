@@ -421,28 +421,31 @@
     width: 100%;
     max-width: 400px;
     box-shadow: inset 0 0 30px rgba(0,0,0,.5), 0 4px 14px rgba(0,0,0,.3);
-    animation: eclair-cadre 6s infinite;
+    animation: eclair-cadre 2.2s infinite;
   }
   .spooky-teaser .eclair {
     position: absolute;
-    font-size: 22px;
+    font-size: 64px;
     opacity: 0;
-    filter: drop-shadow(0 0 6px rgba(255,255,255,.9));
+    filter: drop-shadow(0 0 14px rgba(255,255,255,.95)) drop-shadow(0 0 28px rgba(180,210,255,.8));
     pointer-events: none;
   }
-  .spooky-teaser .eclair-1 { top: -10px; left: -8px; animation: eclair-flash 6s infinite; }
-  .spooky-teaser .eclair-2 { top: -10px; right: -8px; animation: eclair-flash 6s infinite; animation-delay: .12s; }
-  .spooky-teaser .eclair-3 { bottom: -10px; left: 30%; animation: eclair-flash 6s infinite; animation-delay: 3.1s; }
-  .spooky-teaser .eclair-4 { bottom: -10px; right: 20%; animation: eclair-flash 6s infinite; animation-delay: 3.2s; }
+  .spooky-teaser .eclair-1 { top: -26px; left: -22px; animation: eclair-flash 2.2s infinite; }
+  .spooky-teaser .eclair-2 { top: -26px; right: -22px; animation: eclair-flash 2.2s infinite; animation-delay: .55s; }
+  .spooky-teaser .eclair-3 { bottom: -26px; left: 22%; animation: eclair-flash 2.2s infinite; animation-delay: 1.1s; }
+  .spooky-teaser .eclair-4 { bottom: -26px; right: 15%; animation: eclair-flash 2.2s infinite; animation-delay: 1.65s; }
   @keyframes eclair-cadre {
-    0%, 88%, 90.5%, 100% { border-color: rgba(255,140,60,.25); box-shadow: inset 0 0 30px rgba(0,0,0,.5), 0 4px 14px rgba(0,0,0,.3); }
-    89% { border-color: rgba(230,240,255,1); box-shadow: inset 0 0 40px rgba(200,220,255,.4), 0 0 45px 12px rgba(220,235,255,.85); }
-    91.5%, 94.5% { border-color: rgba(255,140,60,.25); box-shadow: inset 0 0 30px rgba(0,0,0,.5), 0 4px 14px rgba(0,0,0,.3); }
-    92% { border-color: rgba(230,240,255,1); box-shadow: inset 0 0 40px rgba(200,220,255,.4), 0 0 55px 16px rgba(220,235,255,.9); }
+    0%, 15%, 35%, 55%, 75%, 100% { border-color: rgba(255,140,60,.25); box-shadow: inset 0 0 30px rgba(0,0,0,.5), 0 4px 14px rgba(0,0,0,.3); }
+    5%, 8% { border-color: rgba(230,240,255,1); box-shadow: inset 0 0 45px rgba(200,220,255,.5), 0 0 55px 16px rgba(220,235,255,.95); }
+    25%, 28% { border-color: rgba(230,240,255,1); box-shadow: inset 0 0 45px rgba(200,220,255,.5), 0 0 60px 18px rgba(220,235,255,1); }
+    45%, 48% { border-color: rgba(230,240,255,1); box-shadow: inset 0 0 45px rgba(200,220,255,.5), 0 0 50px 14px rgba(220,235,255,.9); }
+    65%, 68% { border-color: rgba(230,240,255,1); box-shadow: inset 0 0 45px rgba(200,220,255,.5), 0 0 62px 18px rgba(220,235,255,1); }
+    85%, 88% { border-color: rgba(230,240,255,1); box-shadow: inset 0 0 45px rgba(200,220,255,.5), 0 0 52px 15px rgba(220,235,255,.92); }
   }
   @keyframes eclair-flash {
-    0%, 87%, 91%, 100% { opacity: 0; }
-    88.5%, 89.5% { opacity: 1; }
+    0%, 15%, 35%, 55%, 75%, 100% { opacity: 0; }
+    6%, 7% { opacity: 1; }
+    26%, 27% { opacity: 1; }
   }
   @media (prefers-reduced-motion: reduce) {
     .spooky-teaser, .spooky-teaser .eclair { animation: none; }
