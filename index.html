@@ -236,6 +236,15 @@
     max-width: 640px;
     margin: 0 auto;
   }
+
+  /* Appel à laisser un avis, juste avant le footer */
+  .avis-cta {
+    max-width: 560px;
+    margin: 64px auto 0;
+    text-align: center;
+  }
+  .avis-cta h2 { margin: 0 0 12px; }
+  .avis-cta p { color: var(--text-secondary); margin: 0 0 22px; }
   .faq h2 { margin-bottom: 28px; }
   .faq details {
     background: var(--nuit-2);
@@ -676,7 +685,7 @@
       </div>
 
       <!-- Newsletter, juste à côté du podcast -->
-      <div class="carte newsletter-box">
+      <div class="carte newsletter-box" id="newsletter">
         <img class="carte-visuel" src="images/carte-newsletter.jpg" alt="La Chouette Cosy blottie sous un plaid avec un chocolat chaud" loading="lazy">
         <p class="intro-eyebrow">Rejoins le cercle</p>
         <h2 style="font-family:'Fraunces',serif; font-weight:500; font-size:21px; margin:0 0 8px;">La newsletter du Coin Cosy</h2>
@@ -721,6 +730,16 @@
         <summary>De quoi parle le podcast Le Coin Cosy ?</summary>
         <p>Bien-être, sorcellerie légère et entrepreneuriat féminin, avec des épisodes pensés comme une pause chaleureuse au coin du feu.</p>
       </details>
+    </section>
+
+    <section class="avis-cta">
+      <p class="intro-eyebrow">Ton avis compte</p>
+      <h2>Tu aimes l'univers de la Chouette Cosy ?</h2>
+      <p>Un petit avis prend une minute et aide énormément d'autres personnes à découvrir Le Coin Mystique, le podcast et la boutique.</p>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <a class="bouton" href="https://www.trustpilot.com/evaluate/lachouettecosy.com" target="_blank" rel="noopener" style="text-decoration:none;">⭐&nbsp;Laisser un avis Trustpilot</a>
+        <a class="bouton discret" href="https://www.facebook.com/crmonteurvideo/reviews" target="_blank" rel="noopener" style="text-decoration:none;">👍&nbsp;Avis sur Facebook</a>
+      </div>
     </section>
 
     <footer>
