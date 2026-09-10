@@ -124,7 +124,10 @@
     display: flex;
     gap: 20px;
     align-items: flex-start;
+    cursor: pointer;
+    transition: border-color .15s;
   }
+  .carte-festival:hover { border-color: var(--border-strong); }
   .carte-festival img {
     width: 96px; height: 96px; border-radius: 12px; object-fit: cover; flex-shrink: 0;
     border: 1px solid var(--border-strong);
@@ -262,7 +265,7 @@
       const fiche = `festival.html?id=${encodeURIComponent(f.id)}`;
 
       return `
-        <div class="carte-festival">
+        <div class="carte-festival" data-fiche="${fiche}">
           ${image}
           <div class="carte-corps">
             <div class="carte-tete">
@@ -289,6 +292,16 @@
         return;
       }
       contenu.innerHTML = `<div class="liste">${festivals.map(carteFestival).join("")}</div>`;
+
+      // Toute la carte est cliquable, pas seulement le titre — sauf si on
+      // clique un lien qu'elle contient (pour aller plus loin, site externe...),
+      // qui garde sa propre destination.
+      contenu.querySelectorAll(".carte-festival").forEach((carte) => {
+        carte.addEventListener("click", (e) => {
+          if (e.target.closest("a")) return;
+          window.location.href = carte.dataset.fiche;
+        });
+      });
     }
 
     function construireFiltres() {
