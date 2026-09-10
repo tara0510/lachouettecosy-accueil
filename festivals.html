@@ -132,6 +132,8 @@
   .carte-corps { flex: 1; min-width: 0; }
   .carte-tete { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 10px; margin-bottom: 4px; }
   .carte-festival h2 { font-family: "Fraunces", serif; font-weight: 600; font-size: 19px; margin: 0; }
+  .lien-titre { color: var(--text-primary); text-decoration: none; }
+  .lien-titre:hover { color: var(--or-clair); }
   .badge-local {
     font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
     padding: 3px 9px; border-radius: 999px;
@@ -256,19 +258,21 @@
         f.lien_facebook ? `<a class="lien-externe" href="${echapper(f.lien_facebook)}" target="_blank" rel="noopener">📘 Facebook</a>` : "",
       ].join("");
       const image = f.image_url ? `<img src="${echapper(f.image_url)}" alt="" loading="lazy">` : "";
+      const lieu = [f.lieu_exact, f.ville, f.region].filter(Boolean).join(", ");
+      const fiche = `festival.html?id=${encodeURIComponent(f.id)}`;
 
       return `
         <div class="carte-festival">
           ${image}
           <div class="carte-corps">
             <div class="carte-tete">
-              <h2>${echapper(f.nom)}</h2>
+              <h2><a href="${fiche}" class="lien-titre">${echapper(f.nom)}</a></h2>
               ${f.taille === "petit" ? '<span class="badge-local">Événement local</span>' : ""}
             </div>
-            <p class="carte-lieu-date"><span class="pays">${echapper(f.pays)}</span> — ${echapper(f.ville)}${f.region ? ", " + echapper(f.region) : ""} · ${periodeAffichee(f)}</p>
+            <p class="carte-lieu-date"><span class="pays">${echapper(f.pays)}</span> — ${echapper(lieu)} · ${periodeAffichee(f)}${f.nombre_editions ? ` · ${f.nombre_editions}ᵉ édition` : ""}</p>
             <p class="carte-description">${echapper(f.description)}</p>
             ${tags ? `<div class="tags">${tags}</div>` : ""}
-            <div class="plus-loin">${liensAppli}${liensExternes}</div>
+            <div class="plus-loin">${liensAppli}${liensExternes}<a class="lien-externe" href="${fiche}">📖 Voir la fiche complète</a></div>
           </div>
         </div>
       `;

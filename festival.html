@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festival — La Chouette Cosy</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nuit: #1a1625;
+    --nuit-2: #15111e;
+    --amethyste-clair: #c3b2dc;
+    --or: #c9a876;
+    --or-clair: #dec79a;
+    --sauge: #7a8b6f;
+    --text-primary: #f3efe8;
+    --text-secondary: #c2b8d1;
+    --text-muted: #897f99;
+    --border: rgba(247, 243, 237, 0.08);
+    --border-strong: rgba(247, 243, 237, 0.16);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--nuit); color: var(--text-primary); font-family: "Outfit", sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: var(--or-clair); }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 64px; }
+
+  .retour { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--text-muted); text-decoration: none; margin-bottom: 28px; }
+  .retour:hover { color: var(--or-clair); }
+
+  .cover { border-radius: 18px; overflow: hidden; margin-bottom: 24px; border: 1px solid var(--border-strong); }
+  .cover img { width: 100%; height: 280px; object-fit: cover; display: block; }
+
+  .tete { margin-bottom: 24px; }
+  .badge-local {
+    display: inline-block; font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+    padding: 3px 9px; border-radius: 999px; margin-bottom: 10px;
+    background: rgba(122,139,111,.16); color: var(--sauge); border: 1px solid rgba(122,139,111,.35);
+  }
+  h1 { font-family: "Fraunces", serif; font-weight: 500; font-size: clamp(24px, 4vw, 32px); margin: 0 0 10px; text-wrap: balance; }
+  .lieu-date { font-size: 14.5px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+  .lieu-date .pays { color: var(--or-clair); font-weight: 600; }
+  .editions { font-size: 13.5px; color: var(--text-muted); margin: 4px 0 0; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; }
+  .tag { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: rgba(201,168,118,.12); color: var(--or-clair); border: 1px solid rgba(201,168,118,.25); }
+
+  section { margin: 28px 0; }
+  section h2 { font-family: "Fraunces", serif; font-weight: 500; font-size: 18px; margin: 0 0 10px; }
+  .description { font-size: 15.5px; line-height: 1.75; color: var(--text-primary); margin: 0; }
+
+  .historique {
+    background: var(--nuit-2); border-left: 3px solid var(--or); border-radius: 0 14px 14px 0;
+    padding: 16px 22px; font-size: 14.5px; line-height: 1.7; color: var(--text-secondary);
+  }
+  .historique h2 { color: var(--or-clair); }
+
+  .liens { display: flex; flex-wrap: wrap; gap: 8px; }
+  .lien-pill {
+    font-size: 13.5px; text-decoration: none; padding: 7px 15px; border-radius: 999px;
+    background: rgba(195,178,220,.12); color: var(--amethyste-clair); border: 1px solid rgba(195,178,220,.28);
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .lien-pill:hover { background: rgba(195,178,220,.2); }
+  .lien-externe {
+    font-size: 13.5px; text-decoration: none; padding: 7px 15px; border-radius: 999px;
+    background: transparent; color: var(--text-secondary); border: 1px solid var(--border-strong);
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .lien-externe:hover { border-color: var(--or); color: var(--or-clair); }
+
+  .etat { text-align: center; color: var(--text-muted); font-size: 14.5px; padding: 60px 0; }
+
+  footer { text-align: center; margin-top: 56px; color: var(--text-muted); font-size: 13px; }
+  footer a { color: var(--or-clair); text-decoration: none; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="retour" href="/festivals.html">← Retour au répertoire</a>
+    <div id="contenu">
+      <p class="etat">Chargement...</p>
+    </div>
+    <footer>
+      🦉 La Chouette Cosy — <a href="/">Retour à l'accueil</a>
+    </footer>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://fpxuslmxsxamocfngoke.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZweHVzbG14c3hhbW9jZm5nb2tlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxMTY0NjgsImV4cCI6MjA5OTY5MjQ2OH0.LFCMJvyeBx3AQSVXMRmit1uLsHxdeMM3mf4jEvHC14s";
+
+    function formatDate(iso) {
+      if (!iso) return "";
+      const [annee, mois, jour] = iso.split("-");
+      const d = new Date(Date.UTC(+annee, +mois - 1, +jour));
+      return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+    }
+
+    function periodeAffichee(f) {
+      if (f.date_fin && f.date_fin !== f.date_debut) return `${formatDate(f.date_debut)} → ${formatDate(f.date_fin)}`;
+      if (f.periode_indicative) return `${formatDate(f.date_debut)} (${f.periode_indicative})`;
+      return formatDate(f.date_debut);
+    }
+
+    function echapper(texte) {
+      const div = document.createElement("div");
+      div.textContent = texte ?? "";
+      return div.innerHTML;
+    }
+
+    function afficher(f) {
+      document.title = `${f.nom} — La Chouette Cosy`;
+
+      const lieu = [f.lieu_exact, f.ville, f.region].filter(Boolean).join(", ");
+      const tags = (f.categories || []).map((c) => `<span class="tag">${echapper(c)}</span>`).join("");
+      const liensAppli = (f.pour_aller_plus_loin || [])
+        .map((l) => {
+          const href = l.href.startsWith("http") ? l.href : `https://app.lachouettecosy.com${l.href}`;
+          return `<a class="lien-pill" href="${echapper(href)}" target="_blank" rel="noopener">✨ ${echapper(l.texte)}</a>`;
+        })
+        .join("");
+      const liensExternes = [
+        f.site_web ? `<a class="lien-externe" href="${echapper(f.site_web)}" target="_blank" rel="noopener">🔗 Site officiel</a>` : "",
+        f.lien_facebook ? `<a class="lien-externe" href="${echapper(f.lien_facebook)}" target="_blank" rel="noopener">📘 Facebook</a>` : "",
+      ].join("");
+
+      document.getElementById("contenu").innerHTML = `
+        ${f.image_url ? `<div class="cover"><img src="${echapper(f.image_url)}" alt=""></div>` : ""}
+        <div class="tete">
+          ${f.taille === "petit" ? '<span class="badge-local">Événement local</span>' : ""}
+          <h1>${echapper(f.nom)}</h1>
+          <p class="lieu-date"><span class="pays">${echapper(f.pays)}</span> — ${echapper(lieu)} · ${periodeAffichee(f)}</p>
+          ${f.nombre_editions ? `<p class="editions">${f.nombre_editions}ᵉ édition</p>` : ""}
+          ${tags ? `<div class="tags">${tags}</div>` : ""}
+        </div>
+
+        <section>
+          <p class="description">${echapper(f.description)}</p>
+        </section>
+
+        ${f.infos_historiques ? `
+        <section class="historique">
+          <h2>Un peu d'histoire</h2>
+          <p style="margin:0;">${echapper(f.infos_historiques)}</p>
+        </section>` : ""}
+
+        ${liensAppli || liensExternes ? `
+        <section>
+          <h2>Pour aller plus loin</h2>
+          <div class="liens">${liensAppli}${liensExternes}</div>
+        </section>` : ""}
+      `;
+    }
+
+    async function charger() {
+      const id = new URLSearchParams(window.location.search).get("id");
+      if (!id) {
+        document.getElementById("contenu").innerHTML = '<p class="etat">Festival introuvable.</p>';
+        return;
+      }
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/festivals_paganisme?select=*&id=eq.${encodeURIComponent(id)}&actif=eq.true`,
+          { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
+        );
+        if (!res.ok) throw new Error("Réponse invalide");
+        const resultats = await res.json();
+        if (!resultats.length) {
+          document.getElementById("contenu").innerHTML = '<p class="etat">Festival introuvable.</p>';
+          return;
+        }
+        afficher(resultats[0]);
+      } catch (e) {
+        document.getElementById("contenu").innerHTML = '<p class="etat">Impossible de charger ce festival pour l\'instant.</p>';
+      }
+    }
+
+    charger();
+  </script>
+</body>
+</html>
