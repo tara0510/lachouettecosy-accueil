@@ -29,8 +29,11 @@
   .retour { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--text-muted); text-decoration: none; margin-bottom: 28px; }
   .retour:hover { color: var(--or-clair); }
 
-  .cover { border-radius: 18px; overflow: hidden; margin-bottom: 24px; border: 1px solid var(--border-strong); }
+  .cover { border-radius: 18px; overflow: hidden; margin-bottom: 6px; border: 1px solid var(--border-strong); }
   .cover img { width: 100%; height: 280px; object-fit: cover; display: block; }
+  .credit-photo { font-size: 11.5px; color: var(--text-muted); margin: 0 0 24px; }
+  .credit-photo a { color: var(--text-muted); text-decoration: underline; }
+  .credit-photo a:hover { color: var(--or-clair); }
 
   .tete { margin-bottom: 24px; }
   .badge-local {
@@ -126,8 +129,12 @@
         f.lien_facebook ? `<a class="lien-externe" href="${echapper(f.lien_facebook)}" target="_blank" rel="noopener">📘 Facebook</a>` : "",
       ].join("");
 
+      const credit = f.image_url && f.image_credit_photographe
+        ? `<p class="credit-photo">Photo : ${f.image_credit_lien ? `<a href="${echapper(f.image_credit_lien)}" target="_blank" rel="noopener">${echapper(f.image_credit_photographe)}</a>` : echapper(f.image_credit_photographe)} via Pixabay</p>`
+        : "";
+
       document.getElementById("contenu").innerHTML = `
-        ${f.image_url ? `<div class="cover"><img src="${echapper(f.image_url)}" alt=""></div>` : ""}
+        ${f.image_url ? `<div class="cover"><img src="${echapper(f.image_url)}" alt=""></div>${credit}` : ""}
         <div class="tete">
           ${f.taille === "petit" ? '<span class="badge-local">Événement local</span>' : ""}
           <h1>${echapper(f.nom)}</h1>
