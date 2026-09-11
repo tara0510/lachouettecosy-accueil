@@ -262,7 +262,7 @@
     function carteFestival(f) {
       const tags = (f.categories || []).slice(0, 3).map((c) => `<span class="tag">${echapper(c)}</span>`).join("");
       const image = f.image_url ? `<img class="visuel" src="${echapper(f.image_url)}" alt="" loading="lazy">` : "";
-      const lieu = [f.lieu_exact, f.ville].filter(Boolean).join(", ");
+      const lieu = [f.lieu_exact, f.ville, f.departement].filter(Boolean).join(", ");
       const fiche = `festival.html?id=${encodeURIComponent(f.id)}`;
 
       return `

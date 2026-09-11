@@ -116,7 +116,7 @@
     function afficher(f) {
       document.title = `${f.nom} — La Chouette Cosy`;
 
-      const lieu = [f.lieu_exact, f.ville, f.region].filter(Boolean).join(", ");
+      const lieu = [f.lieu_exact, f.ville, f.departement, f.region].filter(Boolean).join(", ");
       const tags = (f.categories || []).map((c) => `<span class="tag">${echapper(c)}</span>`).join("");
       const liensAppli = (f.pour_aller_plus_loin || [])
         .map((l) => {
