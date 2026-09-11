@@ -53,7 +53,8 @@
     background-size: cover;
   }
   a { color: var(--or-clair); }
-  .wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 64px; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 48px 24px 64px; }
+  .wrap-etroit { max-width: 620px; margin: 0 auto; }
 
   .retour {
     display: inline-flex;
@@ -112,46 +113,59 @@
   .filtre:hover { border-color: var(--or); color: var(--or-clair); }
   .filtre.actif { background: var(--or); border-color: var(--or); color: var(--nuit); font-weight: 600; }
 
-  .etat { text-align: center; color: var(--text-muted); font-size: 14.5px; padding: 40px 0; }
+  .etat { text-align: center; color: var(--text-muted); font-size: 14.5px; padding: 40px 0; grid-column: 1 / -1; }
 
-  .liste { display: flex; flex-direction: column; gap: 18px; }
+  .liste {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 980px) { .liste { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .liste { grid-template-columns: 1fr; } }
 
   .carte-festival {
     background: var(--nuit-2);
     border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 24px 26px;
+    border-radius: 16px;
+    overflow: hidden;
     display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    cursor: pointer;
-    transition: border-color .15s;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s, transform .15s;
   }
-  .carte-festival:hover { border-color: var(--border-strong); }
-  .carte-festival img {
-    width: 96px; height: 96px; border-radius: 12px; object-fit: cover; flex-shrink: 0;
-    border: 1px solid var(--border-strong);
+  .carte-festival:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .carte-festival .visuel {
+    width: 100%; height: 120px; object-fit: cover; display: block; flex-shrink: 0;
+    background: var(--nuit);
   }
-  .carte-corps { flex: 1; min-width: 0; }
-  .carte-tete { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 10px; margin-bottom: 4px; }
-  .carte-festival h2 { font-family: "Fraunces", serif; font-weight: 600; font-size: 19px; margin: 0; }
-  .lien-titre { color: var(--text-primary); text-decoration: none; }
-  .lien-titre:hover { color: var(--or-clair); }
+  .carte-corps { flex: 1; min-width: 0; padding: 16px 18px 18px; display: flex; flex-direction: column; }
+  .carte-tete { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-bottom: 6px; }
+  .carte-festival h2 {
+    font-family: "Fraunces", serif; font-weight: 600; font-size: 16.5px; margin: 0 0 6px;
+    line-height: 1.3; color: var(--text-primary);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
   .badge-local {
-    font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
-    padding: 3px 9px; border-radius: 999px;
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+    padding: 2px 8px; border-radius: 999px;
     background: rgba(122,139,111,.16); color: var(--sauge); border: 1px solid rgba(122,139,111,.35);
     white-space: nowrap;
   }
-  .carte-lieu-date { font-size: 13.5px; color: var(--text-muted); margin: 0 0 10px; }
-  .carte-lieu-date .pays { color: var(--or-clair); }
-  .carte-description { font-size: 14.5px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 12px; }
+  .carte-lieu-date { font-size: 12.5px; color: var(--text-muted); margin: 0 0 8px; line-height: 1.5; }
+  .carte-lieu-date .pays { color: var(--or-clair); font-weight: 600; }
+  .carte-description {
+    font-size: 13.5px; line-height: 1.55; color: var(--text-secondary); margin: 0 0 10px; flex: 1;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
 
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
   .tag {
-    font-size: 12px; padding: 3px 10px; border-radius: 999px;
+    font-size: 11px; padding: 2px 9px; border-radius: 999px;
     background: rgba(201,168,118,.12); color: var(--or-clair); border: 1px solid rgba(201,168,118,.25);
   }
+
+  .carte-cta { font-size: 12.5px; font-weight: 600; color: var(--amethyste-clair); margin-top: auto; }
 
   .plus-loin { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
   .lien-pill {
@@ -179,26 +193,23 @@
 
   footer { text-align: center; margin-top: 56px; color: var(--text-muted); font-size: 13px; }
   footer a { color: var(--or-clair); text-decoration: none; }
-
-  @media (max-width: 520px) {
-    .carte-festival { flex-direction: column; }
-    .carte-festival img { width: 100%; height: 160px; }
-  }
 </style>
 </head>
 <body>
   <div class="wrap">
 
-    <a class="retour" href="/">← Retour à l'accueil</a>
+    <div class="wrap-etroit">
+      <a class="retour" href="/">← Retour à l'accueil</a>
 
-    <div class="hero">
-      <p class="hero-eyebrow">Le Coin Mystique</p>
-      <h1>Festivals sorcellerie, Wicca & mondes merveilleux</h1>
-      <p>Grands rassemblements comme petits rendez-vous locaux, en France, Suisse, Belgique, Luxembourg et Canada — pour trouver où célébrer, apprendre et rencontrer d'autres passionné·es près de chez toi.</p>
-    </div>
+      <div class="hero">
+        <p class="hero-eyebrow">Le Coin Mystique</p>
+        <h1>Festivals sorcellerie, Wicca & mondes merveilleux</h1>
+        <p>Grands rassemblements comme petits rendez-vous locaux, en France, Suisse, Belgique, Luxembourg et Canada — pour trouver où célébrer, apprendre et rencontrer d'autres passionné·es près de chez toi.</p>
+      </div>
 
-    <div class="note-locaux">
-      🌱 Les petits événements locaux ont ici la même place que les grands festivals : c'est aussi pour les faire connaître que ce répertoire existe.
+      <div class="note-locaux">
+        🌱 Les petits événements locaux ont ici la même place que les grands festivals : c'est aussi pour les faire connaître que ce répertoire existe.
+      </div>
     </div>
 
     <div class="filtres" id="filtres"></div>
@@ -249,35 +260,25 @@
     }
 
     function carteFestival(f) {
-      const tags = (f.categories || []).map((c) => `<span class="tag">${echapper(c)}</span>`).join("");
-      const liensAppli = (f.pour_aller_plus_loin || [])
-        .map((l) => {
-          const href = l.href.startsWith("http") ? l.href : `https://app.lachouettecosy.com${l.href}`;
-          return `<a class="lien-pill" href="${echapper(href)}" target="_blank" rel="noopener">✨ ${echapper(l.texte)}</a>`;
-        })
-        .join("");
-      const liensExternes = [
-        f.site_web ? `<a class="lien-externe" href="${echapper(f.site_web)}" target="_blank" rel="noopener">🔗 Site officiel</a>` : "",
-        f.lien_facebook ? `<a class="lien-externe" href="${echapper(f.lien_facebook)}" target="_blank" rel="noopener">📘 Facebook</a>` : "",
-      ].join("");
-      const image = f.image_url ? `<img src="${echapper(f.image_url)}" alt="" loading="lazy">` : "";
-      const lieu = [f.lieu_exact, f.ville, f.region].filter(Boolean).join(", ");
+      const tags = (f.categories || []).slice(0, 3).map((c) => `<span class="tag">${echapper(c)}</span>`).join("");
+      const image = f.image_url ? `<img class="visuel" src="${echapper(f.image_url)}" alt="" loading="lazy">` : "";
+      const lieu = [f.lieu_exact, f.ville].filter(Boolean).join(", ");
       const fiche = `festival.html?id=${encodeURIComponent(f.id)}`;
 
       return `
-        <div class="carte-festival" data-fiche="${fiche}">
+        <a class="carte-festival" href="${fiche}">
           ${image}
           <div class="carte-corps">
             <div class="carte-tete">
-              <h2><a href="${fiche}" class="lien-titre">${echapper(f.nom)}</a></h2>
               ${f.taille === "petit" ? '<span class="badge-local">Événement local</span>' : ""}
             </div>
-            <p class="carte-lieu-date"><span class="pays">${echapper(f.pays)}</span> — ${echapper(lieu)} · ${periodeAffichee(f)}${f.nombre_editions ? ` · ${f.nombre_editions}ᵉ édition` : ""}</p>
+            <h2>${echapper(f.nom)}</h2>
+            <p class="carte-lieu-date"><span class="pays">${echapper(f.pays)}</span> — ${echapper(lieu)} · ${periodeAffichee(f)}</p>
             <p class="carte-description">${echapper(f.description)}</p>
             ${tags ? `<div class="tags">${tags}</div>` : ""}
-            <div class="plus-loin">${liensAppli}${liensExternes}<a class="lien-externe" href="${fiche}">📖 Voir la fiche complète</a></div>
+            <span class="carte-cta">📖 Voir la fiche complète →</span>
           </div>
-        </div>
+        </a>
       `;
     }
 
@@ -292,16 +293,6 @@
         return;
       }
       contenu.innerHTML = `<div class="liste">${festivals.map(carteFestival).join("")}</div>`;
-
-      // Toute la carte est cliquable, pas seulement le titre — sauf si on
-      // clique un lien qu'elle contient (pour aller plus loin, site externe...),
-      // qui garde sa propre destination.
-      contenu.querySelectorAll(".carte-festival").forEach((carte) => {
-        carte.addEventListener("click", (e) => {
-          if (e.target.closest("a")) return;
-          window.location.href = carte.dataset.fiche;
-        });
-      });
     }
 
     function construireFiltres() {
