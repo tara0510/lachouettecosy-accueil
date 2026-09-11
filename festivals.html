@@ -235,6 +235,7 @@
 
     <div class="filtres" id="filtres"></div>
     <div class="filtres" id="filtre-region-zone"></div>
+    <div class="filtres" id="filtre-type-zone"></div>
 
     <div id="contenu">
       <p class="etat">Chargement des festivals...</p>
@@ -258,6 +259,7 @@
     let tousLesFestivals = [];
     let filtreActif = "Tous";
     let filtreRegion = "Toutes";
+    let filtreType = "Tous";
 
     function formatDate(iso) {
       if (!iso) return "";
@@ -311,9 +313,15 @@
         : tousLesFestivals.filter((f) => f.pays === filtreActif);
     }
 
+    function festivalsDuPaysEtRegion() {
+      return festivalsDuPays().filter((f) => filtreRegion === "Toutes" || f.region === filtreRegion);
+    }
+
     function afficher() {
       const contenu = document.getElementById("contenu");
-      const festivals = festivalsDuPays().filter((f) => filtreRegion === "Toutes" || f.region === filtreRegion);
+      const festivals = festivalsDuPaysEtRegion().filter(
+        (f) => filtreType === "Tous" || (f.categories || []).includes(filtreType)
+      );
 
       if (festivals.length === 0) {
         contenu.innerHTML = '<p class="etat">Aucun festival répertorié ici pour l\'instant.</p>';
@@ -332,6 +340,7 @@
         bouton.addEventListener("click", () => {
           filtreActif = bouton.dataset.pays;
           filtreRegion = "Toutes";
+          filtreType = "Tous";
           zone.querySelectorAll(".filtre").forEach((b) => b.classList.toggle("actif", b === bouton));
           construireFiltreRegion();
           afficher();
@@ -347,17 +356,41 @@
 
       if (regions.length === 0) {
         zone.innerHTML = "";
+      } else {
+        zone.innerHTML = `
+          <select class="filtre-region" id="filtre-region">
+            <option value="Toutes">Toutes les régions</option>
+            ${regions.map((r) => `<option value="${echapper(r)}"${r === filtreRegion ? " selected" : ""}>${echapper(r)}</option>`).join("")}
+          </select>
+        `;
+        document.getElementById("filtre-region").addEventListener("change", (e) => {
+          filtreRegion = e.target.value;
+          filtreType = "Tous";
+          construireFiltreType();
+          afficher();
+        });
+      }
+      construireFiltreType();
+    }
+
+    function construireFiltreType() {
+      const zone = document.getElementById("filtre-type-zone");
+      const types = [...new Set(festivalsDuPaysEtRegion().flatMap((f) => f.categories || []))]
+        .sort((a, b) => a.localeCompare(b, "fr"));
+
+      if (types.length === 0) {
+        zone.innerHTML = "";
         return;
       }
 
       zone.innerHTML = `
-        <select class="filtre-region" id="filtre-region">
-          <option value="Toutes">Toutes les régions</option>
-          ${regions.map((r) => `<option value="${echapper(r)}"${r === filtreRegion ? " selected" : ""}>${echapper(r)}</option>`).join("")}
+        <select class="filtre-region" id="filtre-type">
+          <option value="Tous">Tous les types</option>
+          ${types.map((t) => `<option value="${echapper(t)}"${t === filtreType ? " selected" : ""}>${echapper(t)}</option>`).join("")}
         </select>
       `;
-      document.getElementById("filtre-region").addEventListener("change", (e) => {
-        filtreRegion = e.target.value;
+      document.getElementById("filtre-type").addEventListener("change", (e) => {
+        filtreType = e.target.value;
         afficher();
       });
     }
