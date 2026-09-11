@@ -96,8 +96,10 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
-    margin: 36px 0 32px;
+    margin: 0 0 12px;
   }
+  .filtres:first-of-type { margin-top: 36px; }
+  .filtres:last-of-type { margin-bottom: 32px; }
   .filtre {
     font-family: "Outfit", sans-serif;
     font-size: 13.5px;
@@ -112,6 +114,25 @@
   }
   .filtre:hover { border-color: var(--or); color: var(--or-clair); }
   .filtre.actif { background: var(--or); border-color: var(--or); color: var(--nuit); font-weight: 600; }
+
+  .filtre-region {
+    font-family: "Outfit", sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 8px 34px 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: transparent
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23c2b8d1'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E") no-repeat right 12px center;
+    background-size: 14px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color .15s, color .15s;
+  }
+  .filtre-region:hover { border-color: var(--or); color: var(--or-clair); }
+  .filtre-region option { background: var(--nuit-2); color: var(--text-primary); }
 
   .etat { text-align: center; color: var(--text-muted); font-size: 14.5px; padding: 40px 0; grid-column: 1 / -1; }
 
@@ -213,6 +234,7 @@
     </div>
 
     <div class="filtres" id="filtres"></div>
+    <div class="filtres" id="filtre-region-zone"></div>
 
     <div id="contenu">
       <p class="etat">Chargement des festivals...</p>
@@ -235,6 +257,7 @@
 
     let tousLesFestivals = [];
     let filtreActif = "Tous";
+    let filtreRegion = "Toutes";
 
     function formatDate(iso) {
       if (!iso) return "";
@@ -282,11 +305,15 @@
       `;
     }
 
-    function afficher() {
-      const contenu = document.getElementById("contenu");
-      const festivals = filtreActif === "Tous"
+    function festivalsDuPays() {
+      return filtreActif === "Tous"
         ? tousLesFestivals
         : tousLesFestivals.filter((f) => f.pays === filtreActif);
+    }
+
+    function afficher() {
+      const contenu = document.getElementById("contenu");
+      const festivals = festivalsDuPays().filter((f) => filtreRegion === "Toutes" || f.region === filtreRegion);
 
       if (festivals.length === 0) {
         contenu.innerHTML = '<p class="etat">Aucun festival répertorié ici pour l\'instant.</p>';
@@ -304,9 +331,34 @@
       zone.querySelectorAll(".filtre").forEach((bouton) => {
         bouton.addEventListener("click", () => {
           filtreActif = bouton.dataset.pays;
+          filtreRegion = "Toutes";
           zone.querySelectorAll(".filtre").forEach((b) => b.classList.toggle("actif", b === bouton));
+          construireFiltreRegion();
           afficher();
         });
+      });
+      construireFiltreRegion();
+    }
+
+    function construireFiltreRegion() {
+      const zone = document.getElementById("filtre-region-zone");
+      const regions = [...new Set(festivalsDuPays().map((f) => f.region).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b, "fr"));
+
+      if (regions.length === 0) {
+        zone.innerHTML = "";
+        return;
+      }
+
+      zone.innerHTML = `
+        <select class="filtre-region" id="filtre-region">
+          <option value="Toutes">Toutes les régions</option>
+          ${regions.map((r) => `<option value="${echapper(r)}"${r === filtreRegion ? " selected" : ""}>${echapper(r)}</option>`).join("")}
+        </select>
+      `;
+      document.getElementById("filtre-region").addEventListener("change", (e) => {
+        filtreRegion = e.target.value;
+        afficher();
       });
     }
 
