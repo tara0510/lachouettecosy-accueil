@@ -59,6 +59,21 @@
   }
   .historique h2 { color: var(--or-clair); }
 
+  .points-forts {
+    background: var(--nuit-2); border-radius: 14px; border: 1px solid var(--border-strong);
+    padding: 16px 22px;
+  }
+  .points-forts ul { margin: 0; padding: 0 0 0 4px; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .points-forts li { font-size: 14.5px; line-height: 1.6; color: var(--text-primary); display: flex; gap: 9px; }
+  .points-forts li::before { content: "✨"; flex-shrink: 0; }
+
+  .tableau-pratique { border-radius: 14px; overflow: hidden; border: 1px solid var(--border-strong); }
+  .tableau-pratique table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .tableau-pratique td { padding: 12px 18px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .tableau-pratique tr:last-child td { border-bottom: none; }
+  .tableau-pratique td:first-child { color: var(--or-clair); font-weight: 600; white-space: nowrap; width: 38%; }
+  .tableau-pratique td:last-child { color: var(--text-secondary); }
+
   .liens { display: flex; flex-wrap: wrap; gap: 8px; }
   .lien-pill {
     font-size: 13.5px; text-decoration: none; padding: 7px 15px; border-radius: 999px;
@@ -146,6 +161,20 @@
         <section>
           <p class="description">${echapper(f.description)}</p>
         </section>
+
+        ${(f.points_forts || []).length ? `
+        <section class="points-forts">
+          <h2 style="margin:0 0 10px;">Les temps forts</h2>
+          <ul>${(f.points_forts || []).map((p) => `<li>${echapper(p)}</li>`).join("")}</ul>
+        </section>` : ""}
+
+        ${(f.infos_pratiques || []).length ? `
+        <section>
+          <h2>Infos pratiques</h2>
+          <div class="tableau-pratique">
+            <table>${(f.infos_pratiques || []).map((i) => `<tr><td>${echapper(i.label)}</td><td>${echapper(i.valeur)}</td></tr>`).join("")}</table>
+          </div>
+        </section>` : ""}
 
         ${f.infos_historiques ? `
         <section class="historique">
