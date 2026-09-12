@@ -406,6 +406,25 @@
       linear-gradient(180deg, #6b4c30, #4a3220);
   }
 
+  /* Liens secondaires légers : une ligne de texte plutôt qu'un mur de boutons */
+  .liens-discrets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .liens-discrets a {
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-decoration-color: rgba(61,43,26,.35);
+    text-underline-offset: 3px;
+  }
+  .liens-discrets a:hover { color: var(--ink); text-decoration-color: var(--ink); }
+  .liens-discrets .sep { color: var(--ink-soft); opacity: .45; }
+
   /* Carte podcast : joue le rôle de signature visuelle */
 
   .spotify-embed {
@@ -637,11 +656,15 @@
         <img class="carte-visuel" src="images/carte-mystique.jpg" alt="La Chouette Cosy ravie, sa tisane à la main devant son carnet de notes magiques" loading="lazy">
         <h2 id="t-mystique-titre">Le Coin Mystique</h2>
         <p class="desc" id="t-mystique-desc">Ton grimoire numérique : tarot, pierres, rituels, astrologie et bien plus.</p>
-        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
           <a class="bouton" href="https://app.lachouettecosy.com" style="text-decoration:none;" id="t-mystique-btn1">Entrer dans le grimoire →</a>
-          <a class="bouton discret" href="https://app.lachouettecosy.com/blog" style="text-decoration:none;" id="t-mystique-btn2">📖&nbsp;Lire le blog</a>
-          <a class="bouton discret" href="/tarifs.html" style="text-decoration:none;" id="t-mystique-btn3">✨&nbsp;Voir les tarifs</a>
-          <a class="bouton discret" href="/festivals.html" style="text-decoration:none;" id="t-mystique-btn4">🔥&nbsp;Festivals sorcellerie & Wicca</a>
+          <div class="liens-discrets">
+            <a href="https://app.lachouettecosy.com/blog" id="t-mystique-btn2">📖&nbsp;Lire le blog</a>
+            <span class="sep" aria-hidden="true">·</span>
+            <a href="/tarifs.html" id="t-mystique-btn3">✨&nbsp;Voir les tarifs</a>
+            <span class="sep" aria-hidden="true">·</span>
+            <a href="/festivals.html" id="t-mystique-btn4">🔥&nbsp;Festivals sorcellerie & Wicca</a>
+          </div>
         </div>
       </div>
 
