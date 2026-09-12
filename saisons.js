@@ -9,10 +9,10 @@
   "use strict";
 
   var SAISONS = {
-    printemps: { particule: "🌸", image: "/images/saison-printemps.png" },
-    ete: { particule: null, image: "/images/saison-ete.png" },
-    automne: { particule: "🍂", image: "/images/saison-automne.png" },
-    hiver: { particule: "❄️", image: "/images/saison-hiver.png" },
+    printemps: { particules: ["🌸", "🌷"], image: "/images/saison-printemps.png" },
+    ete: { particules: ["🐚", "🦀", "🦐", "⭐"], image: "/images/saison-ete.png" },
+    automne: { particules: ["🍂", "🍁"], image: "/images/saison-automne.png" },
+    hiver: { particules: ["❄️"], image: "/images/saison-hiver.png" },
   };
 
   function saisonParMois(mois) {
@@ -45,7 +45,7 @@
 
   function creerParticules(saison) {
     var config = SAISONS[saison];
-    if (!config || !config.particule || reduireLesMouvements()) return;
+    if (!config || !config.particules || !config.particules.length || reduireLesMouvements()) return;
 
     var conteneur = document.createElement("div");
     conteneur.className = "saison-particules";
@@ -56,7 +56,7 @@
     for (var i = 0; i < nombre; i++) {
       var p = document.createElement("span");
       p.className = "saison-particule";
-      p.textContent = config.particule;
+      p.textContent = config.particules[Math.floor(Math.random() * config.particules.length)];
       p.style.left = Math.random() * 100 + "vw";
       p.style.animationDuration = 10 + Math.random() * 12 + "s";
       p.style.animationDelay = Math.random() * -20 + "s";
