@@ -1,0 +1,46 @@
+/* Décor saisonnier partagé (voir saisons.js) : petite illustration flottante
+   posée sur le décor + particules qui tombent doucement (feuilles, flocons,
+   pétales selon la saison — pas de particules en été). */
+
+.saison-illustration {
+  position: fixed;
+  bottom: -8px;
+  right: 14px;
+  width: 170px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.35));
+}
+@media (max-width: 640px) {
+  .saison-illustration {
+    width: 108px;
+    right: 6px;
+    bottom: -4px;
+  }
+}
+
+.saison-particules {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+.saison-particule {
+  position: absolute;
+  top: -10vh;
+  animation-name: saison-tomber;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+@keyframes saison-tomber {
+  0% { transform: translateY(-10vh) translateX(0) rotate(0deg); }
+  50% { transform: translateY(55vh) translateX(24px) rotate(180deg); }
+  100% { transform: translateY(120vh) translateX(-14px) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saison-particules { display: none; }
+}
