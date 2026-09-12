@@ -55,6 +55,7 @@
   a { color: var(--or-clair); }
   .wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 64px; }
 
+  .haut { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 36px; }
   .retour {
     display: inline-flex;
     align-items: center;
@@ -62,9 +63,14 @@
     font-size: 13.5px;
     color: var(--text-muted);
     text-decoration: none;
-    margin-bottom: 36px;
   }
   .retour:hover { color: var(--or-clair); }
+  .lang-toggle { display: inline-flex; border: 1px solid var(--border-strong); border-radius: 999px; overflow: hidden; flex-shrink: 0; }
+  .lang-toggle button {
+    font-family: "Outfit", sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: .02em;
+    padding: 6px 13px; border: none; background: transparent; color: var(--text-muted); cursor: pointer;
+  }
+  .lang-toggle button.actif { background: var(--or); color: var(--nuit); }
 
   .hero { text-align: center; margin-bottom: 44px; }
   .hero-badge {
@@ -236,53 +242,59 @@
 <body>
   <div class="wrap">
 
-    <a class="retour" href="/">← Retour à l'accueil</a>
+    <div class="haut">
+      <a class="retour" id="lien-retour" href="/">← Retour à l'accueil</a>
+      <div class="lang-toggle" id="lang-toggle">
+        <button type="button" data-lang="fr">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
 
     <div class="hero">
       <div class="hero-badge"><img src="images/chouette-tarifs.jpg" alt="La Chouette Cosy en robe violette, entourée de bougies et d'un pot de magie" loading="eager"></div>
-      <p class="hero-eyebrow">Le Coin Mystique</p>
-      <h1>Essentiel ou Complet — quel grimoire pour toi ?</h1>
-      <p>Deux paliers, un seul grimoire qui grandit avec ta pratique.</p>
+      <p class="hero-eyebrow" id="t-eyebrow">Le Coin Mystique</p>
+      <h1 id="t-titre">Essentiel ou Complet — quel grimoire pour toi ?</h1>
+      <p id="t-soustitre">Deux paliers, un seul grimoire qui grandit avec ta pratique.</p>
     </div>
 
-    <div class="offre-lancement">
+    <div class="offre-lancement" id="t-offre">
       🎉 <strong>Offre de lancement</strong> — 20&nbsp;% sur le premier paiement, jusqu'au 30&nbsp;septembre, appliqué automatiquement.
     </div>
 
     <div class="plans">
       <div class="plan essentiel">
         <div class="plan-kicker">
-          <p class="plan-name">Essentiel</p>
+          <p class="plan-name" id="t-plan1-nom">Essentiel</p>
         </div>
         <div class="plan-price">
           <span class="montant">9,99&nbsp;€</span>
-          <span class="par">/ mois</span>
+          <span class="par" id="t-plan1-par">/ mois</span>
         </div>
-        <p class="plan-tagline">Le grimoire pratique du quotidien : rituels, ingrédients, maison &amp; jardin.</p>
+        <p class="plan-tagline" id="t-plan1-tagline">Le grimoire pratique du quotidien : rituels, ingrédients, maison &amp; jardin.</p>
         <ul class="plan-inclus">
-          <li><span class="tick">✓</span> Sabbats, phases lunaires, saisons</li>
-          <li><span class="tick">✓</span> Sortilèges, incantations, spell jars, sigiles</li>
-          <li><span class="tick">✓</span> Herbier, pierres, huiles, correspondances</li>
-          <li><span class="tick">✓</span> Maison magique, jardin, potions, recettes</li>
+          <li><span class="tick">✓</span> <span id="t-plan1-item1">Sabbats, phases lunaires, saisons</span></li>
+          <li><span class="tick">✓</span> <span id="t-plan1-item2">Sortilèges, incantations, spell jars, sigiles</span></li>
+          <li><span class="tick">✓</span> <span id="t-plan1-item3">Herbier, pierres, huiles, correspondances</span></li>
+          <li><span class="tick">✓</span> <span id="t-plan1-item4">Maison magique, jardin, potions, recettes</span></li>
         </ul>
       </div>
 
       <div class="plan complet">
         <div class="plan-kicker">
-          <p class="plan-name">Complet</p>
-          <span class="badge-populaire">Le plus choisi</span>
+          <p class="plan-name" id="t-plan2-nom">Complet</p>
+          <span class="badge-populaire" id="t-plan2-badge">Le plus choisi</span>
         </div>
         <div class="plan-price">
           <span class="montant">19,99&nbsp;€</span>
-          <span class="par">/ mois</span>
+          <span class="par" id="t-plan2-par">/ mois</span>
         </div>
-        <p class="plan-annuel">ou 199&nbsp;€ / an — 2 mois offerts</p>
-        <p class="plan-tagline">Tout l'Essentiel, plus l'exploration : divination, inspiration et spooky.</p>
+        <p class="plan-annuel" id="t-plan2-annuel">ou 199&nbsp;€ / an — 2 mois offerts</p>
+        <p class="plan-tagline" id="t-plan2-tagline">Tout l'Essentiel, plus l'exploration : divination, inspiration et spooky.</p>
         <ul class="plan-inclus">
-          <li><span class="tick">✓</span> Tout ce qu'il y a dans l'Essentiel</li>
-          <li><span class="tick">✓</span> Tarot, astrologie, runes, numérologie</li>
-          <li><span class="tick">✓</span> Bibliothèque, films cosy, formations</li>
-          <li><span class="tick">✓</span> Spooky : légendes, lieux hantés, bestiaire</li>
+          <li><span class="tick">✓</span> <span id="t-plan2-item1">Tout ce qu'il y a dans l'Essentiel</span></li>
+          <li><span class="tick">✓</span> <span id="t-plan2-item2">Tarot, astrologie, runes, numérologie</span></li>
+          <li><span class="tick">✓</span> <span id="t-plan2-item3">Bibliothèque, films cosy, formations</span></li>
+          <li><span class="tick">✓</span> <span id="t-plan2-item4">Spooky : légendes, lieux hantés, bestiaire</span></li>
         </ul>
       </div>
     </div>
@@ -300,62 +312,62 @@
     </div>
 
     <div class="table-titre">
-      <h2>Le détail, section par section</h2>
-      <p>Pour voir précisément ce que chaque palier débloque.</p>
+      <h2 id="t-table-titre">Le détail, section par section</h2>
+      <p id="t-table-soustitre">Pour voir précisément ce que chaque palier débloque.</p>
     </div>
 
     <div class="compare-scroll">
       <table class="compare">
         <thead>
           <tr>
-            <th>Section du grimoire</th>
-            <th class="essentiel">Essentiel</th>
-            <th class="complet">Complet</th>
+            <th id="t-th-section">Section du grimoire</th>
+            <th class="essentiel" id="t-th-essentiel">Essentiel</th>
+            <th class="complet" id="t-th-complet">Complet</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="cat"><span class="cat-icone">🌤️</span><div><div class="cat-nom">Aujourd'hui</div><div class="cat-detail">Calendrier des sabbats, phases lunaires, saisons</div></div></td>
+            <td class="cat"><span class="cat-icone">🌤️</span><div><div class="cat-nom" id="t-cat1-nom">Aujourd'hui</div><div class="cat-detail" id="t-cat1-detail">Calendrier des sabbats, phases lunaires, saisons</div></div></td>
             <td class="mark oui essentiel">✓</td>
             <td class="mark oui complet">✓</td>
           </tr>
           <tr>
-            <td class="cat"><span class="cat-icone">📖</span><div><div class="cat-nom">Rituels &amp; pratique</div><div class="cat-detail">Sortilèges, incantations, spell jars, cercle de protection, sigiles, mudras</div></div></td>
+            <td class="cat"><span class="cat-icone">📖</span><div><div class="cat-nom" id="t-cat2-nom">Rituels &amp; pratique</div><div class="cat-detail" id="t-cat2-detail">Sortilèges, incantations, spell jars, cercle de protection, sigiles, mudras</div></div></td>
             <td class="mark oui essentiel">✓</td>
             <td class="mark oui complet">✓</td>
           </tr>
           <tr>
-            <td class="cat"><span class="cat-icone">🌿</span><div><div class="cat-nom">Ingrédients &amp; fondamentaux</div><div class="cat-detail">Herbier, huiles essentielles, pierres, encens, correspondances, lexique</div></div></td>
+            <td class="cat"><span class="cat-icone">🌿</span><div><div class="cat-nom" id="t-cat3-nom">Ingrédients &amp; fondamentaux</div><div class="cat-detail" id="t-cat3-detail">Herbier, huiles essentielles, pierres, encens, correspondances, lexique</div></div></td>
             <td class="mark oui essentiel">✓</td>
             <td class="mark oui complet">✓</td>
           </tr>
           <tr>
-            <td class="cat"><span class="cat-icone">🏠</span><div><div class="cat-nom">Maison, jardin &amp; cuisine</div><div class="cat-detail">Maison magique, jardin magique, potions, recettes cosy</div></div></td>
+            <td class="cat"><span class="cat-icone">🏠</span><div><div class="cat-nom" id="t-cat4-nom">Maison, jardin &amp; cuisine</div><div class="cat-detail" id="t-cat4-detail">Maison magique, jardin magique, potions, recettes cosy</div></div></td>
             <td class="mark oui essentiel">✓</td>
             <td class="mark oui complet">✓</td>
           </tr>
           <tr>
-            <td class="cat"><span class="cat-icone">✨</span><div><div class="cat-nom">Astrologie &amp; arts divinatoires</div><div class="cat-detail">Tarot &amp; oracles, astrologie, numérologie, runes, pendule, animaux totem</div></div></td>
+            <td class="cat"><span class="cat-icone">✨</span><div><div class="cat-nom" id="t-cat5-nom">Astrologie &amp; arts divinatoires</div><div class="cat-detail" id="t-cat5-detail">Tarot &amp; oracles, astrologie, numérologie, runes, pendule, animaux totem</div></div></td>
             <td class="mark non essentiel">—</td>
             <td class="mark oui complet">✓</td>
           </tr>
           <tr>
-            <td class="cat"><span class="cat-icone">💡</span><div><div class="cat-nom">Inspiration</div><div class="cat-detail">Bibliothèque, films &amp; séries cosy, figures de l'ésotérisme, podcasts</div></div></td>
+            <td class="cat"><span class="cat-icone">💡</span><div><div class="cat-nom" id="t-cat6-nom">Inspiration</div><div class="cat-detail" id="t-cat6-detail">Bibliothèque, films &amp; séries cosy, figures de l'ésotérisme, podcasts</div></div></td>
             <td class="mark non essentiel">—</td>
             <td class="mark oui complet">✓</td>
           </tr>
           <tr>
-            <td class="cat"><span class="cat-icone">🎓</span><div><div class="cat-nom">Formations</div><div class="cat-detail">Des parcours complets, en leçons, pour approfondir</div></div></td>
+            <td class="cat"><span class="cat-icone">🎓</span><div><div class="cat-nom" id="t-cat7-nom">Formations</div><div class="cat-detail" id="t-cat7-detail">Des parcours complets, en leçons, pour approfondir</div></div></td>
             <td class="mark non essentiel">—</td>
             <td class="mark oui complet">✓</td>
           </tr>
           <tr>
-            <td class="cat"><span class="cat-icone">🧚</span><div><div class="cat-nom">Petits êtres merveilleux <span class="bientot">❄️ 21 déc.</span></div><div class="cat-detail">Fées, elfes, lutins, gnomes, esprits de la nature</div></div></td>
+            <td class="cat"><span class="cat-icone">🧚</span><div><div class="cat-nom"><span id="t-cat8-nom">Petits êtres merveilleux</span> <span class="bientot">❄️ 21 déc.</span></div><div class="cat-detail" id="t-cat8-detail">Fées, elfes, lutins, gnomes, esprits de la nature</div></div></td>
             <td class="mark non essentiel">—</td>
             <td class="mark oui complet">✓</td>
           </tr>
           <tr>
-            <td class="cat"><span class="cat-icone">🕸️</span><div><div class="cat-nom">Spooky <span class="bientot">🎃 31 oct.</span></div><div class="cat-detail">Podcast, légendes, lieux hantés, bestiaire fantastique, peuples de l'ombre</div></div></td>
+            <td class="cat"><span class="cat-icone">🕸️</span><div><div class="cat-nom"><span id="t-cat9-nom">Spooky</span> <span class="bientot">🎃 31 oct.</span></div><div class="cat-detail" id="t-cat9-detail">Podcast, légendes, lieux hantés, bestiaire fantastique, peuples de l'ombre</div></div></td>
             <td class="mark non essentiel">—</td>
             <td class="mark oui complet">✓</td>
           </tr>
@@ -363,18 +375,150 @@
       </table>
     </div>
 
-    <p class="note-bas">
+    <p class="note-bas" id="t-note-bas">
       <span class="script">Dans les deux cas :</span>
       7 jours d'essai gratuit sans carte bancaire, favoris, pense-bêtes et liste de courses inclus, résiliation en un clic à tout moment.
     </p>
 
     <div class="cta-final">
-      <a class="bouton" href="https://app.lachouettecosy.com/abonnement" style="text-decoration:none;">Entrer dans le grimoire →</a>
+      <a class="bouton" href="https://app.lachouettecosy.com/abonnement" style="text-decoration:none;" id="t-cta">Entrer dans le grimoire →</a>
     </div>
 
-    <footer>
+    <footer id="pied">
       🦉 La Chouette Cosy — <a href="/">Retour à l'accueil</a>
     </footer>
   </div>
+
+  <script>
+    var I18N = {
+      fr: {
+        retour: "← Retour à l'accueil", eyebrow: "Le Coin Mystique",
+        titre: "Essentiel ou Complet — quel grimoire pour toi ?",
+        soustitre: "Deux paliers, un seul grimoire qui grandit avec ta pratique.",
+        offre: '🎉 <strong>Offre de lancement</strong> — 20&nbsp;% sur le premier paiement, jusqu\'au 30&nbsp;septembre, appliqué automatiquement.',
+        plan1Nom: "Essentiel", plan1Par: "/ mois",
+        plan1Tagline: "Le grimoire pratique du quotidien : rituels, ingrédients, maison &amp; jardin.",
+        plan1Item1: "Sabbats, phases lunaires, saisons",
+        plan1Item2: "Sortilèges, incantations, spell jars, sigiles",
+        plan1Item3: "Herbier, pierres, huiles, correspondances",
+        plan1Item4: "Maison magique, jardin, potions, recettes",
+        plan2Nom: "Complet", plan2Badge: "Le plus choisi", plan2Par: "/ mois",
+        plan2Annuel: "ou 199&nbsp;€ / an — 2 mois offerts",
+        plan2Tagline: "Tout l'Essentiel, plus l'exploration : divination, inspiration et spooky.",
+        plan2Item1: "Tout ce qu'il y a dans l'Essentiel",
+        plan2Item2: "Tarot, astrologie, runes, numérologie",
+        plan2Item3: "Bibliothèque, films cosy, formations",
+        plan2Item4: "Spooky : légendes, lieux hantés, bestiaire",
+        tableTitre: "Le détail, section par section",
+        tableSoustitre: "Pour voir précisément ce que chaque palier débloque.",
+        thSection: "Section du grimoire", thEssentiel: "Essentiel", thComplet: "Complet",
+        cat1Nom: "Aujourd'hui", cat1Detail: "Calendrier des sabbats, phases lunaires, saisons",
+        cat2Nom: "Rituels &amp; pratique", cat2Detail: "Sortilèges, incantations, spell jars, cercle de protection, sigiles, mudras",
+        cat3Nom: "Ingrédients &amp; fondamentaux", cat3Detail: "Herbier, huiles essentielles, pierres, encens, correspondances, lexique",
+        cat4Nom: "Maison, jardin &amp; cuisine", cat4Detail: "Maison magique, jardin magique, potions, recettes cosy",
+        cat5Nom: "Astrologie &amp; arts divinatoires", cat5Detail: "Tarot &amp; oracles, astrologie, numérologie, runes, pendule, animaux totem",
+        cat6Nom: "Inspiration", cat6Detail: "Bibliothèque, films &amp; séries cosy, figures de l'ésotérisme, podcasts",
+        cat7Nom: "Formations", cat7Detail: "Des parcours complets, en leçons, pour approfondir",
+        cat8Nom: "Petits êtres merveilleux", cat8Detail: "Fées, elfes, lutins, gnomes, esprits de la nature",
+        cat9Nom: "Spooky", cat9Detail: "Podcast, légendes, lieux hantés, bestiaire fantastique, peuples de l'ombre",
+        noteBas: '<span class="script">Dans les deux cas :</span> 7 jours d\'essai gratuit sans carte bancaire, favoris, pense-bêtes et liste de courses inclus, résiliation en un clic à tout moment.',
+        cta: "Entrer dans le grimoire →",
+        pied: '🦉 La Chouette Cosy — <a href="/">Retour à l\'accueil</a>',
+      },
+      en: {
+        retour: "← Back to home", eyebrow: "Le Coin Mystique",
+        titre: "Essential or Complete — which grimoire is right for you?",
+        soustitre: "Two tiers, one single grimoire that grows with your practice.",
+        offre: '🎉 <strong>Launch offer</strong> — 20&nbsp;% off your first payment, until September&nbsp;30, applied automatically.',
+        plan1Nom: "Essential", plan1Par: "/ month",
+        plan1Tagline: "The everyday practical grimoire: rituals, ingredients, home &amp; garden.",
+        plan1Item1: "Sabbats, moon phases, seasons",
+        plan1Item2: "Spells, incantations, spell jars, sigils",
+        plan1Item3: "Herbal lore, crystals, oils, correspondences",
+        plan1Item4: "Magical home, garden, potions, recipes",
+        plan2Nom: "Complete", plan2Badge: "Most popular", plan2Par: "/ month",
+        plan2Annuel: "or €199 / year — 2 months free",
+        plan2Tagline: "Everything in Essential, plus the exploration: divination, inspiration and spooky.",
+        plan2Item1: "Everything included in Essential",
+        plan2Item2: "Tarot, astrology, runes, numerology",
+        plan2Item3: "Library, cosy films, courses",
+        plan2Item4: "Spooky: legends, haunted places, bestiary",
+        tableTitre: "The details, section by section",
+        tableSoustitre: "To see exactly what each tier unlocks.",
+        thSection: "Grimoire section", thEssentiel: "Essential", thComplet: "Complete",
+        cat1Nom: "Today", cat1Detail: "Sabbat calendar, moon phases, seasons",
+        cat2Nom: "Rituals &amp; practice", cat2Detail: "Spells, incantations, spell jars, protection circles, sigils, mudras",
+        cat3Nom: "Ingredients &amp; fundamentals", cat3Detail: "Herbal lore, essential oils, crystals, incense, correspondences, glossary",
+        cat4Nom: "Home, garden &amp; kitchen", cat4Detail: "Magical home, magical garden, potions, cosy recipes",
+        cat5Nom: "Astrology &amp; divinatory arts", cat5Detail: "Tarot &amp; oracle cards, astrology, numerology, runes, pendulum, totem animals",
+        cat6Nom: "Inspiration", cat6Detail: "Library, cosy films &amp; shows, figures from esoteric history, podcasts",
+        cat7Nom: "Courses", cat7Detail: "Full learning paths, broken into lessons, to go deeper",
+        cat8Nom: "Little wondrous beings", cat8Detail: "Fairies, elves, sprites, gnomes, nature spirits",
+        cat9Nom: "Spooky", cat9Detail: "Podcast, legends, haunted places, fantastical bestiary, creatures of the shadows",
+        noteBas: '<span class="script">Either way:</span> 7-day free trial with no card required, favourites, reminders and shopping list included, cancel anytime in one click.',
+        cta: "Step into the grimoire →",
+        pied: '🦉 La Chouette Cosy — <a href="/">Back to home</a>',
+      },
+    };
+
+    var lang = localStorage.getItem('lang') === 'en' ? 'en' : 'fr';
+
+    function appliquerTraductions() {
+      var d = I18N[lang];
+      document.documentElement.lang = lang;
+      document.getElementById('lien-retour').textContent = d.retour;
+      document.getElementById('t-eyebrow').textContent = d.eyebrow;
+      document.getElementById('t-titre').textContent = d.titre;
+      document.getElementById('t-soustitre').textContent = d.soustitre;
+      document.getElementById('t-offre').innerHTML = d.offre;
+
+      document.getElementById('t-plan1-nom').textContent = d.plan1Nom;
+      document.getElementById('t-plan1-par').textContent = d.plan1Par;
+      document.getElementById('t-plan1-tagline').innerHTML = d.plan1Tagline;
+      document.getElementById('t-plan1-item1').textContent = d.plan1Item1;
+      document.getElementById('t-plan1-item2').textContent = d.plan1Item2;
+      document.getElementById('t-plan1-item3').textContent = d.plan1Item3;
+      document.getElementById('t-plan1-item4').textContent = d.plan1Item4;
+
+      document.getElementById('t-plan2-nom').textContent = d.plan2Nom;
+      document.getElementById('t-plan2-badge').textContent = d.plan2Badge;
+      document.getElementById('t-plan2-par').textContent = d.plan2Par;
+      document.getElementById('t-plan2-annuel').innerHTML = d.plan2Annuel;
+      document.getElementById('t-plan2-tagline').innerHTML = d.plan2Tagline;
+      document.getElementById('t-plan2-item1').textContent = d.plan2Item1;
+      document.getElementById('t-plan2-item2').textContent = d.plan2Item2;
+      document.getElementById('t-plan2-item3').textContent = d.plan2Item3;
+      document.getElementById('t-plan2-item4').textContent = d.plan2Item4;
+
+      document.getElementById('t-table-titre').textContent = d.tableTitre;
+      document.getElementById('t-table-soustitre').textContent = d.tableSoustitre;
+      document.getElementById('t-th-section').textContent = d.thSection;
+      document.getElementById('t-th-essentiel').textContent = d.thEssentiel;
+      document.getElementById('t-th-complet').textContent = d.thComplet;
+
+      for (var i = 1; i <= 9; i++) {
+        document.getElementById('t-cat' + i + '-nom').innerHTML = d['cat' + i + 'Nom'];
+        document.getElementById('t-cat' + i + '-detail').innerHTML = d['cat' + i + 'Detail'];
+      }
+
+      document.getElementById('t-note-bas').innerHTML = d.noteBas;
+      document.getElementById('t-cta').textContent = d.cta;
+      document.getElementById('pied').innerHTML = d.pied;
+
+      document.querySelectorAll('#lang-toggle button').forEach(function (b) {
+        b.classList.toggle('actif', b.dataset.lang === lang);
+      });
+    }
+
+    function definirLangue(nouvelleLangue) {
+      lang = nouvelleLangue;
+      localStorage.setItem('lang', lang);
+      appliquerTraductions();
+    }
+    document.querySelectorAll('#lang-toggle button').forEach(function (b) {
+      b.addEventListener('click', function () { definirLangue(b.dataset.lang); });
+    });
+    appliquerTraductions();
+  </script>
 </body>
 </html>

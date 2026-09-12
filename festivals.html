@@ -56,6 +56,7 @@
   .wrap { max-width: 1280px; margin: 0 auto; padding: 48px 24px 64px; }
   .wrap-etroit { max-width: 620px; margin: 0 auto; }
 
+  .haut { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 36px; }
   .retour {
     display: inline-flex;
     align-items: center;
@@ -63,9 +64,14 @@
     font-size: 13.5px;
     color: var(--text-muted);
     text-decoration: none;
-    margin-bottom: 36px;
   }
   .retour:hover { color: var(--or-clair); }
+  .lang-toggle { display: inline-flex; border: 1px solid var(--border-strong); border-radius: 999px; overflow: hidden; flex-shrink: 0; }
+  .lang-toggle button {
+    font-family: "Outfit", sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: .02em;
+    padding: 6px 13px; border: none; background: transparent; color: var(--text-muted); cursor: pointer;
+  }
+  .lang-toggle button.actif { background: var(--or); color: var(--nuit); }
 
   .hero { text-align: center; margin-bottom: 36px; }
   .hero-eyebrow { font-family: "Caveat", cursive; font-size: 24px; color: var(--or-clair); margin: 0 0 6px; }
@@ -220,15 +226,21 @@
   <div class="wrap">
 
     <div class="wrap-etroit">
-      <a class="retour" href="/">← Retour à l'accueil</a>
-
-      <div class="hero">
-        <p class="hero-eyebrow">Le Coin Mystique</p>
-        <h1>Festivals sorcellerie, Wicca & mondes merveilleux</h1>
-        <p>Grands rassemblements comme petits rendez-vous locaux, en France, Suisse, Belgique, Luxembourg et Canada — pour trouver où célébrer, apprendre et rencontrer d'autres passionné·es près de chez toi.</p>
+      <div class="haut">
+        <a class="retour" id="lien-retour" href="/">← Retour à l'accueil</a>
+        <div class="lang-toggle" id="lang-toggle">
+          <button type="button" data-lang="fr">FR</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
       </div>
 
-      <div class="note-locaux">
+      <div class="hero">
+        <p class="hero-eyebrow" id="hero-eyebrow">Le Coin Mystique</p>
+        <h1 id="hero-titre">Festivals sorcellerie, Wicca & mondes merveilleux</h1>
+        <p id="hero-texte">Grands rassemblements comme petits rendez-vous locaux, en France, Suisse, Belgique, Luxembourg et Canada — pour trouver où célébrer, apprendre et rencontrer d'autres passionné·es près de chez toi.</p>
+      </div>
+
+      <div class="note-locaux" id="note-locaux">
         🌱 Les petits événements locaux ont ici la même place que les grands festivals : c'est aussi pour les faire connaître que ce répertoire existe.
       </div>
     </div>
@@ -241,12 +253,12 @@
       <p class="etat">Chargement des festivals...</p>
     </div>
 
-    <p class="suggestion">
+    <p class="suggestion" id="suggestion">
       <span class="script">Tu connais un festival qui manque ici ?</span>
       Petit ou grand, écris-nous sur <a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">Instagram</a>, on l'ajoute avec plaisir.
     </p>
 
-    <footer>
+    <footer id="pied">
       🦉 La Chouette Cosy — <a href="/">Retour à l'accueil</a>
     </footer>
   </div>
@@ -256,6 +268,53 @@
     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZweHVzbG14c3hhbW9jZm5nb2tlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxMTY0NjgsImV4cCI6MjA5OTY5MjQ2OH0.LFCMJvyeBx3AQSVXMRmit1uLsHxdeMM3mf4jEvHC14s";
     const PAYS = ["France", "Suisse", "Belgique", "Luxembourg", "Canada"];
 
+    const I18N = {
+      fr: {
+        retour: "← Retour à l'accueil", eyebrow: "Le Coin Mystique",
+        titre: "Festivals sorcellerie, Wicca & mondes merveilleux",
+        texte: "Grands rassemblements comme petits rendez-vous locaux, en France, Suisse, Belgique, Luxembourg et Canada — pour trouver où célébrer, apprendre et rencontrer d'autres passionné·es près de chez toi.",
+        noteLocaux: "🌱 Les petits événements locaux ont ici la même place que les grands festivals : c'est aussi pour les faire connaître que ce répertoire existe.",
+        chargement: "Chargement des festivals...", aucun: "Aucun festival répertorié ici pour l'instant.",
+        erreur: "Le répertoire est momentanément indisponible, réessaie un peu plus tard.",
+        local: "Événement local", voirFiche: "📖 Voir la fiche complète →",
+        tous: "Tous", toutesRegions: "Toutes les régions", tousTypes: "Tous les types",
+        suggestionTitre: "Tu connais un festival qui manque ici ?",
+        suggestionTexte: "Petit ou grand, écris-nous sur",
+        suggestionFin: ", on l'ajoute avec plaisir.",
+        accueil: "Retour à l'accueil", locale: "fr-FR",
+      },
+      en: {
+        retour: "← Back to home", eyebrow: "Le Coin Mystique",
+        titre: "Witchcraft, Wicca & wondrous worlds festivals",
+        texte: "Big gatherings and small local get-togethers alike, across France, Switzerland, Belgium, Luxembourg and Canada — find where to celebrate, learn and meet fellow enthusiasts near you.",
+        noteLocaux: "🌱 Small local events get just as much room here as the big festivals — this directory exists to help people discover them too.",
+        chargement: "Loading festivals...", aucun: "No festivals listed here for now.",
+        erreur: "The directory is temporarily unavailable, please try again shortly.",
+        local: "Local event", voirFiche: "📖 See full listing →",
+        tous: "All", toutesRegions: "All regions", tousTypes: "All types",
+        suggestionTitre: "Know a festival that's missing here?",
+        suggestionTexte: "Big or small, message us on",
+        suggestionFin: " and we'll happily add it.",
+        accueil: "Back to home", locale: "en-GB",
+      },
+    };
+    const PAYS_EN = { France: "France", Suisse: "Switzerland", Belgique: "Belgium", Luxembourg: "Luxembourg", Canada: "Canada" };
+    const REGIONS_EN = {
+      "Flandre-Orientale": "East Flanders", "province de Liège": "Liège Province",
+      "province de Luxembourg": "Luxembourg Province", "province de Namur": "Namur Province",
+      "Région de Bruxelles-Capitale": "Brussels-Capital Region", "Québec": "Quebec",
+      "Bretagne": "Brittany", "Normandie": "Normandy", "Bâle-Ville": "Basel-City", "Berne": "Bern",
+    };
+    const CATEGORIES_EN = {
+      "bien-être": "wellness", "celtique": "Celtic", "fantasy": "fantasy", "folklore": "folklore",
+      "herboristerie": "herbalism", "médiéval": "medieval", "mondes merveilleux": "wondrous worlds",
+      "nordique": "Nordic", "paganisme": "paganism", "sorcellerie": "witchcraft", "vikings": "Vikings", "wicca": "Wicca",
+    };
+    function libellePays(p) { return lang === "en" ? (PAYS_EN[p] || p) : p; }
+    function libelleRegion(r) { return lang === "en" ? (REGIONS_EN[r] || r) : r; }
+    function libelleCategorie(c) { return lang === "en" ? (CATEGORIES_EN[c] || c) : c; }
+
+    let lang = localStorage.getItem("lang") === "en" ? "en" : "fr";
     let tousLesFestivals = [];
     let filtreActif = "Tous";
     let filtreRegion = "Toutes";
@@ -265,15 +324,16 @@
       if (!iso) return "";
       const [annee, mois, jour] = iso.split("-");
       const d = new Date(Date.UTC(+annee, +mois - 1, +jour));
-      return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+      return d.toLocaleDateString(I18N[lang].locale, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
     }
 
     function periodeAffichee(f) {
+      const periode = lang === "en" ? (f.periode_indicative_en || f.periode_indicative) : f.periode_indicative;
       if (f.date_fin && f.date_fin !== f.date_debut) {
         return `${formatDate(f.date_debut)} → ${formatDate(f.date_fin)}`;
       }
-      if (f.periode_indicative) {
-        return `${formatDate(f.date_debut)} (${f.periode_indicative})`;
+      if (periode) {
+        return `${formatDate(f.date_debut)} (${periode})`;
       }
       return formatDate(f.date_debut);
     }
@@ -284,24 +344,32 @@
       return div.innerHTML;
     }
 
+    function champ(f, base) {
+      if (lang !== "en") return f[base];
+      const enVal = f[base + "_en"];
+      return (enVal && (typeof enVal !== "object" || (Array.isArray(enVal) && enVal.length))) ? enVal : f[base];
+    }
+
     function carteFestival(f) {
-      const tags = (f.categories || []).slice(0, 3).map((c) => `<span class="tag">${echapper(c)}</span>`).join("");
+      const t = I18N[lang];
+      const tags = (f.categories || []).slice(0, 3).map((c) => `<span class="tag">${echapper(libelleCategorie(c))}</span>`).join("");
       const image = f.image_url ? `<img class="visuel" src="${echapper(f.image_url)}" alt="" loading="lazy">` : "";
       const lieu = [f.lieu_exact, f.ville, f.departement].filter(Boolean).join(", ");
       const fiche = `festival.html?id=${encodeURIComponent(f.id)}`;
+      const description = champ(f, "description");
 
       return `
         <a class="carte-festival" href="${fiche}">
           ${image}
           <div class="carte-corps">
             <div class="carte-tete">
-              ${f.taille === "petit" ? '<span class="badge-local">Événement local</span>' : ""}
+              ${f.taille === "petit" ? `<span class="badge-local">${t.local}</span>` : ""}
             </div>
             <h2>${echapper(f.nom)}</h2>
-            <p class="carte-lieu-date"><span class="pays">${echapper(f.pays)}</span> — ${echapper(lieu)} · ${periodeAffichee(f)}</p>
-            <p class="carte-description">${echapper(f.description)}</p>
+            <p class="carte-lieu-date"><span class="pays">${echapper(libellePays(f.pays))}</span> — ${echapper(lieu)} · ${periodeAffichee(f)}</p>
+            <p class="carte-description">${echapper(description)}</p>
             ${tags ? `<div class="tags">${tags}</div>` : ""}
-            <span class="carte-cta">📖 Voir la fiche complète →</span>
+            <span class="carte-cta">${t.voirFiche}</span>
           </div>
         </a>
       `;
@@ -324,17 +392,18 @@
       );
 
       if (festivals.length === 0) {
-        contenu.innerHTML = '<p class="etat">Aucun festival répertorié ici pour l\'instant.</p>';
+        contenu.innerHTML = `<p class="etat">${I18N[lang].aucun}</p>`;
         return;
       }
       contenu.innerHTML = `<div class="liste">${festivals.map(carteFestival).join("")}</div>`;
     }
 
     function construireFiltres() {
+      const t = I18N[lang];
       const zone = document.getElementById("filtres");
       const options = ["Tous", ...PAYS];
       zone.innerHTML = options
-        .map((p) => `<button class="filtre${p === filtreActif ? " actif" : ""}" data-pays="${p}">${p}</button>`)
+        .map((p) => `<button class="filtre${p === filtreActif ? " actif" : ""}" data-pays="${p}">${p === "Tous" ? t.tous : echapper(libellePays(p))}</button>`)
         .join("");
       zone.querySelectorAll(".filtre").forEach((bouton) => {
         bouton.addEventListener("click", () => {
@@ -350,17 +419,18 @@
     }
 
     function construireFiltreRegion() {
+      const t = I18N[lang];
       const zone = document.getElementById("filtre-region-zone");
       const regions = [...new Set(festivalsDuPays().map((f) => f.region).filter(Boolean))]
-        .sort((a, b) => a.localeCompare(b, "fr"));
+        .sort((a, b) => libelleRegion(a).localeCompare(libelleRegion(b), lang));
 
       if (regions.length === 0) {
         zone.innerHTML = "";
       } else {
         zone.innerHTML = `
           <select class="filtre-region" id="filtre-region">
-            <option value="Toutes">Toutes les régions</option>
-            ${regions.map((r) => `<option value="${echapper(r)}"${r === filtreRegion ? " selected" : ""}>${echapper(r)}</option>`).join("")}
+            <option value="Toutes">${t.toutesRegions}</option>
+            ${regions.map((r) => `<option value="${echapper(r)}"${r === filtreRegion ? " selected" : ""}>${echapper(libelleRegion(r))}</option>`).join("")}
           </select>
         `;
         document.getElementById("filtre-region").addEventListener("change", (e) => {
@@ -374,9 +444,10 @@
     }
 
     function construireFiltreType() {
+      const t = I18N[lang];
       const zone = document.getElementById("filtre-type-zone");
       const types = [...new Set(festivalsDuPaysEtRegion().flatMap((f) => f.categories || []))]
-        .sort((a, b) => a.localeCompare(b, "fr"));
+        .sort((a, b) => libelleCategorie(a).localeCompare(libelleCategorie(b), lang));
 
       if (types.length === 0) {
         zone.innerHTML = "";
@@ -385,8 +456,8 @@
 
       zone.innerHTML = `
         <select class="filtre-region" id="filtre-type">
-          <option value="Tous">Tous les types</option>
-          ${types.map((t) => `<option value="${echapper(t)}"${t === filtreType ? " selected" : ""}>${echapper(t)}</option>`).join("")}
+          <option value="Tous">${t.tousTypes}</option>
+          ${types.map((ty) => `<option value="${echapper(ty)}"${ty === filtreType ? " selected" : ""}>${echapper(libelleCategorie(ty))}</option>`).join("")}
         </select>
       `;
       document.getElementById("filtre-type").addEventListener("change", (e) => {
@@ -394,6 +465,34 @@
         afficher();
       });
     }
+
+    function appliquerTextesFixes() {
+      const t = I18N[lang];
+      document.documentElement.lang = lang;
+      document.getElementById("lien-retour").textContent = t.retour;
+      document.getElementById("hero-eyebrow").textContent = t.eyebrow;
+      document.getElementById("hero-titre").textContent = t.titre;
+      document.getElementById("hero-texte").textContent = t.texte;
+      document.getElementById("note-locaux").textContent = t.noteLocaux;
+      document.getElementById("suggestion").innerHTML =
+        `<span class="script">${echapper(t.suggestionTitre)}</span>${echapper(t.suggestionTexte)} <a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">Instagram</a>${echapper(t.suggestionFin)}`;
+      document.getElementById("pied").innerHTML = `🦉 La Chouette Cosy — <a href="/">${t.accueil}</a>`;
+      document.querySelectorAll("#lang-toggle button").forEach((b) => b.classList.toggle("actif", b.dataset.lang === lang));
+    }
+
+    function definirLangue(nouvelleLangue) {
+      lang = nouvelleLangue;
+      localStorage.setItem("lang", lang);
+      appliquerTextesFixes();
+      if (tousLesFestivals.length) {
+        construireFiltres();
+        afficher();
+      }
+    }
+    document.querySelectorAll("#lang-toggle button").forEach((b) => {
+      b.addEventListener("click", () => definirLangue(b.dataset.lang));
+    });
+    appliquerTextesFixes();
 
     async function charger() {
       try {
@@ -406,8 +505,7 @@
         construireFiltres();
         afficher();
       } catch (e) {
-        document.getElementById("contenu").innerHTML =
-          '<p class="etat">Le répertoire est momentanément indisponible, réessaie un peu plus tard.</p>';
+        document.getElementById("contenu").innerHTML = `<p class="etat">${I18N[lang].erreur}</p>`;
       }
     }
 

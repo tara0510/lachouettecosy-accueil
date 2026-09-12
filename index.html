@@ -140,6 +140,15 @@
     padding: 72px 32px 56px;
   }
 
+  /* Bascule de langue, en haut à droite */
+  .haut { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+  .lang-toggle { display: inline-flex; border: 1px solid var(--border-strong); border-radius: 999px; overflow: hidden; }
+  .lang-toggle button {
+    font-family: "Outfit", sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: .02em;
+    padding: 6px 13px; border: none; background: transparent; color: var(--text-muted); cursor: pointer;
+  }
+  .lang-toggle button.actif { background: var(--or); color: var(--nuit); }
+
   /* Hero */
   .hero { text-align: center; margin-bottom: 64px; }
   .hero-badge {
@@ -585,11 +594,17 @@
 </head>
 <body>
   <div class="wrap">
+    <div class="haut">
+      <div class="lang-toggle" id="lang-toggle">
+        <button type="button" data-lang="fr">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
     <div class="hero">
       <div class="hero-badge"><img src="images/hero-chouette.jpg" alt="La Chouette Cosy, blottie avec son cacao et ses bougies" loading="eager"></div>
-      <p class="hero-eyebrow">par la Chouette Cosy</p>
-      <h1>Bienvenue dans mon univers</h1>
-      <p>Un coin cosy pour explorer la sorcellerie douce et la magie du quotidien, écouter et te chouchouter — choisis où tu veux aller.</p>
+      <p class="hero-eyebrow" id="t-hero-eyebrow">par la Chouette Cosy</p>
+      <h1 id="t-hero-titre">Bienvenue dans mon univers</h1>
+      <p id="t-hero-texte">Un coin cosy pour explorer la sorcellerie douce et la magie du quotidien, écouter et te chouchouter — choisis où tu veux aller.</p>
     </div>
 
     <div class="pensee-du-jour">
@@ -598,9 +613,9 @@
     </div>
 
     <section class="intro">
-      <p class="intro-eyebrow">Un mot sur cet univers</p>
-      <h2>La sorcellerie douce, version cosy</h2>
-      <p>Ici, la magie ne fait pas peur : c'est une <strong>magie du quotidien</strong>, tissée de petits rituels, de phases lunaires et de tasses de thé fumantes. Que tu débutes en <strong>sorcellerie douce</strong> ou que tu pratiques depuis longtemps, tu trouveras de quoi nourrir ta curiosité — tarot et oracles, pierres et cristaux, sortilèges, calendrier des sabbats, astrologie... Une invitation à ralentir et à réenchanter les gestes simples, sans jamais se prendre trop au sérieux.</p>
+      <p class="intro-eyebrow" id="t-intro-eyebrow">Un mot sur cet univers</p>
+      <h2 id="t-intro-titre">La sorcellerie douce, version cosy</h2>
+      <p id="t-intro-texte">Ici, la magie ne fait pas peur : c'est une <strong>magie du quotidien</strong>, tissée de petits rituels, de phases lunaires et de tasses de thé fumantes. Que tu débutes en <strong>sorcellerie douce</strong> ou que tu pratiques depuis longtemps, tu trouveras de quoi nourrir ta curiosité — tarot et oracles, pierres et cristaux, sortilèges, calendrier des sabbats, astrologie... Une invitation à ralentir et à réenchanter les gestes simples, sans jamais se prendre trop au sérieux.</p>
     </section>
 
     <div class="separateur" aria-hidden="true">
@@ -620,40 +635,40 @@
       <!-- Le Coin Mystique -->
       <div class="carte carte-mystique">
         <img class="carte-visuel" src="images/carte-mystique.jpg" alt="La Chouette Cosy ravie, sa tisane à la main devant son carnet de notes magiques" loading="lazy">
-        <h2>Le Coin Mystique</h2>
-        <p class="desc">Ton grimoire numérique : tarot, pierres, rituels, astrologie et bien plus.</p>
+        <h2 id="t-mystique-titre">Le Coin Mystique</h2>
+        <p class="desc" id="t-mystique-desc">Ton grimoire numérique : tarot, pierres, rituels, astrologie et bien plus.</p>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-          <a class="bouton" href="https://app.lachouettecosy.com" style="text-decoration:none;">Entrer dans le grimoire →</a>
-          <a class="bouton discret" href="https://app.lachouettecosy.com/blog" style="text-decoration:none;">📖&nbsp;Lire le blog</a>
-          <a class="bouton discret" href="/tarifs.html" style="text-decoration:none;">✨&nbsp;Voir les tarifs</a>
-          <a class="bouton discret" href="/festivals.html" style="text-decoration:none;">🔥&nbsp;Festivals sorcellerie & Wicca</a>
+          <a class="bouton" href="https://app.lachouettecosy.com" style="text-decoration:none;" id="t-mystique-btn1">Entrer dans le grimoire →</a>
+          <a class="bouton discret" href="https://app.lachouettecosy.com/blog" style="text-decoration:none;" id="t-mystique-btn2">📖&nbsp;Lire le blog</a>
+          <a class="bouton discret" href="/tarifs.html" style="text-decoration:none;" id="t-mystique-btn3">✨&nbsp;Voir les tarifs</a>
+          <a class="bouton discret" href="/festivals.html" style="text-decoration:none;" id="t-mystique-btn4">🔥&nbsp;Festivals sorcellerie & Wicca</a>
         </div>
       </div>
 
       <!-- Boutique -->
       <div class="carte carte-boutique">
         <img class="carte-visuel" src="images/carte-boutique.jpg" alt="La Chouette Cosy, malicieuse, présente sa recette magique" loading="lazy">
-        <h2>La Boutique</h2>
-        <p class="desc">Mugs, tee-shirts, casquettes et tote bags à l'effigie de la chouette.</p>
-        <a class="bouton" href="https://la-chouette-cosy.tpopsite.com/" style="text-decoration:none;">Découvrir la boutique →</a>
+        <h2 id="t-boutique-titre">La Boutique</h2>
+        <p class="desc" id="t-boutique-desc">Mugs, tee-shirts, casquettes et tote bags à l'effigie de la chouette.</p>
+        <a class="bouton" href="https://la-chouette-cosy.tpopsite.com/" style="text-decoration:none;" id="t-boutique-btn">Découvrir la boutique →</a>
       </div>
 
       <!-- Ebooks -->
       <div class="carte carte-ebooks">
         <img class="carte-visuel" src="images/carte-ebooks.jpg" alt="La Chouette Cosy écrit dans son grimoire à la plume" loading="lazy">
-        <h2>Mes ebooks</h2>
-        <p class="desc">Le Grimoire de la Chouette Cosy, et Le Coin Spooky : vingt-quatre légendes, mystères &amp; affaires.</p>
+        <h2 id="t-ebooks-titre">Mes ebooks</h2>
+        <p class="desc" id="t-ebooks-desc">Le Grimoire de la Chouette Cosy, et Le Coin Spooky : vingt-quatre légendes, mystères &amp; affaires.</p>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-          <a class="bouton" href="https://www.amazon.fr/dp/B0HF7W517J?tag=lachouettecos-21" target="_blank" rel="noopener" style="text-decoration:none;">📖&nbsp;Le Grimoire</a>
-          <a class="bouton discret" href="https://www.amazon.fr/dp/B0HF8JN3HY?tag=lachouettecos-21" target="_blank" rel="noopener" style="text-decoration:none;">🎃&nbsp;Le Coin Spooky</a>
+          <a class="bouton" href="https://www.amazon.fr/dp/B0HF7W517J?tag=lachouettecos-21" target="_blank" rel="noopener" style="text-decoration:none;" id="t-ebooks-btn1">📖&nbsp;Le Grimoire</a>
+          <a class="bouton discret" href="https://www.amazon.fr/dp/B0HF8JN3HY?tag=lachouettecos-21" target="_blank" rel="noopener" style="text-decoration:none;" id="t-ebooks-btn2">🎃&nbsp;Le Coin Spooky</a>
         </div>
       </div>
 
       <!-- Le Coin Cosy (podcast) — seule sur sa ligne, pleine largeur, pour que
            le lecteur Spotify s'affiche en entier sans défilement interne. -->
       <div class="carte carte-podcast">
-        <h2>Le Coin Cosy</h2>
-        <p class="desc">Le podcast : bien-être, sorcellerie légère et entrepreneuriat féminin.</p>
+        <h2 id="t-podcast-titre">Le Coin Cosy</h2>
+        <p class="desc" id="t-podcast-desc">Le podcast : bien-être, sorcellerie légère et entrepreneuriat féminin.</p>
 
         <div class="spotify-embed">
           <iframe
@@ -680,9 +695,9 @@
           <span class="eclair eclair-4" aria-hidden="true">⚡</span>
           <img src="images/coin-spooky-logo.jpg" alt="Le Coin Spooky">
           <div>
-            <p class="spooky-titre">🕯️ Et quand la nuit tombe...</p>
-            <p>Une autre voix se réveille dans l'application : <strong>Le Coin Spooky</strong>, légendes, affaires non résolues et lieux hantés, racontés comme au coin du feu. Le premier récit s'écoute librement — les suivants n'attendent que les âmes abonnées.</p>
-            <a href="https://app.lachouettecosy.com/coin-spooky" target="_blank" rel="noopener">Écouter si tu l'oses →</a>
+            <p class="spooky-titre" id="t-spooky-titre">🕯️ Et quand la nuit tombe...</p>
+            <p id="t-spooky-texte">Une autre voix se réveille dans l'application : <strong>Le Coin Spooky</strong>, légendes, affaires non résolues et lieux hantés, racontés comme au coin du feu. Le premier récit s'écoute librement — les suivants n'attendent que les âmes abonnées.</p>
+            <a href="https://app.lachouettecosy.com/coin-spooky" target="_blank" rel="noopener" id="t-spooky-lien">Écouter si tu l'oses →</a>
           </div>
         </div>
       </div>
@@ -690,12 +705,12 @@
       <!-- Newsletter, juste à côté du podcast -->
       <div class="carte newsletter-box" id="newsletter">
         <img class="carte-visuel" src="images/carte-newsletter.jpg" alt="La Chouette Cosy blottie sous un plaid avec un chocolat chaud" loading="lazy">
-        <p class="intro-eyebrow">Rejoins le cercle</p>
-        <h2 style="font-family:'Fraunces',serif; font-weight:500; font-size:21px; margin:0 0 8px;">La newsletter du Coin Cosy</h2>
-        <p>Chaque jeudi : le nouvel épisode, une citation qui fait du bien, et une petite fiche pour explorer un coin du grimoire.</p>
+        <p class="intro-eyebrow" id="t-newsletter-eyebrow">Rejoins le cercle</p>
+        <h2 style="font-family:'Fraunces',serif; font-weight:500; font-size:21px; margin:0 0 8px;" id="t-newsletter-titre">La newsletter du Coin Cosy</h2>
+        <p id="t-newsletter-texte">Chaque jeudi : le nouvel épisode, une citation qui fait du bien, et une petite fiche pour explorer un coin du grimoire.</p>
         <form class="newsletter-form" id="form-newsletter">
           <input type="email" id="email-newsletter" required placeholder="ton-email@exemple.com">
-          <button type="submit" class="bouton">Je m'abonne</button>
+          <button type="submit" class="bouton" id="t-newsletter-btn">Je m'abonne</button>
         </form>
         <p class="newsletter-msg" id="msg-newsletter"></p>
       </div>
@@ -715,68 +730,256 @@
     </div>
 
     <section class="faq">
-      <p class="intro-eyebrow" style="text-align:center;">Petites questions</p>
-      <h2 style="text-align:center;">Tu te poses peut-être ces questions</h2>
+      <p class="intro-eyebrow" style="text-align:center;" id="t-faq-eyebrow">Petites questions</p>
+      <h2 style="text-align:center;" id="t-faq-titre">Tu te poses peut-être ces questions</h2>
       <details>
-        <summary>C'est quoi, la sorcellerie douce ?</summary>
-        <p>Une magie du quotidien plutôt qu'une pratique spectaculaire : de petits rituels, l'attention portée aux phases de la lune, une bougie allumée avec une intention claire, une tisane préparée en conscience. Pas besoin de grimoire ancestral pour commencer — juste l'envie de ralentir.</p>
+        <summary id="t-faq-q1">C'est quoi, la sorcellerie douce ?</summary>
+        <p id="t-faq-a1">Une magie du quotidien plutôt qu'une pratique spectaculaire : de petits rituels, l'attention portée aux phases de la lune, une bougie allumée avec une intention claire, une tisane préparée en conscience. Pas besoin de grimoire ancestral pour commencer — juste l'envie de ralentir.</p>
       </details>
       <details>
-        <summary>Faut-il être expérimentée pour débuter ?</summary>
-        <p>Non, absolument pas. Le Coin Mystique est pensé pour accueillir aussi bien les débutantes que les pratiquantes confirmées, avec des explications simples et bienveillantes, sans jugement ni jargon compliqué.</p>
+        <summary id="t-faq-q2">Faut-il être expérimentée pour débuter ?</summary>
+        <p id="t-faq-a2">Non, absolument pas. Le Coin Mystique est pensé pour accueillir aussi bien les débutantes que les pratiquantes confirmées, avec des explications simples et bienveillantes, sans jugement ni jargon compliqué.</p>
       </details>
       <details>
-        <summary>Qu'est-ce qu'on trouve dans Le Coin Mystique ?</summary>
-        <p>Un grimoire numérique cosy : tirages de tarot et d'oracles, fiches sur les pierres et cristaux, sortilèges et rituels doux, calendrier des sabbats et des phases lunaires, astrologie, numérologie, runes, et bien d'autres arts divinatoires à explorer à ton rythme.</p>
+        <summary id="t-faq-q3">Qu'est-ce qu'on trouve dans Le Coin Mystique ?</summary>
+        <p id="t-faq-a3">Un grimoire numérique cosy : tirages de tarot et d'oracles, fiches sur les pierres et cristaux, sortilèges et rituels doux, calendrier des sabbats et des phases lunaires, astrologie, numérologie, runes, et bien d'autres arts divinatoires à explorer à ton rythme.</p>
       </details>
       <details>
-        <summary>De quoi parle le podcast Le Coin Cosy ?</summary>
-        <p>Bien-être, sorcellerie légère et entrepreneuriat féminin, avec des épisodes pensés comme une pause chaleureuse au coin du feu.</p>
+        <summary id="t-faq-q4">De quoi parle le podcast Le Coin Cosy ?</summary>
+        <p id="t-faq-a4">Bien-être, sorcellerie légère et entrepreneuriat féminin, avec des épisodes pensés comme une pause chaleureuse au coin du feu.</p>
       </details>
     </section>
 
     <section class="avis-cta">
-      <p class="intro-eyebrow">Ton avis compte</p>
-      <h2>Tu aimes l'univers de la Chouette Cosy ?</h2>
-      <p>Un petit avis prend une minute et aide énormément d'autres personnes à découvrir Le Coin Mystique, le podcast et la boutique.</p>
+      <p class="intro-eyebrow" id="t-avis-eyebrow">Ton avis compte</p>
+      <h2 id="t-avis-titre">Tu aimes l'univers de la Chouette Cosy ?</h2>
+      <p id="t-avis-texte">Un petit avis prend une minute et aide énormément d'autres personnes à découvrir Le Coin Mystique, le podcast et la boutique.</p>
       <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-        <a class="bouton" href="https://www.trustpilot.com/evaluate/lachouettecosy.com" target="_blank" rel="noopener" style="text-decoration:none;">⭐&nbsp;Laisser un avis Trustpilot</a>
-        <a class="bouton discret" href="https://www.facebook.com/lachouettecosy/reviews" target="_blank" rel="noopener" style="text-decoration:none;">👍&nbsp;Avis sur Facebook</a>
+        <a class="bouton" href="https://www.trustpilot.com/evaluate/lachouettecosy.com" target="_blank" rel="noopener" style="text-decoration:none;" id="t-avis-btn1">⭐&nbsp;Laisser un avis Trustpilot</a>
+        <a class="bouton discret" href="https://www.facebook.com/lachouettecosy/reviews" target="_blank" rel="noopener" style="text-decoration:none;" id="t-avis-btn2">👍&nbsp;Avis sur Facebook</a>
       </div>
     </section>
 
-    <footer>
+    <footer id="pied">
       🦉 La Chouette Cosy — <a href="https://app.lachouettecosy.com">Le Coin Mystique</a> · Le Coin Cosy · La Boutique
     </footer>
   </div>
 
   <script>
-    var pensees = [
-      "Une bougie allumée avec une vraie intention vaut tous les rituels compliqués.",
-      "Aujourd'hui, le seul sortilège dont tu as besoin, c'est peut-être une tisane et cinq minutes de silence.",
-      "La lune ne juge jamais ton ménage en retard.",
-      "Un grimoire qui prend la poussière apprend quand même quelque chose : la patience.",
-      "Ta sorcière intérieure porte peut-être un legging de yoga et boit un café tiède, et c'est très bien comme ça.",
-      "Ranger son bureau, c'est déjà un petit rituel de purification.",
-      "On peut être puissante et avoir oublié où on a mis ses clés.",
-      "Le meilleur oracle du moment, c'est souvent ton propre corps qui te dit de ralentir.",
-      "Une pierre roulée dans la poche fait autant de bien qu'un long discours de développement personnel.",
-      "La magie du quotidien n'a pas besoin de témoins pour être vraie.",
-      "Trois respirations profondes avant de répondre à ce mail énervant : ça compte comme un sort de protection.",
-      "Il n'y a pas de mauvaise sorcière, juste des journées où le chaudron déborde un peu.",
-      "Se coucher tôt un soir de pleine lune, c'est aussi une forme de rébellion douce.",
-      "Un thé bien infusé et un carnet ouvert valent toutes les formations sur la manifestation.",
-      "Tu n'as pas besoin d'un autel parfait pour que la magie opère — une étagère un peu bancale fait très bien l'affaire.",
-      "Dire non poliment, c'est un sortilège de protection qui ne nécessite aucun accessoire.",
-      "La sorcellerie douce, c'est surtout se souvenir qu'on a le droit d'aller à son propre rythme.",
-      "Même les chouettes ont des jours où elles préfèrent rester dans leur nid."
-    ];
-    (function () {
+    var PENSEES = {
+      fr: [
+        "Une bougie allumée avec une vraie intention vaut tous les rituels compliqués.",
+        "Aujourd'hui, le seul sortilège dont tu as besoin, c'est peut-être une tisane et cinq minutes de silence.",
+        "La lune ne juge jamais ton ménage en retard.",
+        "Un grimoire qui prend la poussière apprend quand même quelque chose : la patience.",
+        "Ta sorcière intérieure porte peut-être un legging de yoga et boit un café tiède, et c'est très bien comme ça.",
+        "Ranger son bureau, c'est déjà un petit rituel de purification.",
+        "On peut être puissante et avoir oublié où on a mis ses clés.",
+        "Le meilleur oracle du moment, c'est souvent ton propre corps qui te dit de ralentir.",
+        "Une pierre roulée dans la poche fait autant de bien qu'un long discours de développement personnel.",
+        "La magie du quotidien n'a pas besoin de témoins pour être vraie.",
+        "Trois respirations profondes avant de répondre à ce mail énervant : ça compte comme un sort de protection.",
+        "Il n'y a pas de mauvaise sorcière, juste des journées où le chaudron déborde un peu.",
+        "Se coucher tôt un soir de pleine lune, c'est aussi une forme de rébellion douce.",
+        "Un thé bien infusé et un carnet ouvert valent toutes les formations sur la manifestation.",
+        "Tu n'as pas besoin d'un autel parfait pour que la magie opère — une étagère un peu bancale fait très bien l'affaire.",
+        "Dire non poliment, c'est un sortilège de protection qui ne nécessite aucun accessoire.",
+        "La sorcellerie douce, c'est surtout se souvenir qu'on a le droit d'aller à son propre rythme.",
+        "Même les chouettes ont des jours où elles préfèrent rester dans leur nid."
+      ],
+      en: [
+        "A candle lit with a real intention beats any elaborate ritual.",
+        "Today, the only spell you might need is a cup of tea and five minutes of silence.",
+        "The moon never judges your overdue laundry.",
+        "A dusty grimoire is still teaching you something: patience.",
+        "Your inner witch might be wearing yoga leggings and drinking lukewarm coffee, and that's perfectly fine.",
+        "Tidying your desk already counts as a small cleansing ritual.",
+        "You can be powerful and still have no idea where you put your keys.",
+        "The best oracle right now is often your own body, telling you to slow down.",
+        "A tumbled stone in your pocket does as much good as a long personal-development lecture.",
+        "Everyday magic doesn't need witnesses to be real.",
+        "Three deep breaths before answering that annoying email — that counts as a protection spell.",
+        "There's no such thing as a bad witch, just days when the cauldron boils over a little.",
+        "Going to bed early on a full moon night is its own quiet act of rebellion.",
+        "A well-steeped tea and an open notebook beat any manifestation course.",
+        "You don't need a perfect altar for magic to work — a slightly wobbly shelf does just fine.",
+        "Saying no politely is a protection spell that needs no props at all.",
+        "Gentle witchcraft is mostly about remembering you're allowed to go at your own pace.",
+        "Even owls have days when they'd rather just stay in the nest."
+      ]
+    };
+    var I18N = {
+      fr: {
+        heroEyebrow: "par la Chouette Cosy",
+        heroTitre: "Bienvenue dans mon univers",
+        heroTexte: "Un coin cosy pour explorer la sorcellerie douce et la magie du quotidien, écouter et te chouchouter — choisis où tu veux aller.",
+        introEyebrow: "Un mot sur cet univers",
+        introTitre: "La sorcellerie douce, version cosy",
+        introTexte: "Ici, la magie ne fait pas peur : c'est une <strong>magie du quotidien</strong>, tissée de petits rituels, de phases lunaires et de tasses de thé fumantes. Que tu débutes en <strong>sorcellerie douce</strong> ou que tu pratiques depuis longtemps, tu trouveras de quoi nourrir ta curiosité — tarot et oracles, pierres et cristaux, sortilèges, calendrier des sabbats, astrologie... Une invitation à ralentir et à réenchanter les gestes simples, sans jamais se prendre trop au sérieux.",
+        mystiqueTitre: "Le Coin Mystique",
+        mystiqueDesc: "Ton grimoire numérique : tarot, pierres, rituels, astrologie et bien plus.",
+        mystiqueBtn1: "Entrer dans le grimoire →", mystiqueBtn2: "📖&nbsp;Lire le blog",
+        mystiqueBtn3: "✨&nbsp;Voir les tarifs", mystiqueBtn4: "🔥&nbsp;Festivals sorcellerie & Wicca",
+        boutiqueTitre: "La Boutique",
+        boutiqueDesc: "Mugs, tee-shirts, casquettes et tote bags à l'effigie de la chouette.",
+        boutiqueBtn: "Découvrir la boutique →",
+        ebooksTitre: "Mes ebooks",
+        ebooksDesc: "Le Grimoire de la Chouette Cosy, et Le Coin Spooky : vingt-quatre légendes, mystères &amp; affaires.",
+        ebooksBtn1: "📖&nbsp;Le Grimoire", ebooksBtn2: "🎃&nbsp;Le Coin Spooky",
+        podcastTitre: "Le Coin Cosy",
+        podcastDesc: "Le podcast : bien-être, sorcellerie légère et entrepreneuriat féminin.",
+        spookyTitre: "🕯️ Et quand la nuit tombe...",
+        spookyTexte: "Une autre voix se réveille dans l'application : <strong>Le Coin Spooky</strong>, légendes, affaires non résolues et lieux hantés, racontés comme au coin du feu. Le premier récit s'écoute librement — les suivants n'attendent que les âmes abonnées.",
+        spookyLien: "Écouter si tu l'oses →",
+        newsletterEyebrow: "Rejoins le cercle",
+        newsletterTitre: "La newsletter du Coin Cosy",
+        newsletterTexte: "Chaque jeudi : le nouvel épisode, une citation qui fait du bien, et une petite fiche pour explorer un coin du grimoire.",
+        newsletterBtn: "Je m'abonne", newsletterPlaceholder: "ton-email@exemple.com",
+        newsletterAttente: "Un instant…",
+        newsletterSucces: "C'est fait 🦉 Bienvenue dans le cercle — ton prochain rendez-vous cosy arrive jeudi.",
+        newsletterErreur: "Un souci est survenu, réessaie dans un instant.",
+        faqEyebrow: "Petites questions",
+        faqTitre: "Tu te poses peut-être ces questions",
+        faqQ1: "C'est quoi, la sorcellerie douce ?",
+        faqA1: "Une magie du quotidien plutôt qu'une pratique spectaculaire : de petits rituels, l'attention portée aux phases de la lune, une bougie allumée avec une intention claire, une tisane préparée en conscience. Pas besoin de grimoire ancestral pour commencer — juste l'envie de ralentir.",
+        faqQ2: "Faut-il être expérimentée pour débuter ?",
+        faqA2: "Non, absolument pas. Le Coin Mystique est pensé pour accueillir aussi bien les débutantes que les pratiquantes confirmées, avec des explications simples et bienveillantes, sans jugement ni jargon compliqué.",
+        faqQ3: "Qu'est-ce qu'on trouve dans Le Coin Mystique ?",
+        faqA3: "Un grimoire numérique cosy : tirages de tarot et d'oracles, fiches sur les pierres et cristaux, sortilèges et rituels doux, calendrier des sabbats et des phases lunaires, astrologie, numérologie, runes, et bien d'autres arts divinatoires à explorer à ton rythme.",
+        faqQ4: "De quoi parle le podcast Le Coin Cosy ?",
+        faqA4: "Bien-être, sorcellerie légère et entrepreneuriat féminin, avec des épisodes pensés comme une pause chaleureuse au coin du feu.",
+        avisEyebrow: "Ton avis compte",
+        avisTitre: "Tu aimes l'univers de la Chouette Cosy ?",
+        avisTexte: "Un petit avis prend une minute et aide énormément d'autres personnes à découvrir Le Coin Mystique, le podcast et la boutique.",
+        avisBtn1: "⭐&nbsp;Laisser un avis Trustpilot", avisBtn2: "👍&nbsp;Avis sur Facebook",
+        pied: '🦉 La Chouette Cosy — <a href="https://app.lachouettecosy.com">Le Coin Mystique</a> · Le Coin Cosy · La Boutique',
+      },
+      en: {
+        heroEyebrow: "by la Chouette Cosy",
+        heroTitre: "Welcome to my world",
+        heroTexte: "A cosy corner to explore gentle witchcraft and everyday magic, to listen and to be pampered — pick where you'd like to go.",
+        introEyebrow: "A word about this world",
+        introTitre: "Gentle witchcraft, the cosy way",
+        introTexte: "Here, magic isn't scary: it's an <strong>everyday kind of magic</strong>, woven from small rituals, moon phases and steaming cups of tea. Whether you're just starting out with <strong>gentle witchcraft</strong> or you've been practising for years, you'll find plenty to feed your curiosity — tarot and oracle cards, crystals and stones, spells, a calendar of the sabbats, astrology... An invitation to slow down and re-enchant simple gestures, without ever taking it all too seriously.",
+        mystiqueTitre: "Le Coin Mystique",
+        mystiqueDesc: "Your digital grimoire: tarot, crystals, rituals, astrology and much more.",
+        mystiqueBtn1: "Step into the grimoire →", mystiqueBtn2: "📖&nbsp;Read the blog",
+        mystiqueBtn3: "✨&nbsp;See pricing", mystiqueBtn4: "🔥&nbsp;Witchcraft & Wicca festivals",
+        boutiqueTitre: "The Shop",
+        boutiqueDesc: "Mugs, t-shirts, caps and tote bags featuring the owl.",
+        boutiqueBtn: "Discover the shop →",
+        ebooksTitre: "My ebooks",
+        ebooksDesc: "The Chouette Cosy Grimoire, and Le Coin Spooky: twenty-four legends, mysteries &amp; cold cases.",
+        ebooksBtn1: "📖&nbsp;The Grimoire", ebooksBtn2: "🎃&nbsp;Le Coin Spooky",
+        podcastTitre: "Le Coin Cosy",
+        podcastDesc: "The podcast: well-being, light witchcraft and female entrepreneurship.",
+        spookyTitre: "🕯️ And when night falls...",
+        spookyTexte: "Another voice wakes up inside the app: <strong>Le Coin Spooky</strong>, legends, cold cases and haunted places, told fireside-style. The first story is free to listen to — the rest are waiting for subscribed souls only.",
+        spookyLien: "Listen if you dare →",
+        newsletterEyebrow: "Join the circle",
+        newsletterTitre: "The Coin Cosy newsletter",
+        newsletterTexte: "Every Thursday: the new episode, a feel-good quote, and a little sheet to explore a corner of the grimoire.",
+        newsletterBtn: "Subscribe", newsletterPlaceholder: "your-email@example.com",
+        newsletterAttente: "One moment…",
+        newsletterSucces: "Done 🦉 Welcome to the circle — your next cosy rendezvous lands on Thursday.",
+        newsletterErreur: "Something went wrong, please try again in a moment.",
+        faqEyebrow: "A few questions",
+        faqTitre: "You might be wondering...",
+        faqQ1: "What exactly is gentle witchcraft?",
+        faqA1: "An everyday kind of magic rather than a spectacular practice: small rituals, paying attention to the moon phases, a candle lit with a clear intention, a tea brewed mindfully. No need for an ancestral grimoire to get started — just the wish to slow down.",
+        faqQ2: "Do I need experience to get started?",
+        faqA2: "No, not at all. Le Coin Mystique is designed to welcome beginners and seasoned practitioners alike, with simple, kind explanations, no judgment and no complicated jargon.",
+        faqQ3: "What will I find in Le Coin Mystique?",
+        faqA3: "A cosy digital grimoire: tarot and oracle card readings, crystal and stone sheets, gentle spells and rituals, a calendar of sabbats and moon phases, astrology, numerology, runes, and many other divinatory arts to explore at your own pace.",
+        faqQ4: "What is the Le Coin Cosy podcast about?",
+        faqA4: "Well-being, light witchcraft and female entrepreneurship, with episodes designed as a warm fireside break.",
+        avisEyebrow: "Your opinion matters",
+        avisTitre: "Do you love the Chouette Cosy world?",
+        avisTexte: "A quick review takes a minute and helps so many other people discover Le Coin Mystique, the podcast and the shop.",
+        avisBtn1: "⭐&nbsp;Leave a Trustpilot review", avisBtn2: "👍&nbsp;Review us on Facebook",
+        pied: '🦉 La Chouette Cosy — <a href="https://app.lachouettecosy.com">Le Coin Mystique</a> · Le Coin Cosy · The Shop',
+      },
+    };
+
+    var lang = localStorage.getItem('lang') === 'en' ? 'en' : 'fr';
+
+    function appliquerTraductions() {
+      var d = I18N[lang];
+      document.documentElement.lang = lang;
+      document.getElementById('t-hero-eyebrow').textContent = d.heroEyebrow;
+      document.getElementById('t-hero-titre').textContent = d.heroTitre;
+      document.getElementById('t-hero-texte').textContent = d.heroTexte;
+      document.getElementById('t-intro-eyebrow').textContent = d.introEyebrow;
+      document.getElementById('t-intro-titre').textContent = d.introTitre;
+      document.getElementById('t-intro-texte').innerHTML = d.introTexte;
+
+      document.getElementById('t-mystique-titre').textContent = d.mystiqueTitre;
+      document.getElementById('t-mystique-desc').textContent = d.mystiqueDesc;
+      document.getElementById('t-mystique-btn1').textContent = d.mystiqueBtn1;
+      document.getElementById('t-mystique-btn2').innerHTML = d.mystiqueBtn2;
+      document.getElementById('t-mystique-btn3').innerHTML = d.mystiqueBtn3;
+      document.getElementById('t-mystique-btn4').innerHTML = d.mystiqueBtn4;
+
+      document.getElementById('t-boutique-titre').textContent = d.boutiqueTitre;
+      document.getElementById('t-boutique-desc').textContent = d.boutiqueDesc;
+      document.getElementById('t-boutique-btn').textContent = d.boutiqueBtn;
+
+      document.getElementById('t-ebooks-titre').textContent = d.ebooksTitre;
+      document.getElementById('t-ebooks-desc').innerHTML = d.ebooksDesc;
+      document.getElementById('t-ebooks-btn1').innerHTML = d.ebooksBtn1;
+      document.getElementById('t-ebooks-btn2').innerHTML = d.ebooksBtn2;
+
+      document.getElementById('t-podcast-titre').textContent = d.podcastTitre;
+      document.getElementById('t-podcast-desc').textContent = d.podcastDesc;
+
+      document.getElementById('t-spooky-titre').textContent = d.spookyTitre;
+      document.getElementById('t-spooky-texte').innerHTML = d.spookyTexte;
+      document.getElementById('t-spooky-lien').textContent = d.spookyLien;
+
+      document.getElementById('t-newsletter-eyebrow').textContent = d.newsletterEyebrow;
+      document.getElementById('t-newsletter-titre').textContent = d.newsletterTitre;
+      document.getElementById('t-newsletter-texte').textContent = d.newsletterTexte;
+      document.getElementById('t-newsletter-btn').textContent = d.newsletterBtn;
+      document.getElementById('email-newsletter').setAttribute('placeholder', d.newsletterPlaceholder);
+
+      document.getElementById('t-faq-eyebrow').textContent = d.faqEyebrow;
+      document.getElementById('t-faq-titre').textContent = d.faqTitre;
+      document.getElementById('t-faq-q1').textContent = d.faqQ1;
+      document.getElementById('t-faq-a1').textContent = d.faqA1;
+      document.getElementById('t-faq-q2').textContent = d.faqQ2;
+      document.getElementById('t-faq-a2').textContent = d.faqA2;
+      document.getElementById('t-faq-q3').textContent = d.faqQ3;
+      document.getElementById('t-faq-a3').textContent = d.faqA3;
+      document.getElementById('t-faq-q4').textContent = d.faqQ4;
+      document.getElementById('t-faq-a4').textContent = d.faqA4;
+
+      document.getElementById('t-avis-eyebrow').textContent = d.avisEyebrow;
+      document.getElementById('t-avis-titre').textContent = d.avisTitre;
+      document.getElementById('t-avis-texte').textContent = d.avisTexte;
+      document.getElementById('t-avis-btn1').innerHTML = d.avisBtn1;
+      document.getElementById('t-avis-btn2').innerHTML = d.avisBtn2;
+
+      document.getElementById('pied').innerHTML = d.pied;
+
+      document.querySelectorAll('#lang-toggle button').forEach(function (b) {
+        b.classList.toggle('actif', b.dataset.lang === lang);
+      });
+
       var debutAnnee = new Date(new Date().getFullYear(), 0, 0);
       var jourDeLannee = Math.floor((Date.now() - debutAnnee) / 86400000);
-      var el = document.getElementById('pensee-texte');
-      if (el) el.textContent = pensees[jourDeLannee % pensees.length];
-    })();
+      var pEl = document.getElementById('pensee-texte');
+      if (pEl) pEl.textContent = PENSEES[lang][jourDeLannee % PENSEES[lang].length];
+    }
+
+    function definirLangue(nouvelleLangue) {
+      lang = nouvelleLangue;
+      localStorage.setItem('lang', lang);
+      appliquerTraductions();
+    }
+    document.querySelectorAll('#lang-toggle button').forEach(function (b) {
+      b.addEventListener('click', function () { definirLangue(b.dataset.lang); });
+    });
+    appliquerTraductions();
 
     document.getElementById('form-newsletter').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -785,7 +988,7 @@
       var msg = document.getElementById('msg-newsletter');
       var email = document.getElementById('email-newsletter').value;
       bouton.disabled = true;
-      bouton.textContent = 'Un instant…';
+      bouton.textContent = I18N[lang].newsletterAttente;
       msg.style.color = 'var(--text-muted)';
       msg.textContent = '';
       fetch('https://app.lachouettecosy.com/api/newsletter', {
@@ -797,19 +1000,19 @@
           if (res.ok) {
             form.style.display = 'none';
             msg.style.color = 'var(--or-clair)';
-            msg.textContent = "C'est fait 🦉 Bienvenue dans le cercle — ton prochain rendez-vous cosy arrive jeudi.";
+            msg.textContent = I18N[lang].newsletterSucces;
           } else {
             bouton.disabled = false;
-            bouton.textContent = "Je m'abonne";
+            bouton.textContent = I18N[lang].newsletterBtn;
             msg.style.color = 'var(--terracotta)';
-            msg.textContent = 'Un souci est survenu, réessaie dans un instant.';
+            msg.textContent = I18N[lang].newsletterErreur;
           }
         })
         .catch(function () {
           bouton.disabled = false;
-          bouton.textContent = "Je m'abonne";
+          bouton.textContent = I18N[lang].newsletterBtn;
           msg.style.color = 'var(--terracotta)';
-          msg.textContent = 'Un souci est survenu, réessaie dans un instant.';
+          msg.textContent = I18N[lang].newsletterErreur;
         });
     });
   </script>

@@ -26,8 +26,17 @@
   a { color: var(--or-clair); }
   .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 64px; }
 
-  .retour { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--text-muted); text-decoration: none; margin-bottom: 28px; }
+  .haut { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 28px; }
+  .retour { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--text-muted); text-decoration: none; }
   .retour:hover { color: var(--or-clair); }
+  .lang-toggle {
+    display: inline-flex; border: 1px solid var(--border-strong); border-radius: 999px; overflow: hidden; flex-shrink: 0;
+  }
+  .lang-toggle button {
+    font-family: "Outfit", sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: .02em;
+    padding: 6px 13px; border: none; background: transparent; color: var(--text-muted); cursor: pointer;
+  }
+  .lang-toggle button.actif { background: var(--or); color: var(--nuit); }
 
   .cover { border-radius: 18px; overflow: hidden; margin-bottom: 6px; border: 1px solid var(--border-strong); }
   .cover img { width: 100%; height: 280px; object-fit: cover; display: block; }
@@ -96,11 +105,17 @@
 </head>
 <body>
   <div class="wrap">
-    <a class="retour" href="/festivals.html">← Retour au répertoire</a>
+    <div class="haut">
+      <a class="retour" id="lien-retour" href="/festivals.html">← Retour au répertoire</a>
+      <div class="lang-toggle" id="lang-toggle">
+        <button type="button" data-lang="fr">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
     <div id="contenu">
       <p class="etat">Chargement...</p>
     </div>
-    <footer>
+    <footer id="pied">
       🦉 La Chouette Cosy — <a href="/">Retour à l'accueil</a>
     </footer>
   </div>
@@ -109,16 +124,49 @@
     const SUPABASE_URL = "https://fpxuslmxsxamocfngoke.supabase.co";
     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZweHVzbG14c3hhbW9jZm5nb2tlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxMTY0NjgsImV4cCI6MjA5OTY5MjQ2OH0.LFCMJvyeBx3AQSVXMRmit1uLsHxdeMM3mf4jEvHC14s";
 
+    const I18N = {
+      fr: {
+        retour: "← Retour au répertoire", accueil: "Retour à l'accueil",
+        chargement: "Chargement...", introuvable: "Festival introuvable.",
+        erreur: "Impossible de charger ce festival pour l'instant.",
+        local: "Événement local", edition: "ᵉ édition",
+        tempsForts: "Les temps forts", infosPratiques: "Infos pratiques",
+        histoire: "Un peu d'histoire", plusLoin: "Pour aller plus loin",
+        siteOfficiel: "🔗 Site officiel", facebook: "📘 Facebook",
+        photo: "Photo : ", viaPixabay: " via Pixabay", locale: "fr-FR",
+      },
+      en: {
+        retour: "← Back to the directory", accueil: "Back to home",
+        chargement: "Loading...", introuvable: "Festival not found.",
+        erreur: "Couldn't load this festival right now.",
+        local: "Local event", edition: getEditionSuffix,
+        tempsForts: "Highlights", infosPratiques: "Practical info",
+        histoire: "A bit of history", plusLoin: "Go further",
+        siteOfficiel: "🔗 Official site", facebook: "📘 Facebook",
+        photo: "Photo: ", viaPixabay: " via Pixabay", locale: "en-GB",
+      },
+    };
+    function getEditionSuffix(n) {
+      const j = n % 10, k = n % 100;
+      if (j === 1 && k !== 11) return "st";
+      if (j === 2 && k !== 12) return "nd";
+      if (j === 3 && k !== 13) return "rd";
+      return "th";
+    }
+    let lang = localStorage.getItem("lang") === "en" ? "en" : "fr";
+    let festivalCourant = null;
+
     function formatDate(iso) {
       if (!iso) return "";
       const [annee, mois, jour] = iso.split("-");
       const d = new Date(Date.UTC(+annee, +mois - 1, +jour));
-      return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+      return d.toLocaleDateString(I18N[lang].locale, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
     }
 
     function periodeAffichee(f) {
+      const periode = lang === "en" ? (f.periode_indicative_en || f.periode_indicative) : f.periode_indicative;
       if (f.date_fin && f.date_fin !== f.date_debut) return `${formatDate(f.date_debut)} → ${formatDate(f.date_fin)}`;
-      if (f.periode_indicative) return `${formatDate(f.date_debut)} (${f.periode_indicative})`;
+      if (periode) return `${formatDate(f.date_debut)} (${periode})`;
       return formatDate(f.date_debut);
     }
 
@@ -128,7 +176,22 @@
       return div.innerHTML;
     }
 
+    function champ(f, base) {
+      if (lang !== "en") return f[base];
+      const enVal = f[base + "_en"];
+      return (enVal && (typeof enVal !== "object" || (Array.isArray(enVal) && enVal.length))) ? enVal : f[base];
+    }
+
+    function appliquerTextesFixes() {
+      const t = I18N[lang];
+      document.documentElement.lang = lang;
+      document.getElementById("lien-retour").textContent = t.retour;
+      document.getElementById("pied").innerHTML = `🦉 La Chouette Cosy — <a href="/">${t.accueil}</a>`;
+      document.querySelectorAll("#lang-toggle button").forEach((b) => b.classList.toggle("actif", b.dataset.lang === lang));
+    }
+
     function afficher(f) {
+      const t = I18N[lang];
       document.title = `${f.nom} — La Chouette Cosy`;
 
       const lieu = [f.lieu_exact, f.ville, f.departement, f.region].filter(Boolean).join(", ");
@@ -140,60 +203,78 @@
         })
         .join("");
       const liensExternes = [
-        f.site_web ? `<a class="lien-externe" href="${echapper(f.site_web)}" target="_blank" rel="noopener">🔗 Site officiel</a>` : "",
-        f.lien_facebook ? `<a class="lien-externe" href="${echapper(f.lien_facebook)}" target="_blank" rel="noopener">📘 Facebook</a>` : "",
+        f.site_web ? `<a class="lien-externe" href="${echapper(f.site_web)}" target="_blank" rel="noopener">${t.siteOfficiel}</a>` : "",
+        f.lien_facebook ? `<a class="lien-externe" href="${echapper(f.lien_facebook)}" target="_blank" rel="noopener">${t.facebook}</a>` : "",
       ].join("");
 
       const credit = f.image_url && f.image_credit_photographe
-        ? `<p class="credit-photo">Photo : ${f.image_credit_lien ? `<a href="${echapper(f.image_credit_lien)}" target="_blank" rel="noopener">${echapper(f.image_credit_photographe)}</a>` : echapper(f.image_credit_photographe)} via Pixabay</p>`
+        ? `<p class="credit-photo">${t.photo}${f.image_credit_lien ? `<a href="${echapper(f.image_credit_lien)}" target="_blank" rel="noopener">${echapper(f.image_credit_photographe)}</a>` : echapper(f.image_credit_photographe)}${t.viaPixabay}</p>`
         : "";
+
+      const pointsForts = champ(f, "points_forts") || [];
+      const infosPratiques = champ(f, "infos_pratiques") || [];
+      const description = champ(f, "description");
+      const historique = champ(f, "infos_historiques");
+      const suffixeEdition = typeof t.edition === "function" ? t.edition(f.nombre_editions) : t.edition;
 
       document.getElementById("contenu").innerHTML = `
         ${f.image_url ? `<div class="cover"><img src="${echapper(f.image_url)}" alt=""></div>${credit}` : ""}
         <div class="tete">
-          ${f.taille === "petit" ? '<span class="badge-local">Événement local</span>' : ""}
+          ${f.taille === "petit" ? `<span class="badge-local">${t.local}</span>` : ""}
           <h1>${echapper(f.nom)}</h1>
           <p class="lieu-date"><span class="pays">${echapper(f.pays)}</span> — ${echapper(lieu)} · ${periodeAffichee(f)}</p>
-          ${f.nombre_editions ? `<p class="editions">${f.nombre_editions}ᵉ édition</p>` : ""}
+          ${f.nombre_editions ? `<p class="editions">${f.nombre_editions}${suffixeEdition}</p>` : ""}
           ${tags ? `<div class="tags">${tags}</div>` : ""}
         </div>
 
         <section>
-          <p class="description">${echapper(f.description)}</p>
+          <p class="description">${echapper(description)}</p>
         </section>
 
-        ${(f.points_forts || []).length ? `
+        ${pointsForts.length ? `
         <section class="points-forts">
-          <h2 style="margin:0 0 10px;">Les temps forts</h2>
-          <ul>${(f.points_forts || []).map((p) => `<li>${echapper(p)}</li>`).join("")}</ul>
+          <h2 style="margin:0 0 10px;">${t.tempsForts}</h2>
+          <ul>${pointsForts.map((p) => `<li>${echapper(p)}</li>`).join("")}</ul>
         </section>` : ""}
 
-        ${(f.infos_pratiques || []).length ? `
+        ${infosPratiques.length ? `
         <section>
-          <h2>Infos pratiques</h2>
+          <h2>${t.infosPratiques}</h2>
           <div class="tableau-pratique">
-            <table>${(f.infos_pratiques || []).map((i) => `<tr><td>${echapper(i.label)}</td><td>${echapper(i.valeur)}</td></tr>`).join("")}</table>
+            <table>${infosPratiques.map((i) => `<tr><td>${echapper(i.label)}</td><td>${echapper(i.valeur)}</td></tr>`).join("")}</table>
           </div>
         </section>` : ""}
 
-        ${f.infos_historiques ? `
+        ${historique ? `
         <section class="historique">
-          <h2>Un peu d'histoire</h2>
-          <p style="margin:0;">${echapper(f.infos_historiques)}</p>
+          <h2>${t.histoire}</h2>
+          <p style="margin:0;">${echapper(historique)}</p>
         </section>` : ""}
 
         ${liensAppli || liensExternes ? `
         <section>
-          <h2>Pour aller plus loin</h2>
+          <h2>${t.plusLoin}</h2>
           <div class="liens">${liensAppli}${liensExternes}</div>
         </section>` : ""}
       `;
     }
 
+    function definirLangue(nouvelleLangue) {
+      lang = nouvelleLangue;
+      localStorage.setItem("lang", lang);
+      appliquerTextesFixes();
+      if (festivalCourant) afficher(festivalCourant);
+      else document.getElementById("contenu").innerHTML = `<p class="etat">${I18N[lang].chargement}</p>`;
+    }
+    document.querySelectorAll("#lang-toggle button").forEach((b) => {
+      b.addEventListener("click", () => definirLangue(b.dataset.lang));
+    });
+    appliquerTextesFixes();
+
     async function charger() {
       const id = new URLSearchParams(window.location.search).get("id");
       if (!id) {
-        document.getElementById("contenu").innerHTML = '<p class="etat">Festival introuvable.</p>';
+        document.getElementById("contenu").innerHTML = `<p class="etat">${I18N[lang].introuvable}</p>`;
         return;
       }
       try {
@@ -204,12 +285,13 @@
         if (!res.ok) throw new Error("Réponse invalide");
         const resultats = await res.json();
         if (!resultats.length) {
-          document.getElementById("contenu").innerHTML = '<p class="etat">Festival introuvable.</p>';
+          document.getElementById("contenu").innerHTML = `<p class="etat">${I18N[lang].introuvable}</p>`;
           return;
         }
-        afficher(resultats[0]);
+        festivalCourant = resultats[0];
+        afficher(festivalCourant);
       } catch (e) {
-        document.getElementById("contenu").innerHTML = '<p class="etat">Impossible de charger ce festival pour l\'instant.</p>';
+        document.getElementById("contenu").innerHTML = `<p class="etat">${I18N[lang].erreur}</p>`;
       }
     }
 
