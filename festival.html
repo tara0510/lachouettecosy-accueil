@@ -196,7 +196,7 @@
       const t = I18N[lang];
       document.documentElement.lang = lang;
       document.getElementById("lien-retour").textContent = t.retour;
-      document.getElementById("pied").innerHTML = `🦉 La Chouette Cosy — <a href="/">${t.accueil}</a><div class="footer-social"><a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">📷 Instagram</a><a href="https://www.tiktok.com/@coincosymystique" target="_blank" rel="noopener">🎵 TikTok</a><a href="https://www.pinterest.com/Lachouettecosypointcom/" target="_blank" rel="noopener">📌 Pinterest</a><a href="https://www.facebook.com/lachouettecosy/" target="_blank" rel="noopener">👍 Facebook</a></div>`;
+      document.getElementById("pied").innerHTML = `🦉 La Chouette Cosy — <a href="/">${t.accueil}</a><div class="footer-social"><a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">📷 Instagram</a><a href="https://www.tiktok.com/@coincosymystique" target="_blank" rel="noopener">🎵 TikTok</a><a href="https://www.pinterest.com/Lachouettecosypointcom/" target="_blank" rel="noopener">📌 Pinterest</a><a href="https://www.facebook.com/lachouettecosy/" target="_blank" rel="noopener">👍 Facebook</a><a href="https://www.youtube.com/@LaChouetteCosy" target="_blank" rel="noopener">▶️ YouTube</a></div>`;
       document.querySelectorAll("#lang-toggle button").forEach((b) => b.classList.toggle("actif", b.dataset.lang === lang));
     }
 
