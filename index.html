@@ -633,14 +633,26 @@
   /* Newsletter pleine largeur : visuel à gauche, texte et formulaire à droite (empilés sur mobile) */
   .newsletter-corps { width: 100%; }
   /* Onglets du lecteur : tous les épisodes / Derrière le chaudron */
-  .lecteur-onglets { display: flex; justify-content: center; gap: 8px; margin: 18px 0 4px; flex-wrap: wrap; }
+  .lecteur-onglets { display: flex; gap: 10px; margin: 22px 0 14px; width: 100%; }
   .lecteur-onglets[hidden], .lecteur[hidden], .chd-desc[hidden] { display: none; }
   .lecteur-onglet {
-    font-family: "Outfit", sans-serif; font-size: 13.5px; cursor: pointer;
-    padding: 8px 18px; border-radius: 999px; background: transparent;
-    color: var(--text-secondary); border: 1px solid rgba(255,255,255,.18);
+    flex: 1; position: relative; cursor: pointer;
+    font-family: "Fraunces", serif; font-weight: 600; font-size: 15px; letter-spacing: .03em;
+    padding: 14px 12px; border-radius: 10px;
+    color: var(--or-clair); background: rgba(201,168,118,.08);
+    border: 1px solid rgba(201,168,118,.45);
+    transition: background .15s, color .15s, transform .15s;
   }
-  .lecteur-onglet[aria-selected="true"] { background: rgba(255,255,255,.12); color: var(--text-primary); border-color: rgba(255,255,255,.4); }
+  .lecteur-onglet:hover { background: rgba(201,168,118,.18); transform: translateY(-1px); }
+  .lecteur-onglet[aria-selected="true"] {
+    background: linear-gradient(180deg, var(--or-clair), var(--or)); color: #2a1d10;
+    border-color: var(--or-clair); box-shadow: 0 3px 0 rgba(0,0,0,.35), 0 6px 16px rgba(201,168,118,.25);
+  }
+  .lecteur-onglet[aria-selected="true"]::after {
+    content: ""; position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%);
+    border: 8px solid transparent; border-bottom: 0; border-top-color: var(--or);
+  }
+  @media (max-width: 520px) { .lecteur-onglet { font-size: 13.5px; padding: 12px 6px; } }
   .chd-desc { text-align: center; margin: 10px 0 0; font-size: 14px; color: var(--text-secondary); }
   @media (min-width: 861px) {
     .newsletter-box { flex-direction: row; align-items: center; gap: 40px; padding: 34px 48px 40px; }
