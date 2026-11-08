@@ -293,24 +293,19 @@
      newsletter (1 colonne) juste à côté sur la ligne suivante. */
   .grille {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     row-gap: 64px;
     column-gap: 22px;
     align-items: stretch;
   }
-  .carte-podcast {
-    grid-column: span 2;
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .newsletter-box {
-    grid-column: span 1;
-  }
+  /* Ligne 1 : trois cartes ; ligne 2 : le podcast complet et « Derrière le chaudron » côte à côte ;
+     ligne 3 : la newsletter sur toute la largeur. */
+  .carte-mystique, .carte-boutique, .carte-ebooks { grid-column: span 2; }
+  .carte-podcast, .carte-chaudron { grid-column: span 3; }
+  .newsletter-box { grid-column: 1 / -1; }
   @media (max-width: 860px) {
     .grille { grid-template-columns: 1fr; }
-    .newsletter-box { grid-column: 1; }
-    .carte-podcast { grid-column: 1; }
+    .carte-mystique, .carte-boutique, .carte-ebooks, .carte-podcast, .carte-chaudron, .newsletter-box { grid-column: 1; }
   }
 
   /* Cartes façon parchemin ancien — bords déchirés, papier vieilli,
@@ -442,10 +437,6 @@
   .spotify-embed iframe { display: block; width: 100%; }
 
   .carte[hidden] { display: none; }
-  /* Carte « Derrière le chaudron » : même gabarit que le Coin Cosy, juste en dessous */
-  .carte-chaudron { grid-column: span 2; }
-  @media (max-width: 860px) { .carte-chaudron { grid-column: 1; } }
-
   /* Lecteur du Coin Cosy : tous les épisodes, le dernier mis en avant */
   .lecteur { width: 100%; text-align: left; margin: 0 0 16px; }
   .lecteur-vedette {
@@ -639,6 +630,15 @@
     cursor: pointer;
     font-family: "Outfit", sans-serif;
   }
+  /* Newsletter pleine largeur : visuel à gauche, texte et formulaire à droite (empilés sur mobile) */
+  .newsletter-corps { width: 100%; }
+  @media (min-width: 861px) {
+    .newsletter-box { flex-direction: row; align-items: center; gap: 40px; padding: 34px 48px 40px; }
+    .newsletter-box .carte-visuel { width: 260px; flex: none; margin: 0; }
+    .newsletter-corps { text-align: left; max-width: 560px; }
+    .newsletter-box .newsletter-form { margin: 0; justify-content: flex-start; max-width: 480px; }
+  }
+
   .newsletter-msg {
     margin-top: 14px;
     font-size: 13.5px;
@@ -785,9 +785,18 @@
         </div>
       </div>
 
-      <!-- Newsletter, juste à côté du podcast -->
+      <!-- Derrière le chaudron : les entretiens du podcast (un par mois), filtrés automatiquement
+           sur les titres « [Derrière le chaudron #N] ». Visible seulement si au moins un entretien est trouvé. -->
+      <div class="carte carte-podcast carte-chaudron" id="carte-chaudron" hidden>
+        <h2 id="t-chaudron-titre">Derrière le chaudron</h2>
+        <p class="desc" id="t-chaudron-desc">Un entretien chaque mois : des rencontres, racontées en longueur, avec celles et ceux qui font vivre le tarot, la voyance et la magie douce.</p>
+        <div class="lecteur" id="lecteur-chaudron"></div>
+      </div>
+
+      <!-- Newsletter, pleine largeur sous les lecteurs -->
       <div class="carte newsletter-box" id="newsletter">
         <img class="carte-visuel" src="images/carte-newsletter.jpg" alt="La Chouette Cosy blottie sous un plaid avec un chocolat chaud" loading="lazy">
+        <div class="newsletter-corps">
         <p class="intro-eyebrow" id="t-newsletter-eyebrow">Rejoins le cercle</p>
         <h2 style="font-family:'Fraunces',serif; font-weight:500; font-size:21px; margin:0 0 8px;" id="t-newsletter-titre">La newsletter du Coin Cosy</h2>
         <p id="t-newsletter-texte">Chaque jeudi : le nouvel épisode, une citation qui fait du bien, et une petite fiche pour explorer un coin du grimoire.</p>
@@ -796,14 +805,7 @@
           <button type="submit" class="bouton" id="t-newsletter-btn">Je m'abonne</button>
         </form>
         <p class="newsletter-msg" id="msg-newsletter"></p>
-      </div>
-
-      <!-- Derrière le chaudron : les entretiens du podcast (un par mois), filtrés automatiquement
-           sur les titres « [Derrière le chaudron #N] ». Visible seulement si au moins un entretien est trouvé. -->
-      <div class="carte carte-podcast carte-chaudron" id="carte-chaudron" hidden>
-        <h2 id="t-chaudron-titre">Derrière le chaudron</h2>
-        <p class="desc" id="t-chaudron-desc">Un entretien chaque mois : des rencontres, racontées en longueur, avec celles et ceux qui font vivre le tarot, la voyance et la magie douce.</p>
-        <div class="lecteur" id="lecteur-chaudron"></div>
+        </div>
       </div>
 
     </div>
