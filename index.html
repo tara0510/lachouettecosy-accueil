@@ -301,11 +301,11 @@
   /* Ligne 1 : trois cartes ; ligne 2 : le podcast complet et « Derrière le chaudron » côte à côte ;
      ligne 3 : la newsletter sur toute la largeur. */
   .carte-mystique, .carte-boutique, .carte-ebooks { grid-column: span 2; }
-  .carte-podcast, .carte-chaudron { grid-column: span 3; }
+  .carte-podcast { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 860px; }
   .newsletter-box { grid-column: 1 / -1; }
   @media (max-width: 860px) {
     .grille { grid-template-columns: 1fr; }
-    .carte-mystique, .carte-boutique, .carte-ebooks, .carte-podcast, .carte-chaudron, .newsletter-box { grid-column: 1; }
+    .carte-mystique, .carte-boutique, .carte-ebooks, .carte-podcast, .newsletter-box { grid-column: 1; }
   }
 
   /* Cartes façon parchemin ancien — bords déchirés, papier vieilli,
@@ -632,6 +632,16 @@
   }
   /* Newsletter pleine largeur : visuel à gauche, texte et formulaire à droite (empilés sur mobile) */
   .newsletter-corps { width: 100%; }
+  /* Onglets du lecteur : tous les épisodes / Derrière le chaudron */
+  .lecteur-onglets { display: flex; justify-content: center; gap: 8px; margin: 18px 0 4px; flex-wrap: wrap; }
+  .lecteur-onglets[hidden], .lecteur[hidden], .chd-desc[hidden] { display: none; }
+  .lecteur-onglet {
+    font-family: "Outfit", sans-serif; font-size: 13.5px; cursor: pointer;
+    padding: 8px 18px; border-radius: 999px; background: transparent;
+    color: var(--text-secondary); border: 1px solid rgba(255,255,255,.18);
+  }
+  .lecteur-onglet[aria-selected="true"] { background: rgba(255,255,255,.12); color: var(--text-primary); border-color: rgba(255,255,255,.4); }
+  .chd-desc { text-align: center; margin: 10px 0 0; font-size: 14px; color: var(--text-secondary); }
   @media (min-width: 861px) {
     .newsletter-box { flex-direction: row; align-items: center; gap: 40px; padding: 34px 48px 40px; }
     .newsletter-box .carte-visuel { width: 260px; flex: none; margin: 0; }
@@ -753,9 +763,15 @@
 
         <!-- Lecteur sur mesure : tous les épisodes, le dernier mis en avant (rempli par le script en bas de page).
              Repli automatique sur le lecteur Spotify si la liste ne peut pas être chargée. -->
+        <div class="lecteur-onglets" id="lec-onglets" role="tablist" hidden>
+          <button type="button" class="lecteur-onglet" role="tab" id="onglet-tous" aria-selected="true">Le Coin Cosy</button>
+          <button type="button" class="lecteur-onglet" role="tab" id="onglet-chaudron" aria-selected="false">Derrière le chaudron</button>
+        </div>
+        <p class="chd-desc" id="t-chaudron-desc" hidden>Un entretien chaque mois.</p>
         <div class="lecteur" id="lecteur">
           <p class="lecteur-vide" id="lec-chargement">…</p>
         </div>
+        <div class="lecteur" id="lecteur-chaudron" hidden></div>
         <noscript>
           <div class="spotify-embed">
             <iframe src="https://open.spotify.com/embed/show/4HGgYjF5aKj6ZxD9TDKqMJ?utm_source=generator&theme=0" width="100%" height="232" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Lecteur Spotify — Le Coin Cosy" style="width:100%; display:block;"></iframe>
@@ -783,14 +799,6 @@
             <a href="https://app.lachouettecosy.com/coin-spooky" target="_blank" rel="noopener" id="t-spooky-lien">Écouter si tu l'oses →</a>
           </div>
         </div>
-      </div>
-
-      <!-- Derrière le chaudron : les entretiens du podcast (un par mois), filtrés automatiquement
-           sur les titres « [Derrière le chaudron #N] ». Visible seulement si au moins un entretien est trouvé. -->
-      <div class="carte carte-podcast carte-chaudron" id="carte-chaudron" hidden>
-        <h2 id="t-chaudron-titre">Derrière le chaudron</h2>
-        <p class="desc" id="t-chaudron-desc">Un entretien chaque mois : des rencontres, racontées en longueur, avec celles et ceux qui font vivre le tarot, la voyance et la magie douce.</p>
-        <div class="lecteur" id="lecteur-chaudron"></div>
       </div>
 
       <!-- Newsletter, pleine largeur sous les lecteurs -->
@@ -1149,6 +1157,17 @@
       recherche: false,
     });
 
+    function lecOnglet(chaudron) {
+      document.getElementById('lecteur').hidden = chaudron;
+      document.getElementById('lecteur-chaudron').hidden = !chaudron;
+      document.getElementById('t-chaudron-desc').hidden = !chaudron;
+      document.getElementById('onglet-tous').setAttribute('aria-selected', String(!chaudron));
+      document.getElementById('onglet-chaudron').setAttribute('aria-selected', String(chaudron));
+      document.querySelectorAll('.lecteur audio').forEach(function (a) { a.pause(); });
+    }
+    document.getElementById('onglet-tous').addEventListener('click', function () { lecOnglet(false); });
+    document.getElementById('onglet-chaudron').addEventListener('click', function () { lecOnglet(true); });
+
     function lecCharger() {
       var ctrl = ('AbortController' in window) ? new AbortController() : null;
       var minuteur = setTimeout(function () { if (ctrl) ctrl.abort(); }, 9000);
@@ -1163,7 +1182,7 @@
                      audio: x.episodeUrl, image: x.artworkUrl600 || x.artworkUrl160 || '', desc: lecTexte(x.description || x.shortDescription) };
           }).sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
           if (!lecTous.init(eps)) throw new Error('vide');
-          if (lecChaudron.init(eps)) document.getElementById('carte-chaudron').hidden = false;
+          if (lecChaudron.init(eps)) document.getElementById('lec-onglets').hidden = false;
         })
         .catch(function () { clearTimeout(minuteur); if (!lecTous.pret) lecSpotify('lecteur'); });
     }
@@ -1202,7 +1221,8 @@
       document.getElementById('t-podcast-titre').textContent = d.podcastTitre;
       document.getElementById('t-podcast-desc').textContent = d.podcastDesc;
       LECTEURS.forEach(function (l) { l.textes(); });
-      document.getElementById('t-chaudron-titre').textContent = d.chdTitre;
+      document.getElementById('onglet-tous').textContent = d.podcastTitre;
+      document.getElementById('onglet-chaudron').textContent = d.chdTitre;
       document.getElementById('t-chaudron-desc').textContent = d.chdDesc;
 
       document.getElementById('t-spooky-titre').textContent = d.spookyTitre;
