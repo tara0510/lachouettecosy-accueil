@@ -441,6 +441,46 @@
   }
   .spotify-embed iframe { display: block; width: 100%; }
 
+  /* Lecteur du Coin Cosy : tous les épisodes, le dernier mis en avant */
+  .lecteur { width: 100%; text-align: left; margin: 0 0 16px; }
+  .lecteur-vedette {
+    display: flex; gap: 16px; align-items: center;
+    background: rgba(247,243,237,.05); border: 1px solid var(--border-strong); border-radius: 14px; padding: 14px;
+  }
+  .lecteur-pochette { width: 116px; height: 116px; flex: none; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 14px rgba(0,0,0,.45); background: #2a2036; }
+  .lecteur-infos { min-width: 0; }
+  .lecteur-etiquette { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--or-clair); }
+  .lecteur-vedette h3 { font-family: "Fraunces", serif; font-weight: 500; font-size: 18px; line-height: 1.25; margin: 4px 0 4px; color: var(--text-primary); }
+  .lecteur-meta { font-size: 13px; color: var(--text-muted); margin: 0 0 6px; }
+  .lecteur-desc { font-size: 13.5px; line-height: 1.5; color: var(--text-secondary); margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .lecteur audio { display: block; width: 100%; height: 40px; margin: 12px 0 0; color-scheme: dark; }
+  .lecteur-tete { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin: 18px 0 8px; }
+  .lecteur-tete strong { font-family: "Fraunces", serif; font-weight: 500; font-size: 16px; color: var(--text-primary); }
+  .lecteur-tete strong span { font-family: inherit; font-weight: 400; font-size: 13px; color: var(--text-muted); margin-inline-start: 6px; }
+  .lecteur-recherche {
+    flex: 1 1 160px; max-width: 240px; font: inherit; font-size: 13.5px; color: var(--text-primary);
+    background: rgba(247,243,237,.06); border: 1px solid var(--border-strong); border-radius: 999px; padding: 7px 14px;
+  }
+  .lecteur-recherche::placeholder { color: var(--text-muted); }
+  .lecteur-liste { list-style: none; margin: 0; padding: 0; max-height: 330px; overflow-y: auto; border: 1px solid var(--border); border-radius: 12px; scrollbar-width: thin; scrollbar-color: rgba(222,199,154,.4) transparent; }
+  .lecteur-liste li + li { border-top: 1px solid var(--border); }
+  .lecteur-item {
+    display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+    background: transparent; border: 0; color: inherit; font: inherit; padding: 9px 12px;
+  }
+  .lecteur-item:hover, .lecteur-item:focus-visible { background: rgba(247,243,237,.07); outline: none; }
+  .lecteur-item.actif { background: rgba(222,199,154,.12); }
+  .lecteur-item img { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex: none; background: #2a2036; }
+  .lecteur-item .txt { min-width: 0; flex: 1; }
+  .lecteur-item .ti { display: block; font-size: 14px; line-height: 1.3; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lecteur-item .me { display: block; font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .lecteur-item .pl { flex: none; color: var(--or-clair); font-size: 14px; }
+  .lecteur-vide { font-size: 13.5px; color: var(--text-muted); padding: 14px; text-align: center; }
+  @media (max-width: 520px) {
+    .lecteur-vedette { flex-direction: column; align-items: flex-start; }
+    .lecteur-pochette { width: 100%; height: auto; aspect-ratio: 1 / 1; max-width: 220px; }
+  }
+
   .plateformes {
     display: flex;
     flex-wrap: wrap;
@@ -706,14 +746,16 @@
         <h2 id="t-podcast-titre">Le Coin Cosy</h2>
         <p class="desc" id="t-podcast-desc">Le podcast : bien-être, sorcellerie légère et entrepreneuriat féminin.</p>
 
-        <div class="spotify-embed">
-          <iframe
-            src="https://open.spotify.com/embed/show/4HGgYjF5aKj6ZxD9TDKqMJ?utm_source=generator&theme=0"
-            width="100%" height="232" frameborder="0" allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy" title="Lecteur Spotify — Le Coin Cosy" style="width:100%; display:block;">
-          </iframe>
+        <!-- Lecteur sur mesure : tous les épisodes, le dernier mis en avant (rempli par le script en bas de page).
+             Repli automatique sur le lecteur Spotify si la liste ne peut pas être chargée. -->
+        <div class="lecteur" id="lecteur">
+          <p class="lecteur-vide" id="lec-chargement">…</p>
         </div>
+        <noscript>
+          <div class="spotify-embed">
+            <iframe src="https://open.spotify.com/embed/show/4HGgYjF5aKj6ZxD9TDKqMJ?utm_source=generator&theme=0" width="100%" height="232" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Lecteur Spotify — Le Coin Cosy" style="width:100%; display:block;"></iframe>
+          </div>
+        </noscript>
 
         <div class="plateformes">
           <a href="https://podcasts.apple.com/us/podcast/le-coin-cosy/id1807794277" target="_blank" rel="noopener">🎧 Apple Podcasts</a>
@@ -865,6 +907,8 @@
         ebooksBtn1: "📖&nbsp;Le Grimoire", ebooksBtn2: "🎃&nbsp;Le Coin Spooky",
         podcastTitre: "Le Coin Cosy",
         podcastDesc: "Le podcast : bien-être, sorcellerie légère et entrepreneuriat féminin.",
+        lecDernier: "Dernier épisode", lecEnCours: "En écoute", lecTous: "Tous les épisodes", lecNb: " épisodes",
+        lecChercher: "Chercher un épisode", lecAucun: "Aucun épisode trouvé.", lecMin: " min",
         spookyTitre: "🕯️ Et quand la nuit tombe...",
         spookyTexte: "Une autre voix se réveille dans l'application : <strong>Le Coin Spooky</strong>, légendes, affaires non résolues et lieux hantés, racontés comme au coin du feu. Le premier récit s'écoute librement — les suivants n'attendent que les âmes abonnées.",
         spookyLien: "Écouter si tu l'oses →",
@@ -910,6 +954,8 @@
         ebooksBtn1: "📖&nbsp;The Grimoire", ebooksBtn2: "🎃&nbsp;Le Coin Spooky",
         podcastTitre: "Le Coin Cosy",
         podcastDesc: "The podcast: well-being, light witchcraft and female entrepreneurship.",
+        lecDernier: "Latest episode", lecEnCours: "Now playing", lecTous: "All episodes", lecNb: " episodes",
+        lecChercher: "Search an episode", lecAucun: "No episode found.", lecMin: " min",
         spookyTitre: "🕯️ And when night falls...",
         spookyTexte: "Another voice wakes up inside the app: <strong>Le Coin Spooky</strong>, legends, cold cases and haunted places, told fireside-style. The first story is free to listen to — the rest are waiting for subscribed souls only.",
         spookyLien: "Listen if you dare →",
@@ -940,6 +986,136 @@
 
     var lang = localStorage.getItem('lang') === 'en' ? 'en' : 'fr';
 
+    /* Lecteur du Coin Cosy : tous les épisodes (annuaire public d'Apple Podcasts, mis à jour à chaque
+       nouvel épisode), le dernier mis en avant. Repli sur le lecteur Spotify si la liste est introuvable. */
+    var LECTEUR = { episodes: [], courant: 0, pret: false, filtre: '' };
+    var LEC_URL = 'https://itunes.apple.com/lookup?id=1807794277&media=podcast&entity=podcastEpisode&limit=200&country=fr';
+    var LEC_SPOTIFY = 'https://open.spotify.com/embed/show/4HGgYjF5aKj6ZxD9TDKqMJ?utm_source=generator&theme=0';
+
+    function lecEl(tag, classe, texte) {
+      var e = document.createElement(tag);
+      if (classe) e.className = classe;
+      if (texte !== undefined) e.textContent = texte;
+      return e;
+    }
+    function lecDate(iso) {
+      return new Date(iso).toLocaleDateString(lang === 'en' ? 'en-GB' : 'fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+    function lecDuree(ms) {
+      if (!ms) return '';
+      var m = Math.max(1, Math.round(ms / 60000));
+      if (m < 60) return m + I18N[lang].lecMin;
+      return Math.floor(m / 60) + ' h ' + ('0' + (m % 60)).slice(-2);
+    }
+    function lecTexte(html) {
+      return new DOMParser().parseFromString(html || '', 'text/html').body.textContent.trim();
+    }
+    function lecSpotify() {
+      var zone = document.getElementById('lecteur');
+      zone.textContent = '';
+      var cadre = lecEl('div', 'spotify-embed');
+      var f = document.createElement('iframe');
+      f.src = LEC_SPOTIFY; f.width = '100%'; f.height = '232'; f.frameBorder = '0'; f.loading = 'lazy';
+      f.title = 'Lecteur Spotify — Le Coin Cosy';
+      f.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+      f.style.cssText = 'width:100%;display:block;';
+      cadre.appendChild(f);
+      zone.appendChild(cadre);
+    }
+    function lecConstruire() {
+      var zone = document.getElementById('lecteur');
+      zone.textContent = '';
+      var vedette = lecEl('div', 'lecteur-vedette');
+      var img = lecEl('img', 'lecteur-pochette'); img.id = 'lec-pochette'; img.alt = ''; img.width = 116; img.height = 116;
+      var infos = lecEl('div', 'lecteur-infos');
+      var et = lecEl('span', 'lecteur-etiquette'); et.id = 'lec-etiquette';
+      var ti = lecEl('h3'); ti.id = 'lec-titre';
+      var me = lecEl('p', 'lecteur-meta'); me.id = 'lec-meta';
+      var de = lecEl('p', 'lecteur-desc'); de.id = 'lec-desc';
+      infos.append(et, ti, me, de);
+      vedette.append(img, infos);
+      var audio = document.createElement('audio'); audio.id = 'lec-audio'; audio.controls = true; audio.preload = 'none';
+      var tete = lecEl('div', 'lecteur-tete');
+      var tous = lecEl('strong'); var tousTxt = lecEl('i'); tousTxt.id = 'lec-tous'; tousTxt.style.fontStyle = 'normal';
+      var nb = lecEl('span'); nb.id = 'lec-nb'; tous.append(tousTxt, nb);
+      var rech = document.createElement('input'); rech.type = 'search'; rech.id = 'lec-recherche'; rech.className = 'lecteur-recherche';
+      rech.addEventListener('input', function () { LECTEUR.filtre = rech.value.trim().toLowerCase(); lecListe(); });
+      tete.append(tous, rech);
+      var liste = lecEl('ul', 'lecteur-liste'); liste.id = 'lec-liste';
+      zone.append(vedette, audio, tete, liste);
+    }
+    function lecVedette(i, lire) {
+      var e = LECTEUR.episodes[i];
+      if (!e) return;
+      LECTEUR.courant = i;
+      var audio = document.getElementById('lec-audio');
+      if (audio.getAttribute('data-id') !== String(e.id)) {
+        audio.setAttribute('data-id', String(e.id));
+        audio.src = e.audio;
+      }
+      var p = document.getElementById('lec-pochette');
+      p.src = e.image; p.alt = e.titre;
+      document.getElementById('lec-titre').textContent = e.titre;
+      document.getElementById('lec-meta').textContent = [lecDate(e.date), lecDuree(e.duree)].filter(Boolean).join(' · ');
+      document.getElementById('lec-desc').textContent = e.desc;
+      document.getElementById('lec-etiquette').textContent = (i === 0) ? I18N[lang].lecDernier : I18N[lang].lecEnCours;
+      lecListe();
+      if (lire) {
+        audio.play().catch(function () {});
+        document.getElementById('lecteur').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+    function lecListe() {
+      var ul = document.getElementById('lec-liste');
+      if (!ul) return;
+      ul.textContent = '';
+      var n = 0;
+      LECTEUR.episodes.forEach(function (e, i) {
+        if (LECTEUR.filtre && e.titre.toLowerCase().indexOf(LECTEUR.filtre) === -1) return;
+        n++;
+        var li = document.createElement('li');
+        var b = lecEl('button', 'lecteur-item' + (i === LECTEUR.courant ? ' actif' : ''));
+        b.type = 'button';
+        var im = lecEl('img'); im.src = e.image; im.alt = ''; im.width = 44; im.height = 44; im.loading = 'lazy';
+        var t = lecEl('span', 'txt');
+        t.append(lecEl('span', 'ti', e.titre), lecEl('span', 'me', [lecDate(e.date), lecDuree(e.duree)].filter(Boolean).join(' · ')));
+        b.append(im, t, lecEl('span', 'pl', i === LECTEUR.courant ? '♪' : '▶'));
+        b.addEventListener('click', function () { lecVedette(i, true); });
+        li.appendChild(b);
+        ul.appendChild(li);
+      });
+      if (!n) { var v = document.createElement('li'); v.appendChild(lecEl('p', 'lecteur-vide', I18N[lang].lecAucun)); ul.appendChild(v); }
+      document.getElementById('lec-nb').textContent = LECTEUR.filtre ? '' : ' · ' + LECTEUR.episodes.length + I18N[lang].lecNb;
+    }
+    function lecTextes() {
+      if (!LECTEUR.pret) return;
+      document.getElementById('lec-tous').textContent = I18N[lang].lecTous;
+      document.getElementById('lec-recherche').placeholder = I18N[lang].lecChercher;
+      document.getElementById('lec-recherche').setAttribute('aria-label', I18N[lang].lecChercher);
+      lecVedette(LECTEUR.courant, false);
+    }
+    function lecCharger() {
+      var ctrl = ('AbortController' in window) ? new AbortController() : null;
+      var minuteur = setTimeout(function () { if (ctrl) ctrl.abort(); }, 9000);
+      fetch(LEC_URL, ctrl ? { signal: ctrl.signal } : undefined)
+        .then(function (r) { if (!r.ok) throw new Error('http'); return r.json(); })
+        .then(function (d) {
+          clearTimeout(minuteur);
+          var eps = (d.results || []).filter(function (x) {
+            return x.wrapperType === 'podcastEpisode' && typeof x.episodeUrl === 'string' && x.episodeUrl.indexOf('https://') === 0;
+          }).map(function (x) {
+            return { id: x.trackId, titre: x.trackName, date: x.releaseDate, duree: x.trackTimeMillis,
+                     audio: x.episodeUrl, image: x.artworkUrl600 || x.artworkUrl160 || '', desc: lecTexte(x.description || x.shortDescription) };
+          }).sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+          if (!eps.length) throw new Error('vide');
+          LECTEUR.episodes = eps;
+          lecConstruire();
+          LECTEUR.pret = true;
+          lecTextes();
+        })
+        .catch(function () { clearTimeout(minuteur); lecSpotify(); });
+    }
+
     function appliquerTraductions() {
       var d = I18N[lang];
       document.documentElement.lang = lang;
@@ -968,6 +1144,7 @@
 
       document.getElementById('t-podcast-titre').textContent = d.podcastTitre;
       document.getElementById('t-podcast-desc').textContent = d.podcastDesc;
+      lecTextes();
 
       document.getElementById('t-spooky-titre').textContent = d.spookyTitre;
       document.getElementById('t-spooky-texte').innerHTML = d.spookyTexte;
@@ -1017,6 +1194,7 @@
       b.addEventListener('click', function () { definirLangue(b.dataset.lang); });
     });
     appliquerTraductions();
+    lecCharger();
 
     document.getElementById('form-newsletter').addEventListener('submit', function (e) {
       e.preventDefault();
