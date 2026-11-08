@@ -99,7 +99,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@400;500;600&family=Caveat:wght@600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 <style>
   :root {
     --nuit: #1a1625;
@@ -637,7 +637,7 @@
   .lecteur-onglets[hidden], .lecteur[hidden], .chd-desc[hidden] { display: none; }
   .lecteur-onglet {
     flex: 1; position: relative; cursor: pointer; overflow: visible;
-    font-family: "Fraunces", serif; font-weight: 600; font-size: 15.5px; letter-spacing: .05em;
+    font-family: "Uncial Antiqua", "Fraunces", serif; font-weight: 400; font-size: 17px; letter-spacing: .06em;
     padding: 18px 14px; border-radius: 12px;
     color: var(--or-clair);
     background:
@@ -669,7 +669,7 @@
     content: "✦"; position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%);
     color: var(--or-clair); font-size: 14px; text-shadow: 0 0 10px rgba(222,170,90,.9);
   }
-  @media (max-width: 520px) { .lecteur-onglet { font-size: 13px; padding: 14px 6px; } .lecteur-onglet::before { margin-right: 5px; font-size: 15px; } }
+  @media (max-width: 520px) { .lecteur-onglet { font-size: 14px; padding: 14px 6px; } .lecteur-onglet::before { margin-right: 5px; font-size: 15px; } }
   .chd-desc { text-align: center; margin: 4px 0 20px; font-size: 14px; color: var(--text-secondary); }
   /* Respiration du lecteur : plus d'espace entre chaque partie */
   .carte-podcast .lecteur-onglets { margin: 34px 0 28px; }
