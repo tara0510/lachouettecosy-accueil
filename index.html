@@ -302,7 +302,7 @@
      ligne 3 : la newsletter sur toute la largeur. */
   .carte-mystique, .carte-boutique, .carte-ebooks { grid-column: span 2; }
   .carte-podcast { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 860px; }
-  .newsletter-box { grid-column: 1 / -1; }
+  .newsletter-box { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 860px; }
   @media (max-width: 860px) {
     .grille { grid-template-columns: 1fr; }
     .carte-mystique, .carte-boutique, .carte-ebooks, .carte-podcast, .newsletter-box { grid-column: 1; }
@@ -655,10 +655,10 @@
   @media (max-width: 520px) { .lecteur-onglet { font-size: 13.5px; padding: 12px 6px; } }
   .chd-desc { text-align: center; margin: 10px 0 0; font-size: 14px; color: var(--text-secondary); }
   @media (min-width: 861px) {
-    .newsletter-box { flex-direction: row; align-items: center; gap: 40px; padding: 34px 48px 40px; }
-    .newsletter-box .carte-visuel { width: 260px; flex: none; margin: 0; }
-    .newsletter-corps { text-align: left; max-width: 560px; }
-    .newsletter-box .newsletter-form { margin: 0; justify-content: flex-start; max-width: 480px; }
+    .newsletter-box { flex-direction: row; align-items: center; gap: 34px; padding: 34px 44px 40px; }
+    .newsletter-box .carte-visuel { width: 210px; flex: none; margin: 0; }
+    .newsletter-corps { text-align: left; flex: 1; min-width: 0; }
+    .newsletter-box .newsletter-form { margin: 0; justify-content: flex-start; max-width: none; }
   }
 
   .newsletter-msg {
