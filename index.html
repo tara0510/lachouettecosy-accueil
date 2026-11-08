@@ -653,7 +653,21 @@
     border: 8px solid transparent; border-bottom: 0; border-top-color: var(--or);
   }
   @media (max-width: 520px) { .lecteur-onglet { font-size: 13.5px; padding: 12px 6px; } }
-  .chd-desc { text-align: center; margin: 10px 0 0; font-size: 14px; color: var(--text-secondary); }
+  .chd-desc { text-align: center; margin: 4px 0 20px; font-size: 14px; color: var(--text-secondary); }
+  /* Respiration du lecteur : plus d'espace entre chaque partie */
+  .carte-podcast .lecteur-onglets { margin: 34px 0 28px; }
+  .carte-podcast .lecteur { margin-bottom: 36px; }
+  .carte-podcast .lecteur-vedette { padding: 22px; gap: 24px; }
+  .carte-podcast .lecteur-desc { margin-top: 4px; }
+  .carte-podcast .lecteur audio { margin: 22px 0 0; }
+  .carte-podcast .lecteur-tete { margin: 38px 0 16px; }
+  .carte-podcast .plateformes { gap: 10px; margin-bottom: 40px; }
+  .carte-podcast .spooky-teaser { margin-top: 8px; }
+  @media (max-width: 520px) {
+    .carte-podcast .lecteur-vedette { padding: 16px; gap: 16px; }
+    .carte-podcast .lecteur-onglets { margin: 26px 0 22px; }
+    .carte-podcast .lecteur-tete { margin: 30px 0 14px; }
+  }
   @media (min-width: 861px) {
     .newsletter-box { flex-direction: row; align-items: center; gap: 34px; padding: 34px 44px 40px; }
     .newsletter-box .carte-visuel { width: 210px; flex: none; margin: 0; }
