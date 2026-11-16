@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boutique numérique — PDF à imprimer | La Chouette Cosy</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="Calendrier lunaire 2027, roue de l'année 2027, infographies du Tarot de Marseille et du Rider-Waite-Smith : des PDF à imprimer, livrés par mail.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://www.lachouettecosy.com/boutique-numerique.html">
+<meta property="og:site_name" content="La Chouette Cosy">
+<meta property="og:title" content="Boutique numérique — PDF à imprimer">
+<meta property="og:description" content="Calendrier lunaire 2027, roue de l'année 2027, infographies de tarot : des PDF à imprimer, livrés par mail.">
+<meta property="og:image" content="https://www.lachouettecosy.com/og-image.png">
+<link rel="canonical" href="https://www.lachouettecosy.com/boutique-numerique.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nuit: #1a1625;
+    --nuit-2: #15111e;
+    --amethyste: #3d3450;
+    --amethyste-clair: #c3b2dc;
+    --or: #c9a876;
+    --or-clair: #dec79a;
+    --sauge: #7a8b6f;
+    --terracotta: #b86b4b;
+    --terracotta-clair: #dea68c;
+    --text-primary: #f3efe8;
+    --text-secondary: #c2b8d1;
+    --text-muted: #897f99;
+    --border: rgba(247, 243, 237, 0.08);
+    --border-strong: rgba(247, 243, 237, 0.16);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--nuit);
+    color: var(--text-primary);
+    font-family: "Outfit", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    min-height: 100vh;
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, rgba(247,243,237,.35), transparent),
+      radial-gradient(1px 1px at 28% 62%, rgba(247,243,237,.25), transparent),
+      radial-gradient(1.5px 1.5px at 46% 12%, rgba(247,243,237,.4), transparent),
+      radial-gradient(1px 1px at 63% 78%, rgba(247,243,237,.2), transparent),
+      radial-gradient(1.5px 1.5px at 81% 32%, rgba(247,243,237,.3), transparent),
+      radial-gradient(1px 1px at 92% 68%, rgba(247,243,237,.25), transparent);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  a { color: var(--or-clair); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 64px; }
+
+  .haut { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 36px; }
+  .retour {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .retour:hover { color: var(--or-clair); }
+  .lang-toggle { display: inline-flex; border: 1px solid var(--border-strong); border-radius: 999px; overflow: hidden; flex-shrink: 0; }
+  .lang-toggle button {
+    font-family: "Outfit", sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: .02em;
+    padding: 6px 13px; border: none; background: transparent; color: var(--text-muted); cursor: pointer;
+  }
+  .lang-toggle button.actif { background: var(--or); color: var(--nuit); }
+
+  .hero { text-align: center; margin-bottom: 44px; }
+  .hero-badge {
+    width: 150px; height: 150px; border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--border-strong);
+    margin: 0 auto 20px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.45);
+  }
+  .hero-badge img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
+  .hero-eyebrow { font-family: "Caveat", cursive; font-size: 24px; color: var(--or-clair); margin: 0 0 6px; }
+  .hero h1 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: clamp(28px, 4.6vw, 40px);
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .hero p { color: var(--text-secondary); max-width: 480px; margin: 0 auto; line-height: 1.6; font-size: 15.5px; }
+
+  .offre-lancement {
+    max-width: 620px;
+    margin: 0 auto 48px;
+    background: var(--nuit-2);
+    border-left: 3px solid var(--or);
+    border-radius: 0 14px 14px 0;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: 14.5px;
+  }
+  .offre-lancement strong { color: var(--or-clair); }
+
+  .plans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 56px;
+  }
+  @media (max-width: 640px) { .plans { grid-template-columns: 1fr; } }
+
+  .plan {
+    background: var(--nuit-2);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 30px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .plan.complet { border: 1px solid var(--amethyste-clair); box-shadow: 0 0 0 1px rgba(195,178,220,.15); }
+
+  .plan-kicker { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .plan-name { font-family: "Fraunces", serif; font-weight: 600; font-size: 20px; margin: 0; }
+  .plan.essentiel .plan-name { color: var(--terracotta-clair); }
+  .plan.complet .plan-name { color: var(--amethyste-clair); }
+
+  .badge-populaire {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(195,178,220,.14);
+    color: var(--amethyste-clair);
+    white-space: nowrap;
+  }
+
+  .plan-price { display: flex; align-items: baseline; gap: 6px; }
+  .plan-price .montant { font-family: "Caveat", cursive; font-weight: 700; font-size: 44px; line-height: 1; }
+  .plan.essentiel .montant { color: var(--terracotta-clair); }
+  .plan.complet .montant { color: var(--amethyste-clair); }
+  .plan-price .par { font-size: 14px; color: var(--text-muted); }
+  .plan-annuel { font-size: 13.5px; color: var(--text-secondary); margin: -6px 0 0; }
+  .plan-tagline { font-size: 14.5px; color: var(--text-secondary); line-height: 1.55; margin: 0; }
+
+  .plan-inclus { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 14px; }
+  .plan-inclus li { display: flex; gap: 9px; align-items: flex-start; }
+  .plan-inclus .tick { flex-shrink: 0; }
+  .plan.essentiel .tick { color: var(--terracotta-clair); }
+  .plan.complet .tick { color: var(--amethyste-clair); }
+
+  .separateur { display: flex; justify-content: center; margin: 8px auto 44px; max-width: 460px; }
+  .separateur svg { width: 100%; height: auto; }
+
+  .table-titre { text-align: center; margin-bottom: 28px; }
+  .table-titre h2 { font-family: "Fraunces", serif; font-weight: 500; font-size: 24px; margin: 0 0 8px; }
+  .table-titre p { color: var(--text-secondary); font-size: 14.5px; margin: 0; }
+
+  .compare-scroll { overflow-x: auto; border-radius: 16px; border: 1px solid var(--border); }
+  table.compare { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 540px; background: var(--nuit-2); }
+  table.compare thead th {
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 16px 14px;
+    border-bottom: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+  }
+  table.compare thead th:first-child { text-align: left; }
+  table.compare thead th.essentiel { color: var(--terracotta-clair); }
+  table.compare thead th.complet { color: var(--amethyste-clair); }
+  table.compare tbody tr { border-bottom: 1px solid var(--border); }
+  table.compare tbody tr:last-child { border-bottom: none; }
+  table.compare td { padding: 15px 14px; vertical-align: top; }
+  .cat { display: flex; gap: 11px; align-items: flex-start; max-width: 320px; }
+  .cat-icone { font-size: 18px; line-height: 1.3; }
+  .cat-nom { font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .cat-detail { color: var(--text-muted); font-size: 13px; margin-top: 3px; line-height: 1.5; }
+  .bientot {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(184,107,75,.14);
+    color: var(--terracotta-clair);
+    border: 1px solid rgba(184,107,75,.3);
+    white-space: nowrap;
+  }
+  .mark { text-align: center; font-size: 16px; }
+  .mark.oui.essentiel { color: var(--terracotta-clair); }
+  .mark.oui.complet { color: var(--amethyste-clair); }
+  .mark.non { color: var(--border-strong); }
+
+  .note-bas {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 34em;
+    margin: 40px auto 0;
+    line-height: 1.6;
+  }
+  .note-bas .script { font-family: "Caveat", cursive; font-size: 22px; color: var(--or-clair); display: block; margin-bottom: 4px; }
+
+  .cta-final { text-align: center; margin-top: 48px; }
+  .bouton {
+    display: inline-block;
+    text-decoration: none;
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    padding: 13px 28px;
+    border-radius: 6px;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 2px, transparent 2px 6px),
+      linear-gradient(180deg, #4a3220, #2e1f14);
+    box-shadow: 0 3px 0 rgba(0,0,0,.4), 0 6px 14px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
+    border: 1px solid rgba(0,0,0,.3);
+    transition: filter .15s, transform .15s;
+  }
+  .bouton:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+  footer { text-align: center; margin-top: 72px; color: var(--text-muted); font-size: 13px; }
+  footer a { color: var(--or-clair); text-decoration: none; }
+  .footer-social { margin-top: 12px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .prods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-bottom: 40px; }
+  @media (max-width: 640px) { .prods { grid-template-columns: 1fr; } }
+  .prod { background: var(--nuit-2); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+  .prod.duo { grid-column: 1 / -1; border-color: var(--or); }
+  @media (min-width: 641px) { .prod.duo { flex-direction: row; } .prod.duo .prod-img { width: 44%; aspect-ratio: auto; } }
+  .prod-img { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--amethyste); }
+  .prod-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+  .prod-corps { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .prod h2 { font-family: "Fraunces", serif; font-weight: 500; font-size: 21px; margin: 0; text-wrap: balance; }
+  .prod-acc { color: var(--text-secondary); font-size: 14.5px; line-height: 1.55; margin: 0; }
+  .prod-fmt { color: var(--text-muted); font-size: 13px; margin: 0; }
+  .prod-bas { margin-top: auto; padding-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .prix { font-family: "Fraunces", serif; font-size: 22px; color: var(--or-clair); font-variant-numeric: tabular-nums; }
+  .offre-abo { max-width: 620px; margin: 0 auto 36px; background: var(--nuit-2); border-left: 3px solid var(--or); border-radius: 0 14px 14px 0; padding: 14px 22px; text-align: center; font-size: 14.5px; }
+  .offre-abo strong { color: var(--or-clair); }
+  .goodies { text-align: center; color: var(--text-muted); font-size: 14px; margin-top: 22px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="haut">
+      <a class="retour" id="lien-retour" href="/">← Retour à l'accueil</a>
+      <div class="lang-toggle" id="lang-toggle">
+        <button type="button" data-lang="fr">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="hero-badge"><img src="images/carte-boutique.jpg" alt="La Chouette Cosy présente un parchemin" loading="eager"></div>
+      <p class="hero-eyebrow">La Chouette Cosy</p>
+      <h1 id="t-h1">Des PDF à imprimer, pour ta pratique de l'année</h1>
+      <p id="t-sous">Calendrier lunaire, roue de l'année, infographies de tarot. Tu les reçois par mail juste après l'achat, tu les imprimes chez toi.</p>
+    </div>
+    <div class="offre-abo" id="t-abo">✨ <strong>Abonnés du Coin Mystique</strong> : -20&nbsp;% sur la boutique, appliqué automatiquement quand tu es connecté.</div>
+    <div class="prods">
+      <article class="prod">
+        <a class="prod-img" href="https://app.lachouettecosy.com/boutique/calendrier-lunaire-2027" aria-label="Calendrier lunaire 2027"><img src="images/boutique-numerique/calendrier-lunaire-2027-1.webp" alt="Couverture du calendrier lunaire 2027 de La Chouette Cosy" id="p0-img" width="989" height="1400" loading="lazy"></a>
+        <div class="prod-corps">
+          <h2 id="p0-nom">Calendrier lunaire 2027</h2>
+          <p class="prod-acc" id="p0-acc">La lune de chaque jour de 2027, mois par mois, avec l'heure de Paris pour chaque phase.</p>
+          <p class="prod-fmt" id="p0-fmt">15 pages A4 · PDF</p>
+          <div class="prod-bas"><span class="prix" id="p0-prix">4,90 €</span><a class="bouton" href="https://app.lachouettecosy.com/boutique/calendrier-lunaire-2027" id="p0-btn" style="text-decoration:none;">Voir le détail →</a></div>
+        </div>
+      </article>
+      <article class="prod">
+        <a class="prod-img" href="https://app.lachouettecosy.com/boutique/roue-de-l-annee-2027" aria-label="La roue de l'année 2027"><img src="images/boutique-numerique/roue-de-l-annee-2027-1.webp" alt="Couverture de la roue de l'année 2027" id="p1-img" width="989" height="1400" loading="lazy"></a>
+        <div class="prod-corps">
+          <h2 id="p1-nom">La roue de l'année 2027</h2>
+          <p class="prod-acc" id="p1-acc">Les huit fêtes de la roue de l'année avec leurs dates 2027, et une page de journal pour chacune.</p>
+          <p class="prod-fmt" id="p1-fmt">11 pages A4 · PDF</p>
+          <div class="prod-bas"><span class="prix" id="p1-prix">4,90 €</span><a class="bouton" href="https://app.lachouettecosy.com/boutique/roue-de-l-annee-2027" id="p1-btn" style="text-decoration:none;">Voir le détail →</a></div>
+        </div>
+      </article>
+      <article class="prod">
+        <a class="prod-img" href="https://app.lachouettecosy.com/boutique/infographie-tarot-de-marseille" aria-label="Infographie du Tarot de Marseille"><img src="images/boutique-numerique/infographie-tarot-de-marseille-1.webp" alt="Infographie du Tarot de Marseille : les arcanes majeurs" id="p2-img" width="989" height="1400" loading="lazy"></a>
+        <div class="prod-corps">
+          <h2 id="p2-nom">Infographie du Tarot de Marseille</h2>
+          <p class="prod-acc" id="p2-acc">Les 78 cartes du Tarot de Marseille sur 5 pages, avec des tirages et un tirage de la chouette.</p>
+          <p class="prod-fmt" id="p2-fmt">5 pages A4 · PDF</p>
+          <div class="prod-bas"><span class="prix" id="p2-prix">6,90 €</span><a class="bouton" href="https://app.lachouettecosy.com/boutique/infographie-tarot-de-marseille" id="p2-btn" style="text-decoration:none;">Voir le détail →</a></div>
+        </div>
+      </article>
+      <article class="prod">
+        <a class="prod-img" href="https://app.lachouettecosy.com/boutique/infographie-tarot-rider-waite-smith" aria-label="Infographie du Tarot de Rider-Waite-Smith"><img src="images/boutique-numerique/infographie-tarot-rider-waite-smith-1.webp" alt="Infographie du Tarot Rider-Waite-Smith : les arcanes majeurs" id="p3-img" width="989" height="1400" loading="lazy"></a>
+        <div class="prod-corps">
+          <h2 id="p3-nom">Infographie du Tarot de Rider-Waite-Smith</h2>
+          <p class="prod-acc" id="p3-acc">Les 78 cartes du Rider-Waite-Smith sur 5 pages, avec des tirages, les symboles et un tirage de la chouette.</p>
+          <p class="prod-fmt" id="p3-fmt">5 pages A4 · PDF</p>
+          <div class="prod-bas"><span class="prix" id="p3-prix">6,90 €</span><a class="bouton" href="https://app.lachouettecosy.com/boutique/infographie-tarot-rider-waite-smith" id="p3-btn" style="text-decoration:none;">Voir le détail →</a></div>
+        </div>
+      </article>
+      <article class="prod duo">
+        <a class="prod-img" href="https://app.lachouettecosy.com/boutique/pack-duo-tarot-marseille-rider-waite-smith" aria-label="Pack duo : Marseille et Rider-Waite-Smith"><img src="images/boutique-numerique/pack-duo-tarot-marseille-rider-waite-smith-1.webp" alt="Le pack duo : infographies du tarot de Marseille et du Rider-Waite-Smith" id="p4-img" width="1000" height="687" loading="lazy"></a>
+        <div class="prod-corps">
+          <h2 id="p4-nom">Pack duo : Marseille et Rider-Waite-Smith</h2>
+          <p class="prod-acc" id="p4-acc">Les deux infographies, plus un bonus d'une page pour passer d'un jeu à l'autre. 11,90 € au lieu de 13,80 €.</p>
+          <p class="prod-fmt" id="p4-fmt">3 PDF · économie de 1,90 €</p>
+          <div class="prod-bas"><span class="prix" id="p4-prix">11,90 €</span><a class="bouton" href="https://app.lachouettecosy.com/boutique/pack-duo-tarot-marseille-rider-waite-smith" id="p4-btn" style="text-decoration:none;">Voir le détail →</a></div>
+        </div>
+      </article>
+    </div>
+    <div class="note-bas" id="t-livraison"><span class="script">Comment ça marche</span>Tu paies sur app.lachouettecosy.com, tu reçois un mail avec le lien pour télécharger ton PDF (valable 7&nbsp;jours). À imprimer en A4, à usage personnel.</div>
+    <div style="text-align:center; margin-top:22px;"><a class="bouton" href="https://app.lachouettecosy.com/boutique" style="text-decoration:none;" id="t-cta">Entrer dans la boutique →</a></div>
+    <p class="goodies" id="t-goodies">Tu cherches plutôt des mugs, tee-shirts et tote bags ? <a href="https://la-chouette-cosy.tpopsite.com/">Les objets de la chouette</a>.</p>
+    <footer id="pied">🦉 La Chouette Cosy — <a href="/">Retour à l'accueil</a><div class="footer-social"><a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">📷 Instagram</a><a href="https://www.tiktok.com/@coincosymystique" target="_blank" rel="noopener">🎵 TikTok</a><a href="https://www.pinterest.com/Lachouettecosypointcom/" target="_blank" rel="noopener">📌 Pinterest</a><a href="https://www.facebook.com/lachouettecosy/" target="_blank" rel="noopener">👍 Facebook</a><a href="https://www.youtube.com/@LaChouetteCosy" target="_blank" rel="noopener">▶️ YouTube</a></div></footer>
+  </div>
+  <script>
+    var I18N = { fr: {"h1": "Des PDF à imprimer, pour ta pratique de l'année", "sous": "Calendrier lunaire, roue de l'année, infographies de tarot. Tu les reçois par mail juste après l'achat, tu les imprimes chez toi.", "btn": "Voir le détail →", "retour": "← Retour à l'accueil", "abo": "✨ <strong>Abonnés du Coin Mystique</strong> : -20&nbsp;% sur la boutique, appliqué automatiquement quand tu es connecté.", "livraison": "<span class=\"script\">Comment ça marche</span>Tu paies sur app.lachouettecosy.com, tu reçois un mail avec le lien pour télécharger ton PDF (valable 7&nbsp;jours). À imprimer en A4, à usage personnel.", "cta": "Entrer dans la boutique →", "goodies": "Tu cherches plutôt des mugs, tee-shirts et tote bags ? <a href=\"https://la-chouette-cosy.tpopsite.com/\">Les objets de la chouette</a>.", "pied": "🦉 La Chouette Cosy — <a href=\"/\">Retour à l'accueil</a><div class=\"footer-social\"><a href=\"https://www.instagram.com/le_coin_cosy_podcast/\" target=\"_blank\" rel=\"noopener\">📷 Instagram</a><a href=\"https://www.tiktok.com/@coincosymystique\" target=\"_blank\" rel=\"noopener\">🎵 TikTok</a><a href=\"https://www.pinterest.com/Lachouettecosypointcom/\" target=\"_blank\" rel=\"noopener\">📌 Pinterest</a><a href=\"https://www.facebook.com/lachouettecosy/\" target=\"_blank\" rel=\"noopener\">👍 Facebook</a><a href=\"https://www.youtube.com/@LaChouetteCosy\" target=\"_blank\" rel=\"noopener\">▶️ YouTube</a></div>", "p0nom": "Calendrier lunaire 2027", "p0acc": "La lune de chaque jour de 2027, mois par mois, avec l'heure de Paris pour chaque phase.", "p0fmt": "15 pages A4 · PDF", "p0prix": "4,90 €", "p0alt": "Couverture du calendrier lunaire 2027 de La Chouette Cosy", "p1nom": "La roue de l'année 2027", "p1acc": "Les huit fêtes de la roue de l'année avec leurs dates 2027, et une page de journal pour chacune.", "p1fmt": "11 pages A4 · PDF", "p1prix": "4,90 €", "p1alt": "Couverture de la roue de l'année 2027", "p2nom": "Infographie du Tarot de Marseille", "p2acc": "Les 78 cartes du Tarot de Marseille sur 5 pages, avec des tirages et un tirage de la chouette.", "p2fmt": "5 pages A4 · PDF", "p2prix": "6,90 €", "p2alt": "Infographie du Tarot de Marseille : les arcanes majeurs", "p3nom": "Infographie du Tarot de Rider-Waite-Smith", "p3acc": "Les 78 cartes du Rider-Waite-Smith sur 5 pages, avec des tirages, les symboles et un tirage de la chouette.", "p3fmt": "5 pages A4 · PDF", "p3prix": "6,90 €", "p3alt": "Infographie du Tarot Rider-Waite-Smith : les arcanes majeurs", "p4nom": "Pack duo : Marseille et Rider-Waite-Smith", "p4acc": "Les deux infographies, plus un bonus d'une page pour passer d'un jeu à l'autre. 11,90 € au lieu de 13,80 €.", "p4fmt": "3 PDF · économie de 1,90 €", "p4prix": "11,90 €", "p4alt": "Le pack duo : infographies du tarot de Marseille et du Rider-Waite-Smith"}, en: {"h1": "Printable PDFs for your practice this year", "sous": "Lunar calendar, wheel of the year, tarot infographics. You receive them by email right after your purchase and print them at home.", "btn": "See details →", "retour": "← Back to home", "abo": "✨ <strong>Coin Mystique subscribers</strong>: 20&nbsp;% off the shop, applied automatically when you are logged in.", "livraison": "<span class=\"script\">How it works</span>You pay on app.lachouettecosy.com, then receive an email with the link to download your PDF (valid for 7&nbsp;days). Print it on A4, for personal use.", "cta": "Enter the shop →", "goodies": "Looking for mugs, t-shirts and tote bags instead? <a href=\"https://la-chouette-cosy.tpopsite.com/\">The owl goodies</a>.", "pied": "🦉 La Chouette Cosy — <a href=\"/\">Back to home</a><div class=\"footer-social\"><a href=\"https://www.instagram.com/le_coin_cosy_podcast/\" target=\"_blank\" rel=\"noopener\">📷 Instagram</a><a href=\"https://www.tiktok.com/@coincosymystique\" target=\"_blank\" rel=\"noopener\">🎵 TikTok</a><a href=\"https://www.pinterest.com/Lachouettecosypointcom/\" target=\"_blank\" rel=\"noopener\">📌 Pinterest</a><a href=\"https://www.facebook.com/lachouettecosy/\" target=\"_blank\" rel=\"noopener\">👍 Facebook</a><a href=\"https://www.youtube.com/@LaChouetteCosy\" target=\"_blank\" rel=\"noopener\">▶️ YouTube</a></div>", "p0nom": "Lunar calendar 2027", "p0acc": "The moon for every day of 2027, month by month, with Paris time for each phase.", "p0fmt": "15 A4 pages · PDF", "p0prix": "4.90 €", "p0alt": "Cover of the 2027 lunar calendar by La Chouette Cosy", "p1nom": "The wheel of the year 2027", "p1acc": "The eight festivals of the wheel of the year with their 2027 dates, and a journal page for each.", "p1fmt": "11 A4 pages · PDF", "p1prix": "4.90 €", "p1alt": "Cover of the 2027 wheel of the year", "p2nom": "Tarot de Marseille infographic", "p2acc": "All 78 cards of the Tarot de Marseille on 5 pages, with spreads and the owl spread.", "p2fmt": "5 A4 pages · PDF", "p2prix": "6.90 €", "p2alt": "Tarot de Marseille infographic: the major arcana", "p3nom": "Rider-Waite-Smith tarot infographic", "p3acc": "All 78 Rider-Waite-Smith cards on 5 pages, with spreads, symbols and the owl spread.", "p3fmt": "5 A4 pages · PDF", "p3prix": "6.90 €", "p3alt": "Rider-Waite-Smith tarot infographic: the major arcana", "p4nom": "Duo pack: Marseille and Rider-Waite-Smith", "p4acc": "Both infographics, plus a one-page bonus to switch from one deck to the other. €11.90 instead of €13.80.", "p4fmt": "3 PDFs · save €1.90", "p4prix": "11.90 €", "p4alt": "The duo pack: Tarot de Marseille and Rider-Waite-Smith infographics"} };
+    var lang = 'fr';
+    try { lang = localStorage.getItem('lang') === 'en' ? 'en' : 'fr'; } catch (e) {}
+    function appliquerTraductions() {
+      var d = I18N[lang];
+      document.documentElement.lang = lang;
+      document.getElementById('lien-retour').textContent = d.retour;
+      document.getElementById('t-h1').textContent = d.h1;
+      document.getElementById('t-sous').textContent = d.sous;
+      document.getElementById('t-abo').innerHTML = d.abo;
+      document.getElementById('t-livraison').innerHTML = d.livraison;
+      document.getElementById('t-cta').textContent = d.cta;
+      document.getElementById('t-goodies').innerHTML = d.goodies;
+      for (var i = 0; i < 5; i++) {
+        document.getElementById('p' + i + '-nom').textContent = d['p' + i + 'nom'];
+        document.getElementById('p' + i + '-acc').textContent = d['p' + i + 'acc'];
+        document.getElementById('p' + i + '-fmt').textContent = d['p' + i + 'fmt'];
+        document.getElementById('p' + i + '-prix').textContent = d['p' + i + 'prix'];
+        document.getElementById('p' + i + '-btn').textContent = d.btn;
+        document.getElementById('p' + i + '-img').alt = d['p' + i + 'alt'];
+      }
+      document.getElementById('pied').innerHTML = d.pied;
+      document.querySelectorAll('#lang-toggle button').forEach(function (b) {
+        b.classList.toggle('actif', b.dataset.lang === lang);
+      });
+    }
+    function definirLangue(l) { lang = l; try { localStorage.setItem('lang', lang); } catch (e) {} appliquerTraductions(); }
+    document.querySelectorAll('#lang-toggle button').forEach(function (b) {
+      b.addEventListener('click', function () { definirLangue(b.dataset.lang); });
+    });
+    appliquerTraductions();
+  </script>
+  <script src="/saisons.js"></script>
+  <script src="https://app.lachouettecosy.com/api/annonces/widget" defer></script>
+</body>
+</html>
