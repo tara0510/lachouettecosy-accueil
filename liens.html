@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liens — La chouette cosy</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="Tous les liens de La chouette cosy : l'appli, la boutique, le podcast, les ebooks et les réseaux.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.lachouettecosy.com/liens.html">
+<meta property="og:site_name" content="La Chouette Cosy">
+<meta property="og:title" content="La chouette cosy : tous les liens">
+<meta property="og:description" content="L'appli, la boutique, le podcast, les ebooks et les réseaux.">
+<meta property="og:image" content="https://www.lachouettecosy.com/og-image.png">
+<link rel="canonical" href="https://www.lachouettecosy.com/liens.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/saisons.css">
+<style>
+  :root { --nuit:#1a1625; --nuit-2:#15111e; --or:#c9a876; --or-clair:#dec79a; --amethyste-clair:#c3b2dc;
+    --text-primary:#f3efe8; --text-secondary:#c2b8d1; --text-muted:#897f99;
+    --border:rgba(247,243,237,.08); --border-strong:rgba(247,243,237,.16); }
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:var(--nuit); color:var(--text-primary); font-family:"Outfit",sans-serif; -webkit-font-smoothing:antialiased; }
+  body { min-height:100vh; }
+  .wrap { max-width:520px; margin:0 auto; padding:32px 20px 56px; }
+  .haut { display:flex; justify-content:flex-end; margin-bottom:12px; }
+  .lang-toggle { display:inline-flex; border:1px solid var(--border-strong); border-radius:999px; overflow:hidden; }
+  .lang-toggle button { font:600 12.5px "Outfit",sans-serif; padding:6px 13px; border:none; background:transparent; color:var(--text-muted); cursor:pointer; }
+  .lang-toggle button.actif { background:var(--or); color:var(--nuit); }
+  .hero { text-align:center; margin-bottom:28px; }
+  .badge { width:112px; height:112px; border-radius:50%; overflow:hidden; border:3px solid var(--border-strong); margin:0 auto 14px; box-shadow:0 12px 40px rgba(0,0,0,.45); }
+  .badge img { width:100%; height:100%; object-fit:cover; display:block; }
+  h1 { font-family:"Fraunces",serif; font-weight:500; font-size:28px; margin:0 0 6px; }
+  .tag { font-family:"Caveat",cursive; font-size:23px; color:var(--or-clair); margin:0; }
+  .liens { display:flex; flex-direction:column; gap:12px; }
+  .lien { display:block; text-decoration:none; color:var(--text-primary); background:var(--nuit-2); border:1px solid var(--border-strong); border-radius:16px; padding:15px 20px; text-align:center; transition:border-color .2s, transform .2s; }
+  .lien:hover, .lien:focus-visible { border-color:var(--or); transform:translateY(-2px); outline:none; }
+  .lien b { display:block; font-family:"Fraunces",serif; font-weight:500; font-size:18px; }
+  .lien small { display:block; margin-top:3px; font-size:13.5px; color:var(--text-secondary); }
+  .lien.fort { background:var(--or); border-color:var(--or); color:var(--nuit); }
+  .lien.fort small { color:#3a2f1c; }
+  h2 { font-family:"Caveat",cursive; font-size:22px; font-weight:600; color:var(--amethyste-clair); text-align:center; margin:26px 0 2px; }
+  .reseaux { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 16px; margin-top:28px; }
+  .reseaux a { color:var(--text-muted); font-size:14px; text-decoration:none; }
+  .reseaux a:hover { color:var(--or-clair); }
+  .pied { text-align:center; margin-top:28px; font-size:13px; }
+  .pied a { color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="haut"><div class="lang-toggle"><button type="button" data-l="fr" class="actif">FR</button><button type="button" data-l="en">EN</button></div></div>
+  <header class="hero">
+    <div class="badge"><img src="/images/logo-rond.png" alt="La chouette cosy" width="112" height="112"></div>
+    <h1>La chouette cosy</h1>
+    <p class="tag" data-i="tag">Ta dose de sorcellerie douce, sous un plaid</p>
+  </header>
+
+  <nav class="liens">
+    <a class="lien fort" href="https://app.lachouettecosy.com"><b data-i="appT">L'appli Le Coin Mystique</b><small data-i="appS">7 jours d'essai gratuit, sans carte bancaire</small></a>
+    <a class="lien" href="/boutique-numerique.html"><b data-i="numT">La boutique numérique</b><small data-i="numS">Calendrier lunaire, roue de l'année, infographies tarot (PDF à imprimer)</small></a>
+    <a class="lien" href="https://la-chouette-cosy.tpopsite.com/"><b data-i="tpopT">La boutique de la chouette</b><small data-i="tpopS">Totes, mugs et objets des 4 maisons</small></a>
+    <a class="lien" href="https://podcasts.apple.com/us/podcast/le-coin-cosy/id1807794277"><b data-i="podT">Le podcast Le Coin Cosy</b><small data-i="podS">À écouter sous un plaid</small></a>
+    <a class="lien" href="https://www.amazon.fr/dp/B0HF7W517J?tag=lachouettecos-21"><b data-i="ebT">Les ebooks</b><small data-i="ebS">Le Grimoire et Le Coin Spooky</small></a>
+    <a class="lien" href="https://app.lachouettecosy.com/blog"><b data-i="blogT">Le blog</b><small data-i="blogS">Pleines lunes, tarot, rituels</small></a>
+  </nav>
+
+  <h2 data-i="suis">Retrouve-moi aussi</h2>
+  <div class="reseaux">
+    <a href="https://www.instagram.com/le_coin_cosy_podcast/">Instagram</a>
+    <a href="https://www.tiktok.com/@coincosymystique">TikTok</a>
+    <a href="https://www.pinterest.com/Lachouettecosypointcom/">Pinterest</a>
+    <a href="https://www.facebook.com/lachouettecosy/">Facebook</a>
+    <a href="https://www.youtube.com/@LaChouetteCosy">YouTube</a>
+  </div>
+  <p class="pied"><a href="/" data-i="site">Voir tout le site</a></p>
+</div>
+<script>
+var T={fr:{},en:{tag:"Your daily dose of gentle witchcraft, under a blanket",appT:"The Coin Mystique app",appS:"7-day free trial, no credit card",numT:"The digital shop",numS:"Moon calendar, wheel of the year, tarot infographics (printable PDFs)",tpopT:"The owl's shop",tpopS:"Totes, mugs and items from the 4 houses",podT:"The Coin Cosy podcast",podS:"Best listened to under a blanket",ebT:"The ebooks",ebS:"The Grimoire and The Spooky Corner",blogT:"The blog",blogS:"Full moons, tarot, rituals",suis:"Find me here too",site:"See the whole site"}};
+document.querySelectorAll("[data-i]").forEach(function(e){T.fr[e.dataset.i]=e.textContent;});
+function setL(l){try{localStorage.setItem("lang",l);}catch(x){}document.documentElement.lang=l;
+ document.querySelectorAll("[data-i]").forEach(function(e){e.textContent=T[l][e.dataset.i];});
+ document.querySelectorAll(".lang-toggle button").forEach(function(b){b.classList.toggle("actif",b.dataset.l===l);});}
+document.querySelectorAll(".lang-toggle button").forEach(function(b){b.onclick=function(){setL(b.dataset.l);};});
+try{var s=localStorage.getItem("lang");if(s==="en")setL("en");}catch(x){}
+</script>
+<script src="/saisons.js" defer></script>
+</body>
+</html>
