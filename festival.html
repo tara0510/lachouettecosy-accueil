@@ -147,6 +147,7 @@
         histoire: "Un peu d'histoire", plusLoin: "Pour aller plus loin",
         siteOfficiel: "🔗 Site officiel", facebook: "📘 Facebook",
         photo: "Photo : ", viaPixabay: " via Pixabay", locale: "fr-FR",
+        illustration: "Image d'illustration choisie sur Canva, ce n'est pas une image officielle de l'événement.",
       },
       en: {
         retour: "← Back to the directory", accueil: "Back to home",
@@ -157,6 +158,7 @@
         histoire: "A bit of history", plusLoin: "Go further",
         siteOfficiel: "🔗 Official site", facebook: "📘 Facebook",
         photo: "Photo: ", viaPixabay: " via Pixabay", locale: "en-GB",
+        illustration: "Illustration picked on Canva, not an official image of the event.",
       },
     };
     function getEditionSuffix(n) {
@@ -224,7 +226,7 @@
 
       const credit = f.image_url && f.image_credit_photographe
         ? `<p class="credit-photo">${t.photo}${f.image_credit_lien ? `<a href="${echapper(f.image_credit_lien)}" target="_blank" rel="noopener">${echapper(f.image_credit_photographe)}</a>` : echapper(f.image_credit_photographe)}${t.viaPixabay}</p>`
-        : "";
+        : (f.image_url && /\/images\/festival-/.test(f.image_url) ? `<p class="credit-photo">${t.illustration}</p>` : "");
 
       const pointsForts = champ(f, "points_forts") || [];
       const infosPratiques = champ(f, "infos_pratiques") || [];
