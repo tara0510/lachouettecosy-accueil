@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | La Chouette Cosy</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="Une question ? Écris à la Chouette Cosy : bonjour@lachouettecosy.com ou via le formulaire.">
+<link rel="canonical" href="https://www.lachouettecosy.com/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://www.lachouettecosy.com/contact.html">
+<meta property="og:site_name" content="La Chouette Cosy">
+<meta property="og:title" content="Contact | La Chouette Cosy">
+<meta property="og:description" content="Une question ? Écris à la Chouette Cosy : bonjour@lachouettecosy.com ou via le formulaire.">
+<meta property="og:image" content="https://www.lachouettecosy.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@400;500;600&family=Caveat:wght@600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site-base.css">
+<link rel="stylesheet" href="/refonte.css">
+<link rel="stylesheet" href="/saisons.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QYD6071W2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QYD6071W2P');
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body class="refonte">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="dechire" x="-5%" y="-5%" width="110%" height="110%">
+<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="4" result="n"/>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G" result="d"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="8" result="g"/>
+<feColorMatrix in="g" type="matrix" values="0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .22 0" result="grain"/>
+<feComposite in="grain" in2="d" operator="in" result="grainIn"/>
+<feMerge><feMergeNode in="d"/><feMergeNode in="grainIn"/></feMerge></filter></defs></svg>
+<header class="top"><a class="marque" href="/"><img src="/images/logo-rond.png" alt="" width="48" height="48"><span>La Chouette Cosy</span></a><button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="menu" data-i18n-alt="navMenu" aria-label="Menu"><span></span></button><nav id="menu" aria-label="Menu principal"><a href="/" data-i18n="navAccueil">Accueil</a><a href="/appli.html" data-i18n="navAppli">L'appli</a><a href="/podcast.html" data-i18n="navPodcast">Le podcast</a><a href="/boutique.html" data-i18n="navBoutique">La boutique</a><a href="/contact.html" aria-current="page" data-i18n="navContact">Contact</a></nav><div class="lang" id="lang-toggle"><button type="button" data-lang="fr">FR</button><button type="button" data-lang="en">EN</button></div></header>
+<main class="page"><section class="entete"><h1 data-i18n="coTitre">Contact</h1><p class="chapeau" data-i18n="coChapeau"></p></section><section class="bloc"><div class="papier-ombre"><div class="papier"><span class="scotch" style="left:42%"></span><h2 data-i18n="coEcris">Écris-moi</h2><p><span data-i18n="coOu">Tu peux aussi m'écrire directement :</span> <a class="adresse" href="mailto:bonjour@lachouettecosy.com">bonjour@lachouettecosy.com</a></p><form class="formulaire" id="form-contact" novalidate><input type="text" name="siteWeb" id="champ-piege" class="piege" tabindex="-1" autocomplete="off" aria-hidden="true"><label><span data-i18n="coNom">Ton prénom</span><input type="text" id="c-nom" maxlength="80" autocomplete="given-name"></label><label><span data-i18n="coEmail">Ton adresse email</span><input type="email" id="c-email" required maxlength="200" autocomplete="email"></label><label><span data-i18n="coSujet">Sujet</span><input type="text" id="c-sujet" maxlength="80"></label><label><span data-i18n="coMessage">Ton message</span><textarea id="c-message" required minlength="10" maxlength="4000"></textarea></label><div><button type="submit" class="porte"><svg viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M5 10h30v21H5zM5 11l15 11 15-11"/></svg><span class="ruban" data-i18n="coEnvoyer">Envoyer</span><i class="etin e1"></i><i class="etin e2"></i></button></div><p class="retour" id="msg-contact" role="status"></p></form></div></div></section></main>
+<footer class="pied">
+<div><a href="https://app.lachouettecosy.com">Le Coin Mystique</a><a href="https://app.lachouettecosy.com/guide" data-i18n="piedGuides">Guides</a><a href="https://app.lachouettecosy.com/blog" data-i18n="piedBlog">Blog</a><a href="/contact.html" data-i18n="piedContact">Contact</a><a href="https://app.lachouettecosy.com/mentions-legales" data-i18n="piedMentions">Mentions légales</a></div>
+<div><a href="https://www.instagram.com/lachouettecosy/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">Instagram podcast</a><a href="https://www.pinterest.fr/Lachouettecosypointcom/" target="_blank" rel="noopener">Pinterest</a><a href="https://www.facebook.com/lachouettecosy/" target="_blank" rel="noopener">Facebook</a><a href="https://www.youtube.com/@LaChouetteCosy" target="_blank" rel="noopener">YouTube</a></div>
+<div data-i18n="piedPhrase">La Chouette Cosy</div>
+</footer>
+<script src="/pensees.js"></script>
+<script src="/i18n-base.js"></script>
+<script>var PAGE_I18N = {"fr": {"titrePage": "Contact | La Chouette Cosy", "coTitre": "Contact", "coChapeau": "Une question, une idée, un petit mot ? Je lis tout, et je te réponds dès que possible.", "coEcris": "Écris-moi", "coOu": "Tu peux aussi m'écrire directement :", "coNom": "Ton prénom", "coEmail": "Ton adresse email", "coSujet": "Sujet", "coMessage": "Ton message", "coEnvoyer": "Envoyer", "coAttente": "Envoi...", "coOk": "Merci, ton message est bien parti. Je te réponds dès que possible.", "coKo": "Le message n'est pas parti. Vérifie ton adresse et ton message (10 caractères minimum), ou écris-moi directement à bonjour@lachouettecosy.com."}, "en": {"titrePage": "Contact | La Chouette Cosy", "coTitre": "Contact", "coChapeau": "A question, an idea, a little note? I read everything and I'll answer as soon as I can.", "coEcris": "Write to me", "coOu": "You can also write to me directly:", "coNom": "Your first name", "coEmail": "Your email address", "coSujet": "Subject", "coMessage": "Your message", "coEnvoyer": "Send", "coAttente": "Sending...", "coOk": "Thank you, your message is on its way. I'll answer as soon as I can.", "coKo": "The message didn't go through. Check your address and your message (10 characters minimum), or write to me directly at bonjour@lachouettecosy.com."}};</script>
+<script src="/site.js"></script>
+<script>
+document.getElementById('form-contact').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var f = e.target, bouton = f.querySelector('button'), libelle = bouton.querySelector('.ruban'), msg = document.getElementById('msg-contact');
+  var d = I18N[lang];
+  bouton.disabled = true; libelle.textContent = d.coAttente; msg.className = 'retour'; msg.textContent = '';
+  function echec() { bouton.disabled = false; libelle.textContent = I18N[lang].coEnvoyer; msg.className = 'retour ko'; msg.textContent = I18N[lang].coKo; }
+  fetch('https://app.lachouettecosy.com/api/contact', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nom: document.getElementById('c-nom').value, email: document.getElementById('c-email').value, sujet: document.getElementById('c-sujet').value,
+      message: document.getElementById('c-message').value, siteWeb: document.getElementById('champ-piege').value, rendu: RENDU_PAGE })
+  }).then(function (r) {
+    if (r.ok) { f.style.display = 'none'; msg.className = 'retour ok'; msg.textContent = I18N[lang].coOk; } else echec();
+  }).catch(echec);
+});
+</script>
+<script>appliquerTraductions();</script>
+<script src="/saisons.js"></script>
+<script src="https://app.lachouettecosy.com/api/annonces/widget" defer></script>
+</body>
+</html>
