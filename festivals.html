@@ -17,7 +17,8 @@
 <meta property="og:image" content="https://www.lachouettecosy.com/og-image.png">
 <link rel="canonical" href="https://www.lachouettecosy.com/festivals.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@400;500;600&family=Caveat:wght@600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/refonte.css">
 <style>
   :root {
     --nuit: #1a1625;
@@ -105,7 +106,7 @@
     grid-template-columns: repeat(4, 1fr) auto;
     gap: 14px;
     align-items: end;
-    margin: 36px 0 34px;
+    margin: 36px 0 68px;
     padding: 20px 22px;
     border: 1px solid rgba(201, 168, 118, .35);
     border-radius: 18px;
@@ -161,6 +162,17 @@
   @media (max-width: 520px) {
     .barre-filtres { grid-template-columns: 1fr; padding: 16px; }
   }
+
+
+  /* Entête façon parchemin, comme le reste du site */
+  .entete-fest { max-width: 840px; margin: 56px auto 0; }
+  .entete-fest .papier { padding: 44px 48px 40px; text-align: center; }
+  .entete-fest .sur { font-family: "Caveat", cursive; font-size: 26px; font-weight: 700; color: var(--bordeaux); margin: 0 0 4px; }
+  .entete-fest h1 { font-family: "Uncial Antiqua", serif; font-weight: 400; font-size: clamp(27px, 4.6vw, 44px); line-height: 1.2; margin: 0 0 16px; color: var(--encre); text-wrap: balance; }
+  .entete-fest p.texte { max-width: 600px; margin: 0 auto; font-size: 18px; line-height: 1.6; color: var(--encre); }
+  .mot-fest { max-width: 640px; margin: 34px auto 0; text-align: center; font-family: "Caveat", cursive; font-size: 26px; line-height: 1.3; color: var(--or-clair); }
+  .mot-fest::before { content: ""; display: block; width: 120px; height: 14px; margin: 0 auto 12px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' fill='none' stroke='%23c9a876' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M4 7h40M76 7h40'/%3E%3Cpath d='M64 2a5 5 0 1 0 3 9 4 4 0 0 1-3-9z' fill='%23c9a876'/%3E%3C/svg%3E") center / contain no-repeat; }
+  @media (max-width: 560px) { .entete-fest .papier { padding: 36px 24px 32px; } }
 
   .etat { text-align: center; color: var(--text-muted); font-size: 14.5px; padding: 40px 0; grid-column: 1 / -1; }
 
@@ -254,28 +266,26 @@
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
-<body>
+<body class="refonte">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="dechire" x="-5%" y="-5%" width="110%" height="110%">
+<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="4" result="n"/>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G" result="d"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="8" result="g"/>
+<feColorMatrix in="g" type="matrix" values="0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .22 0" result="grain"/>
+<feComposite in="grain" in2="d" operator="in" result="grainIn"/>
+<feMerge><feMergeNode in="d"/><feMergeNode in="grainIn"/></feMerge></filter></defs></svg>
+<header class="top"><a class="marque" href="/"><img src="/images/logo-rond.png" alt="" width="48" height="48"><span>La Chouette Cosy</span></a><button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span></button><nav id="menu" aria-label="Menu principal"><a href="/" data-nav="accueil">Accueil</a><a href="/appli.html" data-nav="appli">L'appli</a><a href="/podcast.html" data-nav="podcast">Le podcast</a><a href="/boutique.html" data-nav="boutique">La boutique</a><a href="/contact.html" data-nav="contact">Contact</a></nav><div class="lang" id="lang-toggle"><button type="button" data-lang="fr">FR</button><button type="button" data-lang="en">EN</button></div></header>
   <div class="wrap">
 
-    <div class="wrap-etroit">
-      <div class="haut">
-        <a class="retour" id="lien-retour" href="/">← Retour à l'accueil</a>
-        <div class="lang-toggle" id="lang-toggle">
-          <button type="button" data-lang="fr">FR</button>
-          <button type="button" data-lang="en">EN</button>
-        </div>
-      </div>
-
-      <div class="hero">
-        <p class="hero-eyebrow" id="hero-eyebrow">Le Coin Mystique</p>
-        <h1 id="hero-titre">Festivals sorcellerie, Wicca & mondes merveilleux</h1>
-        <p id="hero-texte">Grands rassemblements comme petits rendez-vous locaux, en France, Suisse, Belgique, Luxembourg et Canada — pour trouver où célébrer, apprendre et rencontrer d'autres passionné·es près de chez toi.</p>
-      </div>
-
-      <div class="note-locaux" id="note-locaux">
-        🌱 Les petits événements locaux ont ici la même place que les grands festivals : c'est aussi pour les faire connaître que ce répertoire existe.
-      </div>
-    </div>
+    <section class="entete-fest">
+      <div class="papier-ombre"><div class="papier"><span class="scotch" style="left:calc(50% - 55px)"></span>
+        <p class="sur" id="hero-eyebrow">Le Coin Mystique</p>
+        <h1 id="hero-titre">Festivals sorcellerie, Wicca &amp; mondes merveilleux</h1>
+        <p class="texte" id="hero-texte"></p>
+      </div></div>
+      <p class="mot-fest" id="note-locaux"></p>
+    </section>
 
     <form class="barre-filtres" id="barre-filtres" onsubmit="return false"></form>
 
@@ -288,7 +298,7 @@
       Petit ou grand, écris-nous sur <a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">Instagram</a>, on l'ajoute avec plaisir.
     </p>
 
-    <footer id="pied">
+    <footer id="pied" class="pied">
       🦉 La Chouette Cosy — <a href="/">Retour à l'accueil</a>
     </footer>
   </div>
@@ -302,8 +312,8 @@
       fr: {
         retour: "← Retour à l'accueil", eyebrow: "Le Coin Mystique",
         titre: "Festivals sorcellerie, Wicca & mondes merveilleux",
-        texte: "Grands rassemblements comme petits rendez-vous locaux, en France, Suisse, Belgique, Luxembourg et Canada — pour trouver où célébrer, apprendre et rencontrer d'autres passionné·es près de chez toi.",
-        noteLocaux: "🌱 Les petits événements locaux ont ici la même place que les grands festivals : c'est aussi pour les faire connaître que ce répertoire existe.",
+        texte: "Grands rassemblements comme petits rendez-vous locaux, en France, Suisse, Belgique, Luxembourg et Canada, pour trouver où célébrer, apprendre et rencontrer d'autres passionné·es près de chez toi.",
+        noteLocaux: "Les petits événements locaux ont ici la même place que les grands festivals : c'est aussi pour les faire connaître que ce répertoire existe.",
         chargement: "Chargement des festivals...", aucun: "Aucun festival répertorié ici pour l'instant.",
         erreur: "Le répertoire est momentanément indisponible, réessaie un peu plus tard.",
         local: "Événement local", voirFiche: "📖 Voir la fiche complète →",
@@ -317,8 +327,8 @@
       en: {
         retour: "← Back to home", eyebrow: "Le Coin Mystique",
         titre: "Witchcraft, Wicca & wondrous worlds festivals",
-        texte: "Big gatherings and small local get-togethers alike, across France, Switzerland, Belgium, Luxembourg and Canada — find where to celebrate, learn and meet fellow enthusiasts near you.",
-        noteLocaux: "🌱 Small local events get just as much room here as the big festivals — this directory exists to help people discover them too.",
+        texte: "Big gatherings and small local get-togethers alike, across France, Switzerland, Belgium, Luxembourg and Canada, find where to celebrate, learn and meet fellow enthusiasts near you.",
+        noteLocaux: "Small local events get just as much room here as the big festivals: this directory exists to help people discover them too.",
         chargement: "Loading festivals...", aucun: "No festivals listed here for now.",
         erreur: "The directory is temporarily unavailable, please try again shortly.",
         local: "Local event", voirFiche: "📖 See full listing →",
@@ -346,6 +356,14 @@
     function libelleRegion(r) { return lang === "en" ? (REGIONS_EN[r] || r) : r; }
     function libelleCategorie(c) { return lang === "en" ? (CATEGORIES_EN[c] || c) : c; }
 
+    const NAV = {
+      fr: { accueil: "Accueil", appli: "L'appli", podcast: "Le podcast", boutique: "La boutique", contact: "Contact" },
+      en: { accueil: "Home", appli: "The app", podcast: "The podcast", boutique: "The shop", contact: "Contact" },
+    };
+    document.getElementById("burger").addEventListener("click", () => {
+      const ouvert = document.getElementById("menu").classList.toggle("ouvert");
+      document.getElementById("burger").setAttribute("aria-expanded", ouvert ? "true" : "false");
+    });
     let lang = localStorage.getItem("lang") === "en" ? "en" : "fr";
     let tousLesFestivals = [];
     let filtreActif = "Tous";
@@ -492,14 +510,14 @@
     function appliquerTextesFixes() {
       const t = I18N[lang];
       document.documentElement.lang = lang;
-      document.getElementById("lien-retour").textContent = t.retour;
+      document.querySelectorAll("[data-nav]").forEach((a) => { a.textContent = NAV[lang][a.dataset.nav]; });
       document.getElementById("hero-eyebrow").textContent = t.eyebrow;
       document.getElementById("hero-titre").textContent = t.titre;
       document.getElementById("hero-texte").textContent = t.texte;
       document.getElementById("note-locaux").textContent = t.noteLocaux;
       document.getElementById("suggestion").innerHTML =
         `<span class="script">${echapper(t.suggestionTitre)}</span>${echapper(t.suggestionTexte)} <a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">Instagram</a>${echapper(t.suggestionFin)}`;
-      document.getElementById("pied").innerHTML = `🦉 La Chouette Cosy — <a href="/">${t.accueil}</a><div class="footer-social"><a href="https://www.instagram.com/lachouettecosy/" target="_blank" rel="noopener">📷 Instagram</a><a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">📷 Instagram podcast</a><a href="https://www.tiktok.com/@coincosymystique" target="_blank" rel="noopener">🎵 TikTok</a><a href="https://www.pinterest.com/Lachouettecosypointcom/" target="_blank" rel="noopener">📌 Pinterest</a><a href="https://www.facebook.com/lachouettecosy/" target="_blank" rel="noopener">👍 Facebook</a><a href="https://www.youtube.com/@LaChouetteCosy" target="_blank" rel="noopener">▶️ YouTube</a></div>`;
+      document.getElementById("pied").innerHTML = `<div><a href="https://app.lachouettecosy.com">Le Coin Mystique</a><a href="https://app.lachouettecosy.com/guide">${lang === "en" ? "Guides" : "Guides"}</a><a href="https://app.lachouettecosy.com/blog">Blog</a><a href="/contact.html">Contact</a><a href="https://app.lachouettecosy.com/mentions-legales">${lang === "en" ? "Legal notice" : "Mentions légales"}</a></div><div><a href="https://www.instagram.com/lachouettecosy/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/le_coin_cosy_podcast/" target="_blank" rel="noopener">Instagram podcast</a><a href="https://www.pinterest.fr/Lachouettecosypointcom/" target="_blank" rel="noopener">Pinterest</a><a href="https://www.facebook.com/lachouettecosy/" target="_blank" rel="noopener">Facebook</a><a href="https://www.tiktok.com/@coincosymystique" target="_blank" rel="noopener">TikTok</a><a href="https://www.youtube.com/@LaChouetteCosy" target="_blank" rel="noopener">YouTube</a></div><div>${lang === "en" ? "La Chouette Cosy · gentle witchcraft and everyday magic" : "La Chouette Cosy · sorcellerie douce et magie du quotidien"}</div>`;
       document.querySelectorAll("#lang-toggle button").forEach((b) => b.classList.toggle("actif", b.dataset.lang === lang));
     }
 
