@@ -140,17 +140,6 @@
       recherche: false,
     });
 
-    function lecOnglet(chaudron) {
-      document.getElementById('lecteur').hidden = chaudron;
-      document.getElementById('lecteur-chaudron').hidden = !chaudron;
-      document.getElementById('t-chaudron-desc').hidden = !chaudron;
-      document.getElementById('onglet-tous').setAttribute('aria-selected', String(!chaudron));
-      document.getElementById('onglet-chaudron').setAttribute('aria-selected', String(chaudron));
-      document.querySelectorAll('.lecteur audio').forEach(function (a) { a.pause(); });
-    }
-    document.getElementById('onglet-tous').addEventListener('click', function () { lecOnglet(false); });
-    document.getElementById('onglet-chaudron').addEventListener('click', function () { lecOnglet(true); });
-
     function lecCharger() {
       var ctrl = ('AbortController' in window) ? new AbortController() : null;
       var minuteur = setTimeout(function () { if (ctrl) ctrl.abort(); }, 9000);
@@ -165,7 +154,7 @@
                      audio: x.episodeUrl, image: x.artworkUrl600 || x.artworkUrl160 || '', desc: lecTexte(x.description || x.shortDescription) };
           }).sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
           if (!lecTous.init(eps)) throw new Error('vide');
-          if (lecChaudron.init(eps)) document.getElementById('lec-onglets').hidden = false;
+          if (!lecChaudron.init(eps)) document.getElementById('parchemin-chaudron').hidden = true;
         })
         .catch(function () { clearTimeout(minuteur); if (!lecTous.pret) lecSpotify('lecteur'); });
     }
