@@ -855,6 +855,7 @@
         <h2 style="font-family:'Fraunces',serif; font-weight:500; font-size:21px; margin:0 0 8px;" id="t-newsletter-titre">La newsletter du Coin Cosy</h2>
         <p id="t-newsletter-texte">Chaque jeudi : le nouvel épisode, une citation qui fait du bien, et une petite fiche pour explorer un coin du grimoire.</p>
         <form class="newsletter-form" id="form-newsletter">
+          <input type="text" name="siteWeb" id="champ-piege" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
           <input type="email" id="email-newsletter" required placeholder="ton-email@exemple.com">
           <button type="submit" class="bouton" id="t-newsletter-btn">Je m'abonne</button>
         </form>
@@ -1060,6 +1061,8 @@
     };
 
     var lang = localStorage.getItem('lang') === 'en' ? 'en' : 'fr';
+    // Anti-spam de /api/newsletter : heure d'affichage de la page (une soumission avant 1,5 s est ignorée).
+    var RENDU_PAGE = Date.now();
 
     /* Lecteurs du Coin Cosy : la liste des épisodes vient de l'annuaire public d'Apple Podcasts (mise à jour à
        chaque nouvel épisode). Un lecteur « tous les épisodes » (repli sur Spotify si la liste est introuvable)
@@ -1328,6 +1331,7 @@
       var bouton = form.querySelector('button');
       var msg = document.getElementById('msg-newsletter');
       var email = document.getElementById('email-newsletter').value;
+      var piege = document.getElementById('champ-piege').value;
       bouton.disabled = true;
       bouton.textContent = I18N[lang].newsletterAttente;
       msg.style.color = 'var(--text-muted)';
@@ -1335,7 +1339,7 @@
       fetch('https://app.lachouettecosy.com/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email }),
+        body: JSON.stringify({ email: email, langue: lang, siteWeb: piege, rendu: RENDU_PAGE }),
       })
         .then(function (res) {
           if (res.ok) {
