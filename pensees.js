@@ -1,0 +1,42 @@
+    var PENSEES = {
+      fr: [
+        "Une bougie allumée avec une vraie intention vaut tous les rituels compliqués.",
+        "Aujourd'hui, le seul sortilège dont tu as besoin, c'est peut-être une tisane et cinq minutes de silence.",
+        "La lune ne juge jamais ton ménage en retard.",
+        "Un grimoire qui prend la poussière apprend quand même quelque chose : la patience.",
+        "Ta sorcière intérieure porte peut-être un legging de yoga et boit un café tiède, et c'est très bien comme ça.",
+        "Ranger son bureau, c'est déjà un petit rituel de purification.",
+        "On peut être puissante et avoir oublié où on a mis ses clés.",
+        "Le meilleur oracle du moment, c'est souvent ton propre corps qui te dit de ralentir.",
+        "Une pierre roulée dans la poche fait autant de bien qu'un long discours de développement personnel.",
+        "La magie du quotidien n'a pas besoin de témoins pour être vraie.",
+        "Trois respirations profondes avant de répondre à ce mail énervant : ça compte comme un sort de protection.",
+        "Il n'y a pas de mauvaise sorcière, juste des journées où le chaudron déborde un peu.",
+        "Se coucher tôt un soir de pleine lune, c'est aussi une forme de rébellion douce.",
+        "Un thé bien infusé et un carnet ouvert valent toutes les formations sur la manifestation.",
+        "Tu n'as pas besoin d'un autel parfait pour que la magie opère — une étagère un peu bancale fait très bien l'affaire.",
+        "Dire non poliment, c'est un sortilège de protection qui ne nécessite aucun accessoire.",
+        "La sorcellerie douce, c'est surtout se souvenir qu'on a le droit d'aller à son propre rythme.",
+        "Même les chouettes ont des jours où elles préfèrent rester dans leur nid."
+      ],
+      en: [
+        "A candle lit with a real intention beats any elaborate ritual.",
+        "Today, the only spell you might need is a cup of tea and five minutes of silence.",
+        "The moon never judges your overdue laundry.",
+        "A dusty grimoire is still teaching you something: patience.",
+        "Your inner witch might be wearing yoga leggings and drinking lukewarm coffee, and that's perfectly fine.",
+        "Tidying your desk already counts as a small cleansing ritual.",
+        "You can be powerful and still have no idea where you put your keys.",
+        "The best oracle right now is often your own body, telling you to slow down.",
+        "A tumbled stone in your pocket does as much good as a long personal-development lecture.",
+        "Everyday magic doesn't need witnesses to be real.",
+        "Three deep breaths before answering that annoying email — that counts as a protection spell.",
+        "There's no such thing as a bad witch, just days when the cauldron boils over a little.",
+        "Going to bed early on a full moon night is its own quiet act of rebellion.",
+        "A well-steeped tea and an open notebook beat any manifestation course.",
+        "You don't need a perfect altar for magic to work — a slightly wobbly shelf does just fine.",
+        "Saying no politely is a protection spell that needs no props at all.",
+        "Gentle witchcraft is mostly about remembering you're allowed to go at your own pace.",
+        "Even owls have days when they'd rather just stay in the nest."
+      ]
+    };
