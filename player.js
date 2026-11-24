@@ -140,13 +140,23 @@
       recherche: false,
     });
 
+    /* L'annuaire d'Apple n'autorise pas fetch depuis un autre site (CORS) mais accepte le mode « callback » (JSONP) */
+    function lecAppel(url) {
+      return new Promise(function (resolve, reject) {
+        var nom = 'lecRappel' + Date.now();
+        var balise = document.createElement('script');
+        var fin = function () { delete window[nom]; if (balise.parentNode) balise.parentNode.removeChild(balise); };
+        var minuteur = setTimeout(function () { fin(); reject(new Error('delai')); }, 9000);
+        window[nom] = function (d) { clearTimeout(minuteur); fin(); resolve(d); };
+        balise.onerror = function () { clearTimeout(minuteur); fin(); reject(new Error('reseau')); };
+        balise.src = url + '&callback=' + nom;
+        document.head.appendChild(balise);
+      });
+    }
+
     function lecCharger() {
-      var ctrl = ('AbortController' in window) ? new AbortController() : null;
-      var minuteur = setTimeout(function () { if (ctrl) ctrl.abort(); }, 9000);
-      fetch(LEC_URL, ctrl ? { signal: ctrl.signal } : undefined)
-        .then(function (r) { if (!r.ok) throw new Error('http'); return r.json(); })
+      lecAppel(LEC_URL)
         .then(function (d) {
-          clearTimeout(minuteur);
           var eps = (d.results || []).filter(function (x) {
             return x.wrapperType === 'podcastEpisode' && typeof x.episodeUrl === 'string' && x.episodeUrl.indexOf('https://') === 0;
           }).map(function (x) {
@@ -156,7 +166,11 @@
           if (!lecTous.init(eps)) throw new Error('vide');
           if (!lecChaudron.init(eps)) document.getElementById('parchemin-chaudron').hidden = true;
         })
-        .catch(function () { clearTimeout(minuteur); if (!lecTous.pret) lecSpotify('lecteur'); });
+        .catch(function () {
+          if (!lecTous.pret) lecSpotify('lecteur');
+          var c = document.getElementById('parchemin-chaudron');
+          if (c && !lecChaudron.pret) c.hidden = true;
+        });
     }
 
     /* Un seul épisode à la fois : lancer un lecteur met l'autre en pause */
