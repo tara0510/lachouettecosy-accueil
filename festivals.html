@@ -342,6 +342,8 @@
 
     function periodeAffichee(f) {
       const periode = lang === "en" ? (f.periode_indicative_en || f.periode_indicative) : f.periode_indicative;
+      // Édition passée dont la date 2027 n'est pas encore annoncée : on n'affiche que la mention « Dates 2027 à venir »
+      if (f.date_debut < new Date().toISOString().slice(0, 10) && periode) return periode;
       if (f.date_fin && f.date_fin !== f.date_debut) {
         return `${formatDate(f.date_debut)} → ${formatDate(f.date_fin)}`;
       }
@@ -515,6 +517,10 @@
         );
         if (!res.ok) throw new Error("Réponse invalide");
         tousLesFestivals = await res.json();
+        // Les festivals aux dates à venir passent après ceux qui ont une date annoncée
+        const aujourdhui = new Date().toISOString().slice(0, 10);
+        const rang = (f) => (f.date_debut < aujourdhui ? 1 : 0);
+        tousLesFestivals.sort((a, b) => rang(a) - rang(b) || (rang(a) ? a.nom.localeCompare(b.nom, "fr") : 0));
         construireFiltres();
         afficher();
       } catch (e) {

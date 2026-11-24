@@ -178,6 +178,8 @@
 
     function periodeAffichee(f) {
       const periode = lang === "en" ? (f.periode_indicative_en || f.periode_indicative) : f.periode_indicative;
+      // Édition passée dont la date 2027 n'est pas encore annoncée : on n'affiche que la mention « Dates 2027 à venir »
+      if (f.date_debut < new Date().toISOString().slice(0, 10) && periode) return periode;
       if (f.date_fin && f.date_fin !== f.date_debut) return `${formatDate(f.date_debut)} → ${formatDate(f.date_fin)}`;
       if (periode) return `${formatDate(f.date_debut)} (${periode})`;
       return formatDate(f.date_debut);
