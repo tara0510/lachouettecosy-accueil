@@ -100,48 +100,67 @@
     color: var(--text-secondary);
   }
 
-  .filtres {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin: 0 0 12px;
+  .barre-filtres {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: 14px;
+    align-items: end;
+    margin: 36px 0 34px;
+    padding: 20px 22px;
+    border: 1px solid rgba(201, 168, 118, .35);
+    border-radius: 18px;
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgba(195, 178, 220, .12), transparent 55%),
+      linear-gradient(180deg, rgba(61, 52, 80, .55), rgba(21, 17, 30, .75));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(255, 255, 255, .03);
   }
-  .filtres:first-of-type { margin-top: 36px; }
-  .filtres:last-of-type { margin-bottom: 32px; }
-  .filtre {
+  .champ { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  .champ-nom {
     font-family: "Outfit", sans-serif;
-    font-size: 13.5px;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 999px;
-    border: 1px solid var(--border-strong);
-    background: transparent;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: background .15s, color .15s, border-color .15s;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--or);
+    padding-left: 4px;
   }
-  .filtre:hover { border-color: var(--or); color: var(--or-clair); }
-  .filtre.actif { background: var(--or); border-color: var(--or); color: var(--nuit); font-weight: 600; }
-
   .filtre-region {
+    width: 100%;
     font-family: "Outfit", sans-serif;
-    font-size: 13.5px;
+    font-size: 14.5px;
     font-weight: 500;
-    padding: 8px 34px 8px 16px;
-    border-radius: 999px;
+    padding: 12px 38px 12px 16px;
+    border-radius: 12px;
     border: 1px solid var(--border-strong);
-    background: transparent
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23c2b8d1'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E") no-repeat right 12px center;
-    background-size: 14px;
+    background: rgba(26, 22, 37, .85)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23c9a876'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E") no-repeat right 12px center;
+    background-size: 16px;
     color: var(--text-secondary);
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
-    transition: border-color .15s, color .15s;
+    text-overflow: ellipsis;
+    transition: border-color .15s, color .15s, box-shadow .15s;
   }
-  .filtre-region:hover { border-color: var(--or); color: var(--or-clair); }
+  .filtre-region:hover, .filtre-region:focus-visible { border-color: var(--or); color: var(--or-clair); outline: none; box-shadow: 0 0 0 3px rgba(201, 168, 118, .15); }
+  .filtre-region.choisi { border-color: var(--or); color: var(--or-clair); background-color: rgba(201, 168, 118, .12); font-weight: 600; }
   .filtre-region option { background: var(--nuit-2); color: var(--text-primary); }
+  .filtre-fin { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; padding-bottom: 2px; }
+  .nb-resultats { font-family: "Outfit", sans-serif; font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
+  .nb-resultats strong { color: var(--or-clair); font-size: 18px; font-weight: 600; }
+  .effacer {
+    font-family: "Outfit", sans-serif; font-size: 12.5px; color: var(--text-muted);
+    background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; visibility: hidden;
+  }
+  .effacer.visible { visibility: visible; }
+  .effacer:hover { color: var(--or-clair); }
+  @media (max-width: 900px) {
+    .barre-filtres { grid-template-columns: 1fr 1fr; }
+    .filtre-fin { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
+  }
+  @media (max-width: 520px) {
+    .barre-filtres { grid-template-columns: 1fr; padding: 16px; }
+  }
 
   .etat { text-align: center; color: var(--text-muted); font-size: 14.5px; padding: 40px 0; grid-column: 1 / -1; }
 
@@ -258,9 +277,7 @@
       </div>
     </div>
 
-    <div class="filtres" id="filtres"></div>
-    <div class="filtres" id="filtre-region-zone"></div>
-    <div class="filtres" id="filtre-type-zone"></div>
+    <form class="barre-filtres" id="barre-filtres" onsubmit="return false"></form>
 
     <div id="contenu">
       <p class="etat">Chargement des festivals...</p>
@@ -291,6 +308,7 @@
         erreur: "Le répertoire est momentanément indisponible, réessaie un peu plus tard.",
         local: "Événement local", voirFiche: "📖 Voir la fiche complète →",
         tous: "Tous", toutesRegions: "Toutes les régions", tousTypes: "Tous les types",
+        champPays: "Pays", champRegion: "Région", champType: "Type d'événement", champMois: "Mois", tousMois: "Toute l'année", tousPays: "Tous les pays", effacer: "Tout effacer", resultat: (n) => n + (n > 1 ? " festivals" : " festival"),
         suggestionTitre: "Tu connais un festival qui manque ici ?",
         suggestionTexte: "Petit ou grand, écris-nous sur",
         suggestionFin: ", on l'ajoute avec plaisir.",
@@ -305,6 +323,7 @@
         erreur: "The directory is temporarily unavailable, please try again shortly.",
         local: "Local event", voirFiche: "📖 See full listing →",
         tous: "All", toutesRegions: "All regions", tousTypes: "All types",
+        champPays: "Country", champRegion: "Region", champType: "Event type", champMois: "Month", tousMois: "All year", tousPays: "All countries", effacer: "Clear filters", resultat: (n) => n + (n > 1 ? " festivals" : " festival"),
         suggestionTitre: "Know a festival that's missing here?",
         suggestionTexte: "Big or small, message us on",
         suggestionFin: " and we'll happily add it.",
@@ -332,6 +351,7 @@
     let filtreActif = "Tous";
     let filtreRegion = "Toutes";
     let filtreType = "Tous";
+    let filtreMois = "Tous";
 
     function formatDate(iso) {
       if (!iso) return "";
@@ -390,21 +410,39 @@
       `;
     }
 
-    function festivalsDuPays() {
-      return filtreActif === "Tous"
-        ? tousLesFestivals
-        : tousLesFestivals.filter((f) => f.pays === filtreActif);
+    // Mois (0 à 11) couverts par un festival : du début à la fin, ou le mois de début seul
+    function moisDuFestival(f) {
+      const debut = new Date(f.date_debut + "T00:00:00Z");
+      const fin = f.date_fin ? new Date(f.date_fin + "T00:00:00Z") : debut;
+      const mois = [debut.getUTCMonth()];
+      if (fin > debut && (fin - debut) / 86400000 < 62) {
+        const m = fin.getUTCMonth();
+        if (!mois.includes(m)) mois.push(m);
+      }
+      return mois;
     }
 
-    function festivalsDuPaysEtRegion() {
-      return festivalsDuPays().filter((f) => filtreRegion === "Toutes" || f.region === filtreRegion);
+    function nomDuMois(i) {
+      const n = new Date(Date.UTC(2027, i, 1)).toLocaleDateString(I18N[lang].locale, { month: "long", timeZone: "UTC" });
+      return n.charAt(0).toUpperCase() + n.slice(1);
+    }
+
+    function filtrer(ignorer) {
+      return tousLesFestivals.filter((f) =>
+        (ignorer === "pays" || filtreActif === "Tous" || f.pays === filtreActif) &&
+        (ignorer === "region" || filtreRegion === "Toutes" || f.region === filtreRegion) &&
+        (ignorer === "type" || filtreType === "Tous" || (f.categories || []).includes(filtreType)) &&
+        (ignorer === "mois" || filtreMois === "Tous" || moisDuFestival(f).includes(+filtreMois))
+      );
     }
 
     function afficher() {
       const contenu = document.getElementById("contenu");
-      const festivals = festivalsDuPaysEtRegion().filter(
-        (f) => filtreType === "Tous" || (f.categories || []).includes(filtreType)
-      );
+      const festivals = filtrer();
+      const nb = document.getElementById("nb-resultats");
+      if (nb) nb.innerHTML = `<strong>${festivals.length}</strong> ${I18N[lang].resultat(festivals.length).replace(/^\d+ /, "")}`;
+      const efface = document.getElementById("effacer");
+      if (efface) efface.classList.toggle("visible", filtreActif !== "Tous" || filtreRegion !== "Toutes" || filtreType !== "Tous" || filtreMois !== "Tous");
 
       if (festivals.length === 0) {
         contenu.innerHTML = `<p class="etat">${I18N[lang].aucun}</p>`;
@@ -413,71 +451,41 @@
       contenu.innerHTML = `<div class="liste">${festivals.map(carteFestival).join("")}</div>`;
     }
 
+    // Les menus se répondent : chacun ne propose que ce qui existe avec les autres choix en cours
     function construireFiltres() {
       const t = I18N[lang];
-      const zone = document.getElementById("filtres");
-      const options = ["Tous", ...PAYS];
-      zone.innerHTML = options
-        .map((p) => `<button class="filtre${p === filtreActif ? " actif" : ""}" data-pays="${p}">${p === "Tous" ? t.tous : echapper(libellePays(p))}</button>`)
-        .join("");
-      zone.querySelectorAll(".filtre").forEach((bouton) => {
-        bouton.addEventListener("click", () => {
-          filtreActif = bouton.dataset.pays;
-          filtreRegion = "Toutes";
-          filtreType = "Tous";
-          zone.querySelectorAll(".filtre").forEach((b) => b.classList.toggle("actif", b === bouton));
-          construireFiltreRegion();
-          afficher();
-        });
-      });
-      construireFiltreRegion();
-    }
-
-    function construireFiltreRegion() {
-      const t = I18N[lang];
-      const zone = document.getElementById("filtre-region-zone");
-      const regions = [...new Set(festivalsDuPays().map((f) => f.region).filter(Boolean))]
-        .sort((a, b) => libelleRegion(a).localeCompare(libelleRegion(b), lang));
-
-      if (regions.length === 0) {
-        zone.innerHTML = "";
-      } else {
-        zone.innerHTML = `
-          <select class="filtre-region" id="filtre-region">
-            <option value="Toutes">${t.toutesRegions}</option>
-            ${regions.map((r) => `<option value="${echapper(r)}"${r === filtreRegion ? " selected" : ""}>${echapper(libelleRegion(r))}</option>`).join("")}
+      const form = document.getElementById("barre-filtres");
+      const champ = (id, nom, vide, valeur, options) => `
+        <label class="champ">
+          <span class="champ-nom">${nom}</span>
+          <select class="filtre-region${options.vide ? "" : ""}${valeur !== vide[0] ? " choisi" : ""}" id="${id}">
+            <option value="${vide[0]}">${vide[1]}</option>
+            ${options.map(([v, l]) => `<option value="${echapper(String(v))}"${String(v) === String(valeur) ? " selected" : ""}>${echapper(l)}</option>`).join("")}
           </select>
-        `;
-        document.getElementById("filtre-region").addEventListener("change", (e) => {
-          filtreRegion = e.target.value;
-          filtreType = "Tous";
-          construireFiltreType();
-          afficher();
-        });
-      }
-      construireFiltreType();
-    }
+        </label>`;
 
-    function construireFiltreType() {
-      const t = I18N[lang];
-      const zone = document.getElementById("filtre-type-zone");
-      const types = [...new Set(festivalsDuPaysEtRegion().flatMap((f) => f.categories || []))]
-        .sort((a, b) => libelleCategorie(a).localeCompare(libelleCategorie(b), lang));
+      const pays = PAYS.filter((p) => filtrer("pays").some((f) => f.pays === p)).map((p) => [p, libellePays(p)]);
+      const regions = [...new Set(filtrer("region").map((f) => f.region).filter(Boolean))]
+        .sort((a, b) => libelleRegion(a).localeCompare(libelleRegion(b), lang)).map((r) => [r, libelleRegion(r)]);
+      const types = [...new Set(filtrer("type").flatMap((f) => f.categories || []))]
+        .sort((a, b) => libelleCategorie(a).localeCompare(libelleCategorie(b), lang)).map((c) => [c, libelleCategorie(c)]);
+      const moisDispo = [...new Set(filtrer("mois").flatMap(moisDuFestival))].sort((a, b) => a - b).map((m) => [m, nomDuMois(m)]);
 
-      if (types.length === 0) {
-        zone.innerHTML = "";
-        return;
-      }
+      form.innerHTML =
+        champ("f-pays", t.champPays, ["Tous", t.tousPays], filtreActif, pays) +
+        champ("f-region", t.champRegion, ["Toutes", t.toutesRegions], filtreRegion, regions) +
+        champ("f-type", t.champType, ["Tous", t.tousTypes], filtreType, types) +
+        champ("f-mois", t.champMois, ["Tous", t.tousMois], filtreMois, moisDispo) +
+        `<div class="filtre-fin"><span class="nb-resultats" id="nb-resultats"></span><button type="button" class="effacer" id="effacer">${t.effacer}</button></div>`;
 
-      zone.innerHTML = `
-        <select class="filtre-region" id="filtre-type">
-          <option value="Tous">${t.tousTypes}</option>
-          ${types.map((ty) => `<option value="${echapper(ty)}"${ty === filtreType ? " selected" : ""}>${echapper(libelleCategorie(ty))}</option>`).join("")}
-        </select>
-      `;
-      document.getElementById("filtre-type").addEventListener("change", (e) => {
-        filtreType = e.target.value;
-        afficher();
+      const brancher = (id, fixer) => document.getElementById(id).addEventListener("change", (e) => { fixer(e.target.value); construireFiltres(); afficher(); });
+      brancher("f-pays", (v) => { filtreActif = v; filtreRegion = "Toutes"; });
+      brancher("f-region", (v) => { filtreRegion = v; });
+      brancher("f-type", (v) => { filtreType = v; });
+      brancher("f-mois", (v) => { filtreMois = v; });
+      document.getElementById("effacer").addEventListener("click", () => {
+        filtreActif = "Tous"; filtreRegion = "Toutes"; filtreType = "Tous"; filtreMois = "Tous";
+        construireFiltres(); afficher();
       });
     }
 
