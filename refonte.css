@@ -123,3 +123,4 @@ a:hover>.porte .etin,.porte:hover .etin{animation-duration:1.3s}
 .pied a:hover{text-decoration:underline}
 @media (max-width:520px){.cartel h2{font-size:21px}.top{padding:10px 14px}}
 @media (max-width:420px){.cartel h2{white-space:normal}.page{padding:0 16px}.cartel .papier{padding:38px 22px 30px}}
+.spooky-bloc{margin:64px auto 56px;max-width:960px}
