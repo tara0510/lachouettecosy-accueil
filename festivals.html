@@ -543,10 +543,10 @@
         );
         if (!res.ok) throw new Error("Réponse invalide");
         tousLesFestivals = await res.json();
-        // Les festivals aux dates à venir passent après ceux qui ont une date annoncée
-        const aujourdhui = new Date().toISOString().slice(0, 10);
+                const aujourdhui = new Date().toISOString().slice(0, 10);
         const rang = (f) => (f.date_debut < aujourdhui ? 1 : 0);
-        tousLesFestivals.sort((a, b) => rang(a) - rang(b) || (rang(a) ? a.nom.localeCompare(b.nom, "fr") : 0));
+        // Datés d'abord (du plus proche au plus lointain), puis ceux aux dates à venir, classés selon la date de leur dernière édition
+        tousLesFestivals.sort((a, b) => rang(a) - rang(b) || a.date_debut.localeCompare(b.date_debut));
         construireFiltres();
         afficher();
       } catch (e) {
