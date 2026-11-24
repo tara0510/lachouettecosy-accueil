@@ -194,7 +194,9 @@
     text-decoration: none;
     color: inherit;
     transition: border-color .15s, transform .15s;
+    position: relative;
   }
+  .mention-illu { position: absolute; top: 10px; left: 10px; padding: 3px 10px; border-radius: 999px; background: rgba(21, 17, 30, .78); color: var(--text-secondary); font-size: 11px; letter-spacing: .02em; backdrop-filter: blur(2px); pointer-events: none; }
   .carte-festival:hover { border-color: var(--border-strong); transform: translateY(-2px); }
   .carte-festival .visuel {
     width: 100%; height: 170px; object-fit: cover; display: block; flex-shrink: 0;
@@ -317,7 +319,7 @@
         chargement: "Chargement des festivals...", aucun: "Aucun festival répertorié ici pour l'instant.",
         erreur: "Le répertoire est momentanément indisponible, réessaie un peu plus tard.",
         local: "Événement local", voirFiche: "📖 Voir la fiche complète →",
-        tous: "Tous", toutesRegions: "Toutes les régions", tousTypes: "Tous les types",
+        illustration: "Image d'illustration, non officielle", tous: "Tous", toutesRegions: "Toutes les régions", tousTypes: "Tous les types",
         champPays: "Pays", champRegion: "Région", champType: "Type d'événement", champMois: "Mois", tousMois: "Toute l'année", tousPays: "Tous les pays", effacer: "Tout effacer", resultat: (n) => n + (n > 1 ? " festivals" : " festival"),
         suggestionTitre: "Tu connais un festival qui manque ici ?",
         suggestionTexte: "Petit ou grand, écris-nous sur",
@@ -332,7 +334,7 @@
         chargement: "Loading festivals...", aucun: "No festivals listed here for now.",
         erreur: "The directory is temporarily unavailable, please try again shortly.",
         local: "Local event", voirFiche: "📖 See full listing →",
-        tous: "All", toutesRegions: "All regions", tousTypes: "All types",
+        illustration: "Illustration, not official", tous: "All", toutesRegions: "All regions", tousTypes: "All types",
         champPays: "Country", champRegion: "Region", champType: "Event type", champMois: "Month", tousMois: "All year", tousPays: "All countries", effacer: "Clear filters", resultat: (n) => n + (n > 1 ? " festivals" : " festival"),
         suggestionTitre: "Know a festival that's missing here?",
         suggestionTexte: "Big or small, message us on",
@@ -406,7 +408,7 @@
     function carteFestival(f) {
       const t = I18N[lang];
       const tags = (f.categories || []).slice(0, 3).map((c) => `<span class="tag">${echapper(libelleCategorie(c))}</span>`).join("");
-      const image = f.image_url ? `<img class="visuel" src="${echapper(f.image_url)}" alt="" loading="lazy">` : "";
+      const image = f.image_url ? `<img class="visuel" src="${echapper(f.image_url)}" alt="" loading="lazy">` + (/\/images\/festival-/.test(f.image_url) ? `<span class="mention-illu">${t.illustration}</span>` : "") : "";
       const lieu = [f.lieu_exact, f.ville, f.departement].filter(Boolean).join(", ");
       const fiche = `festival.html?id=${encodeURIComponent(f.id)}`;
       const description = champ(f, "description");
