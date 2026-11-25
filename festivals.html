@@ -154,6 +154,13 @@
     background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; visibility: hidden;
   }
   .effacer.visible { visibility: visible; }
+  .interrupteur { display: inline-flex; align-items: center; gap: 9px; cursor: pointer; font-family: "Outfit", sans-serif; font-size: 13px; color: var(--text-secondary); user-select: none; }
+  .interrupteur input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .interrupteur .piste { position: relative; flex: none; width: 36px; height: 20px; border-radius: 999px; border: 1px solid var(--border-strong); background: rgba(26, 22, 37, .85); transition: background .15s, border-color .15s; }
+  .interrupteur .piste::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--text-muted); transition: transform .15s, background .15s; }
+  .interrupteur input:checked + .piste { background: rgba(201, 168, 118, .22); border-color: var(--or); }
+  .interrupteur input:checked + .piste::after { transform: translateX(16px); background: var(--or-clair); }
+  .interrupteur input:focus-visible + .piste { box-shadow: 0 0 0 3px rgba(201, 168, 118, .25); }
   .effacer:hover { color: var(--or-clair); }
   @media (max-width: 900px) {
     .barre-filtres { grid-template-columns: 1fr 1fr; }
@@ -318,7 +325,7 @@
         erreur: "Le répertoire est momentanément indisponible, réessaie un peu plus tard.",
         local: "Événement local", voirFiche: "📖 Voir la fiche complète →",
         tous: "Tous", toutesRegions: "Toutes les régions", tousTypes: "Tous les types",
-        champPays: "Pays", champRegion: "Région", champType: "Type d'événement", champMois: "Mois", tousMois: "Toute l'année", tousPays: "Tous les pays", effacer: "Tout effacer", resultat: (n) => n + (n > 1 ? " festivals" : " festival"),
+        champPays: "Pays", champRegion: "Région", champType: "Type d'événement", champMois: "Mois", afficherAVenir: "Afficher les dates à venir", tousMois: "Toute l'année", tousPays: "Tous les pays", effacer: "Tout effacer", resultat: (n) => n + (n > 1 ? " festivals" : " festival"),
         suggestionTitre: "Tu connais un festival qui manque ici ?",
         suggestionTexte: "Petit ou grand, écris-nous sur",
         suggestionFin: ", on l'ajoute avec plaisir.",
@@ -333,7 +340,7 @@
         erreur: "The directory is temporarily unavailable, please try again shortly.",
         local: "Local event", voirFiche: "📖 See full listing →",
         tous: "All", toutesRegions: "All regions", tousTypes: "All types",
-        champPays: "Country", champRegion: "Region", champType: "Event type", champMois: "Month", tousMois: "All year", tousPays: "All countries", effacer: "Clear filters", resultat: (n) => n + (n > 1 ? " festivals" : " festival"),
+        champPays: "Country", champRegion: "Region", champType: "Event type", champMois: "Month", afficherAVenir: "Show dates to be announced", tousMois: "All year", tousPays: "All countries", effacer: "Clear filters", resultat: (n) => n + (n > 1 ? " festivals" : " festival"),
         suggestionTitre: "Know a festival that's missing here?",
         suggestionTexte: "Big or small, message us on",
         suggestionFin: " and we'll happily add it.",
@@ -370,6 +377,7 @@
     let filtreRegion = "Toutes";
     let filtreType = "Tous";
     let filtreMois = "Tous";
+    let afficherAVenir = true;
 
     function formatDate(iso) {
       if (!iso) return "";
@@ -445,8 +453,15 @@
       return n.charAt(0).toUpperCase() + n.slice(1);
     }
 
+    // Édition passée dont les dates de la prochaine ne sont pas encore annoncées
+    function estAVenir(f) {
+      return f.date_debut < new Date().toISOString().slice(0, 10) && !!f.periode_indicative;
+    }
+
     function filtrer(ignorer) {
       return tousLesFestivals.filter((f) =>
+        (afficherAVenir || !estAVenir(f)) &&
+        !(estAVenir(f) && ignorer !== "mois" && filtreMois !== "Tous") &&
         (ignorer === "pays" || filtreActif === "Tous" || f.pays === filtreActif) &&
         (ignorer === "region" || filtreRegion === "Toutes" || f.region === filtreRegion) &&
         (ignorer === "type" || filtreType === "Tous" || (f.categories || []).includes(filtreType)) &&
@@ -460,7 +475,7 @@
       const nb = document.getElementById("nb-resultats");
       if (nb) nb.innerHTML = `<strong>${festivals.length}</strong> ${I18N[lang].resultat(festivals.length).replace(/^\d+ /, "")}`;
       const efface = document.getElementById("effacer");
-      if (efface) efface.classList.toggle("visible", filtreActif !== "Tous" || filtreRegion !== "Toutes" || filtreType !== "Tous" || filtreMois !== "Tous");
+      if (efface) efface.classList.toggle("visible", filtreActif !== "Tous" || filtreRegion !== "Toutes" || filtreType !== "Tous" || filtreMois !== "Tous" || !afficherAVenir);
 
       if (festivals.length === 0) {
         contenu.innerHTML = `<p class="etat">${I18N[lang].aucun}</p>`;
@@ -487,22 +502,23 @@
         .sort((a, b) => libelleRegion(a).localeCompare(libelleRegion(b), lang)).map((r) => [r, libelleRegion(r)]);
       const types = [...new Set(filtrer("type").flatMap((f) => f.categories || []))]
         .sort((a, b) => libelleCategorie(a).localeCompare(libelleCategorie(b), lang)).map((c) => [c, libelleCategorie(c)]);
-      const moisDispo = [...new Set(filtrer("mois").flatMap(moisDuFestival))].sort((a, b) => a - b).map((m) => [m, nomDuMois(m)]);
+      const moisDispo = [...new Set(filtrer("mois").filter((f) => !estAVenir(f)).flatMap(moisDuFestival))].sort((a, b) => a - b).map((m) => [m, nomDuMois(m)]);
 
       form.innerHTML =
         champ("f-pays", t.champPays, ["Tous", t.tousPays], filtreActif, pays) +
         champ("f-region", t.champRegion, ["Toutes", t.toutesRegions], filtreRegion, regions) +
         champ("f-type", t.champType, ["Tous", t.tousTypes], filtreType, types) +
         champ("f-mois", t.champMois, ["Tous", t.tousMois], filtreMois, moisDispo) +
-        `<div class="filtre-fin"><span class="nb-resultats" id="nb-resultats"></span><button type="button" class="effacer" id="effacer">${t.effacer}</button></div>`;
+        `<div class="filtre-fin"><label class="interrupteur"><input type="checkbox" id="f-avenir"${afficherAVenir ? " checked" : ""}><span class="piste"></span>${t.afficherAVenir}</label><span class="nb-resultats" id="nb-resultats"></span><button type="button" class="effacer" id="effacer">${t.effacer}</button></div>`;
 
       const brancher = (id, fixer) => document.getElementById(id).addEventListener("change", (e) => { fixer(e.target.value); construireFiltres(); afficher(); });
       brancher("f-pays", (v) => { filtreActif = v; filtreRegion = "Toutes"; });
       brancher("f-region", (v) => { filtreRegion = v; });
       brancher("f-type", (v) => { filtreType = v; });
       brancher("f-mois", (v) => { filtreMois = v; });
+      document.getElementById("f-avenir").addEventListener("change", (e) => { afficherAVenir = e.target.checked; construireFiltres(); afficher(); });
       document.getElementById("effacer").addEventListener("click", () => {
-        filtreActif = "Tous"; filtreRegion = "Toutes"; filtreType = "Tous"; filtreMois = "Tous";
+        filtreActif = "Tous"; filtreRegion = "Toutes"; filtreType = "Tous"; filtreMois = "Tous"; afficherAVenir = true;
         construireFiltres(); afficher();
       });
     }
